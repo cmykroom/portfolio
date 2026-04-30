@@ -10,7 +10,7 @@
 
 <div class="container">
 
-    <!-- 左侧固定栏 -->
+    <!-- 左侧固定导航 -->
     <div class="left-panel">
         <div class="top-nav">
             <span>MENGFEI YAN</span>
@@ -25,27 +25,27 @@
         </div>
 
         <div class="project-list">
-            <div class="project-item active" onclick="showProject(1)">
+            <div class="project-item active" onclick="scrollToProject('p1', this)">
                 <span>01</span>
                 <span>Project 01</span>
                 <span>2024</span>
             </div>
-            <div class="project-item" onclick="showProject(2)">
+            <div class="project-item" onclick="scrollToProject('p2', this)">
                 <span>02</span>
                 <span>Project 02</span>
                 <span>2023</span>
             </div>
-            <div class="project-item" onclick="showProject(3)">
+            <div class="project-item" onclick="scrollToProject('p3', this)">
                 <span>03</span>
                 <span>Project 03</span>
                 <span>2022</span>
             </div>
-            <div class="project-item" onclick="showProject(4)">
+            <div class="project-item" onclick="scrollToProject('p4', this)">
                 <span>04</span>
                 <span>Project 04</span>
                 <span>2021</span>
             </div>
-            <div class="project-item" onclick="showProject(5)">
+            <div class="project-item" onclick="scrollToProject('p5', this)">
                 <span>05</span>
                 <span>Project 05</span>
                 <span>2020</span>
@@ -54,20 +54,58 @@
 
         <div class="footer">
             <span id="clock"></span>
-            <span>IG, Email</span>
+            <span>mengfeiyan11@gmail.com</span>
         </div>
     </div>
 
-    <!-- 右侧封面预览 -->
-    <div class="right-panel">
-        <a id="projectLink" href="project1.html">
+    <!-- 右侧滚动作品区 -->
+    <div class="right-panel" id="scrollArea">
+
+        <a href="project1.html" class="project-block" id="p1">
             <div class="preview-meta">
-                <span id="previewClient">01</span>
-                <span id="previewTitle">Project 01</span>
-                <span id="previewYear">2024</span>
+                <span>01</span>
+                <span>Project 01</span>
+                <span>2024</span>
             </div>
-            <img id="previewImage" src="images/cover1.jpg" alt="">
+            <img src="images/cover1.jpg" alt="">
         </a>
+
+        <a href="project2.html" class="project-block" id="p2">
+            <div class="preview-meta">
+                <span>02</span>
+                <span>Project 02</span>
+                <span>2023</span>
+            </div>
+            <img src="images/cover2.jpg" alt="">
+        </a>
+
+        <a href="project3.html" class="project-block" id="p3">
+            <div class="preview-meta">
+                <span>03</span>
+                <span>Project 03</span>
+                <span>2022</span>
+            </div>
+            <img src="images/cover3.jpg" alt="">
+        </a>
+
+        <a href="project4.html" class="project-block" id="p4">
+            <div class="preview-meta">
+                <span>04</span>
+                <span>Project 04</span>
+                <span>2021</span>
+            </div>
+            <img src="images/cover4.jpg" alt="">
+        </a>
+
+        <a href="project5.html" class="project-block" id="p5">
+            <div class="preview-meta">
+                <span>05</span>
+                <span>Project 05</span>
+                <span>2020</span>
+            </div>
+            <img src="images/cover5.jpg" alt="">
+        </a>
+
     </div>
 
 </div>
