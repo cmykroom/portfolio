@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MENGFEI YAN</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- 左侧固定栏 -->
+    <div class="left-panel">
+        <div class="top-nav">
+            <span>MENGFEI YAN</span>
+            <span>INFORMATION</span>
+            <span>SELECTED WORK</span>
+        </div>
+
+        <div class="table-header">
+            <span>Client</span>
+            <span>Project</span>
+            <span>Year</span>
+        </div>
+
+        <div class="project-list">
+            <div class="project-item active" onclick="showProject(1)">
+                <span>01</span>
+                <span>Project 01</span>
+                <span>2024</span>
+            </div>
+            <div class="project-item" onclick="showProject(2)">
+                <span>02</span>
+                <span>Project 02</span>
+                <span>2023</span>
+            </div>
+            <div class="project-item" onclick="showProject(3)">
+                <span>03</span>
+                <span>Project 03</span>
+                <span>2022</span>
+            </div>
+            <div class="project-item" onclick="showProject(4)">
+                <span>04</span>
+                <span>Project 04</span>
+                <span>2021</span>
+            </div>
+            <div class="project-item" onclick="showProject(5)">
+                <span>05</span>
+                <span>Project 05</span>
+                <span>2020</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span id="clock"></span>
+            <span>IG, Email</span>
+        </div>
+    </div>
+
+    <!-- 右侧封面预览 -->
+    <div class="right-panel">
+        <a id="projectLink" href="project1.html">
+            <div class="preview-meta">
+                <span id="previewClient">01</span>
+                <span id="previewTitle">Project 01</span>
+                <span id="previewYear">2024</span>
+            </div>
+            <img id="previewImage" src="images/cover1.jpg" alt="">
+        </a>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
