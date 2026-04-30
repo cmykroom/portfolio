@@ -44,11 +44,17 @@ body{
 }
 
 .project-list{
-    margin-top:40px;
+    margin-top:25px;
+}
+
+.table-header{
+    padding:12px 0;
+    border-bottom:1px solid #111;
 }
 
 .project-item{
     padding:12px 0;
+    border-bottom:1px solid #111;
     cursor:pointer;
     transition:all .3s;
 }
