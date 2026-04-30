@@ -1,53 +1,16 @@
-const projects = {
-    1: {
-        client: "01",
-        title: "Project 01",
-        year: "2024",
-        image: "images/cover1.jpg",
-        link: "project1.html"
-    },
-    2: {
-        client: "02",
-        title: "Project 02",
-        year: "2023",
-        image: "images/cover2.jpg",
-        link: "project2.html"
-    },
-    3: {
-        client: "03",
-        title: "Project 03",
-        year: "2022",
-        image: "images/cover3.jpg",
-        link: "project3.html"
-    },
-    4: {
-        client: "04",
-        title: "Project 04",
-        year: "2021",
-        image: "images/cover4.jpg",
-        link: "project4.html"
-    },
-    5: {
-        client: "05",
-        title: "Project 05",
-        year: "2020",
-        image: "images/cover5.jpg",
-        link: "project5.html"
-    }
-};
+function scrollToProject(id, element){
+    const target = document.getElementById(id);
+    const scrollArea = document.getElementById("scrollArea");
 
-function showProject(num){
-    document.getElementById("previewClient").innerText = projects[num].client;
-    document.getElementById("previewTitle").innerText = projects[num].title;
-    document.getElementById("previewYear").innerText = projects[num].year;
-    document.getElementById("previewImage").src = projects[num].image;
-    document.getElementById("projectLink").href = projects[num].link;
+    scrollArea.scrollTo({
+        top: target.offsetTop - 20,
+        behavior: "smooth"
+    });
 
     document.querySelectorAll(".project-item").forEach(item=>{
         item.classList.remove("active");
     });
-
-    document.querySelectorAll(".project-item")[num-1].classList.add("active");
+    element.classList.add("active");
 }
 
 function updateClock(){
@@ -55,6 +18,28 @@ function updateClock(){
     const time = now.toLocaleTimeString('en-GB');
     document.getElementById("clock").innerText = time;
 }
-
 setInterval(updateClock,1000);
 updateClock();
+
+const blocks = document.querySelectorAll(".project-block");
+const navItems = document.querySelectorAll(".project-item");
+const scrollArea = document.getElementById("scrollArea");
+
+scrollArea.addEventListener("scroll", ()=>{
+    let current = "";
+
+    blocks.forEach(block=>{
+        const blockTop = block.offsetTop - scrollArea.scrollTop;
+        if(blockTop <= 200){
+            current = block.getAttribute("id");
+        }
+    });
+
+    navItems.forEach(item=>item.classList.remove("active"));
+
+    if(current==="p1") navItems[0].classList.add("active");
+    if(current==="p2") navItems[1].classList.add("active");
+    if(current==="p3") navItems[2].classList.add("active");
+    if(current==="p4") navItems[3].classList.add("active");
+    if(current==="p5") navItems[4].classList.add("active");
+});
