@@ -16,6 +16,8 @@ body{
     overflow:hidden;
 }
 
+/* ===== left ===== */
+
 .left-panel{
     width:50%;
     padding:30px 20px 30px 30px;
@@ -30,13 +32,7 @@ body{
     z-index:10;
 }
 
-.top-nav{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    font-size:13px;
-    letter-spacing:0.5px;
-}
-
+.top-nav,
 .table-header,
 .project-item,
 .footer,
@@ -61,6 +57,13 @@ body{
 .project-item:hover{
     opacity:0.35;
 }
+
+.footer{
+    font-size:12px;
+    color:#666;
+}
+
+/* ===== right ===== */
 
 .right-panel{
     margin-left:50%;
@@ -96,12 +99,7 @@ body{
     display:block;
 }
 
-.footer{
-    font-size:12px;
-    color:#666;
-}
-
-/* detail */
+/* ===== detail page ===== */
 
 .detail-page{
     padding:30px;
@@ -140,8 +138,6 @@ body{
     margin-bottom:30px;
 }
 
-
-
 /* ===== mobile ===== */
 
 @media screen and (max-width: 768px){
@@ -174,7 +170,6 @@ body{
     .project-block img{
         width:100%;
         height:auto;
-        object-fit:cover;
     }
 
     .detail-page{
