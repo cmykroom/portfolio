@@ -32,7 +32,15 @@ body{
     z-index:10;
 }
 
-.top-nav,
+/* 顶部单独网格 */
+.top-nav{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    font-size:13px;
+    letter-spacing:0.5px;
+    width:75%;
+}
+
 .table-header,
 .project-item,
 .footer,
@@ -105,7 +113,7 @@ body{
     display:block;
 }
 
-/* ===== detail page ===== */
+/* ===== detail ===== */
 
 .detail-page{
     padding:30px;
