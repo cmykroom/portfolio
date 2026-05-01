@@ -2,16 +2,14 @@
 
     --font: "Inter", Arial, sans-serif;
 
-    --text-sm: 13px;
-    --text-md: 15px;
+    --text: 16px;
+    --small: 13px;
 
     --bg: #f5f5f3;
-    --text: #111;
-    --line: #111;
+    --black: #111;
 
-    --space-1: 12px;
-    --space-2: 20px;
-    --space-3: 40px;
+    --space: 40px;
+    --gap: 24px;
 }
 
 *{
@@ -23,7 +21,9 @@
 
 body{
     background:var(--bg);
-    color:var(--text);
+    color:var(--black);
+    font-size:var(--text);
+    line-height:1.25;
 }
 
 /* =========================
@@ -34,31 +34,31 @@ body{
     display:flex;
 }
 
-/* LEFT（完整信息保留） */
+/* LEFT FIXED */
 .left-panel{
+    position:fixed;
     width:50%;
     height:100vh;
-    position:fixed;
     left:0;
     top:0;
+
+    padding:var(--space);
 
     display:flex;
     flex-direction:column;
     justify-content:space-between;
-
-    padding:var(--space-3);
 }
 
 /* TOP NAV */
 .top-nav{
     display:grid;
     grid-template-columns:1fr 1fr 1fr;
-    font-size:var(--text-sm);
+    font-size:var(--small);
 }
 
 /* INFO */
-.info-block{
-    font-size:var(--text-md);
+.info{
+    font-size:var(--text);
     line-height:1.4;
 }
 
@@ -67,44 +67,46 @@ body{
     display:flex;
     justify-content:space-between;
     font-size:12px;
-    color:#666;
+    opacity:0.7;
 }
 
-/* RIGHT */
+/* =========================
+   RIGHT PANEL
+========================= */
+
 .right-panel{
     margin-left:50%;
     width:50%;
     height:100vh;
     overflow-y:auto;
 
-    padding:var(--space-3);
+    padding:var(--space);
+    padding-bottom:80px; /* ✔ Cargo scroll spacing */
 }
 
-/* TABLE */
+/* =========================
+   TABLE SYSTEM
+========================= */
+
 .table-header{
     display:grid;
-    grid-template-columns:1fr 2fr 1fr;
+    grid-template-columns:0.6fr 1.4fr 0.7fr;
 
-    height:52px;
-    align-items:center;
+    padding:14px 0;
+    margin-top:28px; /* ✔ 你要的“空一行感” */
 
-    border-bottom:1px solid var(--line);
+    border-bottom:1px solid var(--black);
 
-    font-size:var(--text-md);
-
-    margin-top:24px; /* ✔ 你要的空一行 */
+    font-size:16px;
 }
 
 .project-item{
     display:grid;
-    grid-template-columns:1fr 2fr 1fr;
+    grid-template-columns:0.6fr 1.4fr 0.7fr;
 
-    height:52px;
-    align-items:center;
+    padding:14px 0;
 
-    border-bottom:1px solid var(--line);
-
-    font-size:var(--text-md);
+    border-bottom:1px solid var(--black);
 
     transition:0.2s ease;
 }
@@ -113,7 +115,10 @@ body{
     opacity:0.35;
 }
 
-/* LIST */
+/* =========================
+   LIST
+========================= */
+
 .project-list{
     margin-top:0;
 }
