@@ -80,51 +80,44 @@ body{
     width:75%;
 }
 
-/* TABLE + LIST + RIGHT META */
+/* =========================================================
+   🔥 ROW SYSTEM（核心统一：表头 + 内容行）
+========================================================= */
+
 .table-header,
-.project-item,
-.preview-meta{
+.project-item{
     display:grid;
     grid-template-columns:0.6fr 1.4fr 0.7fr;
 
-    padding: var(--space-sm) 0;
-
-    font-size: var(--text-sm);
-    letter-spacing:0.5px;
-
     align-items:center;
-    line-height:1;
-}
 
-/* LEFT FONT SIZE */
-.table-header span,
-.project-item span {
+    height: 44px;              /* ✔ 统一行高（关键） */
+    border-bottom:1px solid var(--color-line);
+
     font-size: 16px;
-    line-height: 0.75;
+    line-height: 1;
 }
 
-/* LEFT LIST */
+/* 左侧字体统一 */
+.table-header span,
+.project-item span{
+    font-size: 16px;
+    line-height: 1;
+}
+
+/* LIST */
 .project-list{
-    margin-top: var(--space-md);
+    margin-top: 0;             /* ✔ 去掉干扰节奏 */
 }
 
-.table-header{
-    border-bottom:1px solid var(--color-line);
-}
-
-.project-item{
-    border-bottom:1px solid var(--color-line);
-    cursor:pointer;
-    transition:all .3s;
-}
-
+/* hover / active */
 .project-item.active,
 .project-item:hover{
     opacity:0.35;
 }
 
 /* =========================================================
-   FOOTER (LEFT + RIGHT SYNC FINAL FIX)
+   FOOTER（LEFT + RIGHT SYNC）
 ========================================================= */
 
 .footer,
@@ -133,11 +126,12 @@ body{
     justify-content:space-between;
     align-items:center;
 
-    padding: 20px 0 12px;   /* ✔ 下沉关键 */
+    padding: 20px 0 12px;
+
     font-size: var(--text-xs);
     color: var(--color-sub);
 
-    min-height: 50px;       /* ✔ 更贴底 */
+    min-height: 50px;
 }
 
 /* LEFT FOOTER */
@@ -193,8 +187,14 @@ body{
     color: var(--color-text);
 }
 
-/* RIGHT META LINE */
+/* RIGHT META */
 .preview-meta{
+    display:grid;
+    grid-template-columns:0.6fr 1.4fr 0.7fr;
+
+    height: 44px;               /* ✔ 和左侧完全一致 */
+    align-items:center;
+
     border-bottom:1px solid var(--color-line);
     margin-bottom: var(--space-sm);
 }
