@@ -1,4 +1,3 @@
-/* 基础全局样式 */
 * {
     margin: 0;
     padding: 0;
@@ -7,80 +6,91 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
     font-size: 12px;
     color: #000;
     background-color: #fff;
-    overflow: hidden; /* 锁定主窗口滚动 */
+    overflow: hidden;
 }
 
-/* 布局容器 */
 .main-container {
     display: flex;
     height: 100vh;
     width: 100vw;
 }
 
-/* --- 左侧栏样式 --- */
-.left-panel {
-    width: 50%;
-    border-right: 1px solid #d0d0d0;
+/* --- 统一对齐的顶部 --- */
+.panel-header {
+    height: 80px; /* 增加固定高度确保对齐 */
+    display: flex;
+    align-items: flex-start;
+    padding: 20px 20px 0 20px;
+}
+
+.header-content {
+    display: flex;
+    width: 100%;
+}
+
+.header-content div { flex: 1; }
+
+/* --- 左右面板结构 --- */
+.left-panel, .right-panel {
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
+    height: 100vh;
 }
 
-.header-top {
-    display: flex;
-    padding: 0 20px 45px 20px;
-    letter-spacing: 0.02em;
-}
-.header-top div { flex: 1; }
+.left-panel { width: 50%; border-right: 1px solid #d0d0d0; }
+.right-panel { width: 50%; }
 
+.scroll-content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* --- 左侧表格样式 --- */
 .project-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.project-table th {
+.project-table th, .project-table td {
+    padding: 10px 20px;
+    border-bottom: 1px solid #d0d0d0;
     text-align: left;
-    padding: 10px 20px;
     font-weight: normal;
-    border-bottom: 1px solid #d0d0d0;
 }
 
-.project-table td {
-    padding: 10px 20px;
-    border-bottom: 1px solid #d0d0d0;
+/* 强制表格的第一条线与右侧对齐 */
+.project-table thead tr {
+    height: 40px; /* 与右侧 item-meta 的对齐高度 */
 }
 
-.project-table tr {
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
+.col-year { text-align: right !important; }
+.project-table tbody tr:hover { background: #f5f5f5; cursor: pointer; }
 
-.project-table tbody tr:hover {
-    background-color: #f5f5f5;
-}
-
-.col-year { text-align: right; }
-
-/* --- 右侧栏样式 --- */
-.right-panel {
-    width: 50%;
-    overflow-y: auto;
-    scroll-behavior: smooth;
-    padding: 0;
-}
-
+/* --- 右侧展示样式 --- */
 .gallery-item {
-    padding: 40px;
-    border-bottom: 1px solid #d0d0d0;
+    padding: 0; /* 移除内边距让边框贯穿 */
 }
+
+.item-meta {
+    display: flex;
+    height: 40px; /* 严格控制高度与左侧对齐 */
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid #d0d0d0;
+    text-transform: none;
+}
+
+.m-client { flex: 0 0 30%; }
+.m-project { flex: 0 0 50%; }
+.m-year { flex: 0 0 20%; text-align: right; }
 
 .image-container {
     position: relative;
-    width: 100%;
+    margin: 20px 20px 60px 20px; /* 图片缩进但保持元信息贯穿 */
     min-height: 450px;
     background-color: #f2f2f2;
     display: flex;
@@ -88,69 +98,34 @@ body {
     justify-content: center;
 }
 
-.v-large { min-height: 700px; } /* 模拟不同长度的作品 */
+.v-large { min-height: 700px; }
 
-/* 四角加号装饰 */
-.plus {
-    position: absolute;
-    font-size: 18px;
-    color: #999;
-    font-weight: 200;
-    line-height: 1;
-}
-.top-left { top: 10px; left: 10px; }
-.top-right { top: 10px; right: 10px; }
-.bottom-left { bottom: 10px; left: 10px; }
-.bottom-right { bottom: 10px; right: 10px; }
+/* 装饰加号 */
+.plus { position: absolute; font-size: 18px; color: #999; font-weight: 200; }
+.top-left { top: 10px; left: 10px; } .top-right { top: 10px; right: 10px; }
+.bottom-left { bottom: 10px; left: 10px; } .bottom-right { bottom: 10px; right: 10px; }
 
 .placeholder-tag {
     color: #aaa;
     text-align: center;
     text-transform: uppercase;
     font-size: 10px;
-    letter-spacing: 1px;
+    line-height: 1.4;
 }
 
-.item-meta {
-    display: flex;
-    justify-content: space-between;
-    padding: 12px 0 0 0;
-    letter-spacing: 0.05em;
-}
-
-/* --- 底部工具栏 --- */
-.footer-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+/* --- 底部对齐栏 --- */
+.panel-footer {
     height: 45px;
-    background: #fff;
     border-top: 1px solid #d0d0d0;
     display: flex;
     align-items: center;
     padding: 0 20px;
-    z-index: 100;
+    background: #fff;
 }
 
-.footer-left { flex: 1; }
-.footer-left span { margin-right: 80px; }
+.right-panel .panel-footer { justify-content: space-between; }
+.left-panel .panel-footer span { margin-right: 60px; }
+.panel-footer a { color: #000; text-decoration: none; }
 
-.footer-right { 
-    flex: 1; 
-    display: flex; 
-    justify-content: space-between; 
-}
-
-.footer-bar a {
-    color: #000;
-    text-decoration: none;
-}
-
-/* 响应式适配 */
-@media (max-width: 900px) {
-    .main-container { flex-direction: column; overflow-y: auto; }
-    .left-panel, .right-panel { width: 100%; height: auto; border-right: none; }
-    .right-panel { overflow-y: visible; }
-    .footer-bar { position: relative; flex-direction: column; height: auto; padding: 20px; }
-}
+/* 隐藏滚动条 */
+.scroll-content::-webkit-scrollbar { display: none; }
