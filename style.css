@@ -93,6 +93,11 @@ body{
 }
 
 /* PROJECT LIST */
+
+.table-header span,
+.project-item span {
+    font-size: 17px; /* 👈 这里调大一点点，比如 16px / 17px */
+}
 .project-list{
     margin-top: var(--space-md);
 }
