@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. 点击左侧表格行跳转到右侧对应项目
     const tableRows = document.querySelectorAll('.project-table tbody tr');
     const galleryScrollContainer = document.getElementById('gal');
 
+    // 点击左侧跳转
     tableRows.forEach(row => {
         row.addEventListener('click', () => {
             const targetId = row.getAttribute('data-target');
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 2. 实时时钟功能 (toLocaleTimeString 格式更整洁)
+    // 实时时钟
     const timerElement = document.getElementById('timer');
     function updateClock() {
         const now = new Date();
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateClock, 1000);
     updateClock();
 
-    // 3. 回到顶部功能
+    // 回到顶部 (针对右侧滚动容器)
     const topButton = document.getElementById('back-to-top');
     topButton.addEventListener('click', (e) => {
         e.preventDefault();
