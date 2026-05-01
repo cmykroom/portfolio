@@ -96,8 +96,8 @@ body{
 
 .table-header span,
 .project-item span {
-    font-size: 17px; /* 👈 这里调大一点点，比如 16px / 17px */
-    line-height: 1.1; /* 👈 关键：行距越小越紧 */
+    font-size: 16 px; /* 👈 这里调大一点点，比如 16px / 17px */
+    line-height: 0.8; /* 👈 关键：行距越小越紧 */
 }
 .project-list{
     margin-top: var(--space-md);
