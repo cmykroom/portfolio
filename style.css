@@ -1,208 +1,118 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: Arial, Helvetica, sans-serif;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MENGFEI YAN</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-body{
-    background:#f5f5f3;
-    color:#111;
-}
+<div class="container">
 
-.container{
-    display:flex;
-    height:100vh;
-    overflow:hidden;
-}
+    <!-- 左侧固定导航 -->
+    <div class="left-panel">
+        <div class="top-nav">
+            <span>MENGFEI YAN</span>
+            <span>INFORMATION</span>
+            <span></span>
+        </div>
 
-/* ===== left ===== */
+        <div class="table-header">
+            <span>Client</span>
+            <span>Project</span>
+            <span>Year</span>
+        </div>
 
-.left-panel{
-    width:50%;
-    padding:30px 20px 30px 30px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    position:fixed;
-    left:0;
-    top:0;
-    height:100vh;
-    background:#f5f5f3;
-    z-index:10;
-}
+        <div class="project-list">
+            <div class="project-item active" onclick="scrollToProject('p1', this)">
+                <span>01</span>
+                <span>Project 01</span>
+                <span>2024</span>
+            </div>
+            <div class="project-item" onclick="scrollToProject('p2', this)">
+                <span>02</span>
+                <span>Project 02</span>
+                <span>2023</span>
+            </div>
+            <div class="project-item" onclick="scrollToProject('p3', this)">
+                <span>03</span>
+                <span>Project 03</span>
+                <span>2022</span>
+            </div>
+            <div class="project-item" onclick="scrollToProject('p4', this)">
+                <span>04</span>
+                <span>Project 04</span>
+                <span>2021</span>
+            </div>
+            <div class="project-item" onclick="scrollToProject('p5', this)">
+                <span>05</span>
+                <span>Project 05</span>
+                <span>2020</span>
+            </div>
+        </div>
 
-/* 顶部单独网格 */
-.top-nav{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    font-size:13px;
-    letter-spacing:0.5px;
-    width:75%;
-}
+        <div class="footer">
+            <span id="clock"></span>
+            <span>mengfeiyan11@gmail.com</span>
+            <span></span>
+        </div>
+    </div>
 
-.table-header,
-.project-item,
-.footer,
-.preview-meta{
-    display:grid;
-    grid-template-columns:0.6fr 1.4fr 0.7fr;
-    font-size:13px;
-    letter-spacing:0.5px;
-}
+    <!-- 右侧滚动作品区 -->
+    <div class="right-panel" id="scrollArea">
 
-.project-list{
-    margin-top:25px;
-}
+        <div class="work-title">SELECTED WORK</div>
 
-.table-header{
-    padding:12px 0;
-    border-bottom:1px solid #111;
-}
+        <a href="project1.html" class="project-block" id="p1">
+            <div class="preview-meta">
+                <span>01</span>
+                <span>Project 01</span>
+                <span>2024</span>
+            </div>
+            <img src="images/cover1.jpg" alt="">
+        </a>
 
-.project-item{
-    padding:12px 0;
-    border-bottom:1px solid #111;
-    cursor:pointer;
-    transition:all .3s;
-}
+        <a href="project2.html" class="project-block" id="p2">
+            <div class="preview-meta">
+                <span>02</span>
+                <span>Project 02</span>
+                <span>2023</span>
+            </div>
+            <img src="images/cover2.jpg" alt="">
+        </a>
 
-.project-item.active,
-.project-item:hover{
-    opacity:0.35;
-}
+        <a href="project3.html" class="project-block" id="p3">
+            <div class="preview-meta">
+                <span>03</span>
+                <span>Project 03</span>
+                <span>2022</span>
+            </div>
+            <img src="images/cover3.jpg" alt="">
+        </a>
 
-.footer{
-    font-size:12px;
-    color:#666;
-}
+        <a href="project4.html" class="project-block" id="p4">
+            <div class="preview-meta">
+                <span>04</span>
+                <span>Project 04</span>
+                <span>2021</span>
+            </div>
+            <img src="images/cover4.jpg" alt="">
+        </a>
 
-/* ===== right ===== */
+        <a href="project5.html" class="project-block" id="p5">
+            <div class="preview-meta">
+                <span>05</span>
+                <span>Project 05</span>
+                <span>2020</span>
+            </div>
+            <img src="images/cover5.jpg" alt="">
+        </a>
 
-.right-panel{
-    margin-left:50%;
-    width:50%;
-    height:100vh;
-    overflow-y:scroll;
-    padding:30px 20px 30px 5px;
-    scroll-behavior:smooth;
-}
+    </div>
 
-.work-title{
-    font-size:13px;
-    margin-bottom:45px;
-    letter-spacing:0.5px;
-}
+</div>
 
-.project-block{
-    display:block;
-    min-height:100vh;
-    margin-bottom:90px;
-    text-decoration:none;
-    color:#111;
-}
-
-.preview-meta{
-    margin-bottom:15px;
-}
-
-.project-block img{
-    width:100%;
-    height:82vh;
-    object-fit:cover;
-    display:block;
-}
-
-/* ===== detail ===== */
-
-.detail-page{
-    padding:30px;
-}
-
-.detail-header{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    margin-bottom:50px;
-    font-size:13px;
-}
-
-.detail-header a{
-    color:#111;
-    text-decoration:none;
-}
-
-.detail-text{
-    margin-bottom:50px;
-}
-
-.detail-text h1{
-    margin-bottom:10px;
-    font-size:28px;
-    font-weight:normal;
-}
-
-.detail-text p{
-    max-width:500px;
-    line-height:1.7;
-    font-size:14px;
-}
-
-.detail-images img{
-    width:100%;
-    margin-bottom:30px;
-}
-
-/* ===== mobile ===== */
-
-@media screen and (max-width: 768px){
-
-    .left-panel{
-        display:none;
-    }
-
-    .right-panel{
-        margin-left:0;
-        width:100%;
-        padding:15px;
-    }
-
-    .work-title{
-        font-size:12px;
-        margin-bottom:20px;
-    }
-
-    .project-block{
-        min-height:auto;
-        margin-bottom:50px;
-    }
-
-    .preview-meta{
-        font-size:12px;
-        margin-bottom:10px;
-    }
-
-    .project-block img{
-        width:100%;
-        height:auto;
-    }
-
-    .detail-page{
-        padding:15px;
-    }
-
-    .detail-header{
-        grid-template-columns:1fr;
-        row-gap:8px;
-        margin-bottom:25px;
-        font-size:12px;
-    }
-
-    .detail-text h1{
-        font-size:22px;
-    }
-
-    .detail-text p{
-        font-size:13px;
-        line-height:1.6;
-    }
-}
+<script src="script.js"></script>
+</body>
+</html>
