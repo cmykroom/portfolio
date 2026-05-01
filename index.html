@@ -1,161 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Inter 字体引入 -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MENGFEI YAN</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MENGFEI YAN</title>
 
-    <link rel="stylesheet" href="style.css">
+<style>
 
-    <!-- 🔵 GLOBAL STYLE CONTROL（以后主要改这里或CSS变量） -->
-    <style>
-        :root {
+/* =========================================================
+   DESIGN SYSTEM (统一版)
+========================================================= */
 
-            /* ===== FONT SETTINGS（字体控制） ===== */
-            --font-main: Helvetica, Arial, sans-serif; /* 🔧主字体 */
-            --font-size-base: 14px; /* 🔧基础文字大小 */
-            --font-size-title: 16px; /* 🔧标题文字大小 */
-            --font-size-small: 12px; /* 🔧辅助文字 */
+:root{
 
-            /* ===== COLOR SETTINGS（颜色控制） ===== */
-            --color-text: #000000; /* 🔧主文字颜色 */
-            --color-sub: #666666;  /* 🔧次要文字 */
-            --color-line: #000000; /* 🔧线条颜色 */
-            --color-bg: #ffffff;   /* 🔧背景颜色 */
+    --font-main: "Inter", Arial, sans-serif;
 
-            /* ===== SPACING（间距控制） ===== */
-            --gap-small: 4px;
-            --gap-base: 10px;
-            --gap-large: 20px;
-        }
-    </style>
+    --text-xs: 12px;
+    --text-sm: 14px;
+    --text-base: 16px;
+    --text-lg: 20px;
+
+    --color-bg: #fff;
+    --color-text: #000;
+    --color-sub: #666;
+    --color-line: #000;
+
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 40px;
+}
+
+/* =========================================================
+   BASE
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: var(--font-main);
+}
+
+body{
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.container{
+    display:flex;
+    height:100vh;
+}
+
+/* =========================================================
+   LEFT PANEL
+========================================================= */
+
+.left-panel{
+    width:50%;
+    position:sticky;
+    top:0;
+    height:100vh;
+    padding: var(--space-lg);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+/* 🔥 统一 GRID（关键修复） */
+.grid-3{
+    display:grid;
+    grid-template-columns: 0.6fr 1.4fr 0.7fr;
+    font-size: var(--text-sm);
+}
+
+/* TOP NAV */
+.top-nav{
+    composes: grid-3;
+    display:grid;
+    grid-template-columns: 0.6fr 1.4fr 0.7fr;
+    margin-bottom: var(--space-md);
+}
+
+/* HEADER */
+.table-header{
+    display:grid;
+    grid-template-columns: 0.6fr 1.4fr 0.7fr;
+    padding-bottom: var(--space-xs);
+    border-bottom:1px solid var(--color-line);
+}
+
+/* LIST */
+.project-list{
+    margin-top: var(--space-xs); /* ✔ 修复间距过大 */
+}
+
+.project-item{
+    display:grid;
+    grid-template-columns: 0.6fr 1.4fr 0.7fr;
+    padding: var(--space-sm) 0;
+    border-bottom:1px solid var(--color-line);
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.project-item:hover{
+    opacity:0.6;
+}
+
+.project-item.active{
+    opacity:1;
+    font-weight:500;
+}
+
+/* FOOTER */
+.footer{
+    font-size: var(--text-xs);
+    color: var(--color-sub);
+    display:flex;
+    justify-content:space-between;
+}
+
+/* =========================================================
+   RIGHT PANEL
+========================================================= */
+
+.right-panel{
+    width:50%;
+    overflow-y:auto;
+    height:100vh;
+    padding: var(--space-lg);
+}
+
+.work-title{
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.project-block{
+    display:block;
+    margin-bottom: var(--space-xl);
+    text-decoration:none;
+    color:inherit;
+}
+
+.preview-meta{
+    display:grid;
+    grid-template-columns: 0.6fr 1.4fr 0.7fr;
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-xs);
+}
+
+.project-block img{
+    width:100%;
+    height:80vh;
+    object-fit:cover;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width:768px){
+
+.left-panel{ display:none; }
+
+.right-panel{
+    width:100%;
+    padding: var(--space-md);
+}
+
+.project-block img{
+    height:auto;
+}
+
+}
+
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-    <!-- 左侧固定导航 -->
-    <div class="left-panel">
+<!-- LEFT -->
+<div class="left-panel">
 
-        <!-- 🔵 TOP NAV -->
+    <div>
+
+        <!-- TOP -->
         <div class="top-nav">
             <span>MENGFEI YAN</span>
             <span>INFORMATION</span>
             <span></span>
         </div>
 
-        <!-- 🔵 TABLE HEADER -->
+        <!-- HEADER -->
         <div class="table-header">
             <span>Client</span>
             <span>Project</span>
             <span>Year</span>
         </div>
 
-        <!-- 🔵 PROJECT LIST -->
+        <!-- LIST -->
         <div class="project-list">
 
-            <div class="project-item active" onclick="scrollToProject('p1', this)">
-                <span>01</span>
-                <span>Project 01</span>
-                <span>2024</span>
+            <div class="project-item active" data-target="p1">
+                <span>01</span><span>Project 01</span><span>2024</span>
             </div>
 
-            <div class="project-item" onclick="scrollToProject('p2', this)">
-                <span>02</span>
-                <span>Project 02</span>
-                <span>2023</span>
+            <div class="project-item" data-target="p2">
+                <span>02</span><span>Project 02</span><span>2023</span>
             </div>
 
-            <div class="project-item" onclick="scrollToProject('p3', this)">
-                <span>03</span>
-                <span>Project 03</span>
-                <span>2022</span>
+            <div class="project-item" data-target="p3">
+                <span>03</span><span>Project 03</span><span>2022</span>
             </div>
 
-            <div class="project-item" onclick="scrollToProject('p4', this)">
-                <span>04</span>
-                <span>Project 04</span>
-                <span>2021</span>
+            <div class="project-item" data-target="p4">
+                <span>04</span><span>Project 04</span><span>2021</span>
             </div>
 
-            <div class="project-item" onclick="scrollToProject('p5', this)">
-                <span>05</span>
-                <span>Project 05</span>
-                <span>2020</span>
+            <div class="project-item" data-target="p5">
+                <span>05</span><span>Project 05</span><span>2020</span>
             </div>
 
-        </div>
-
-        <!-- 🔵 FOOTER -->
-        <div class="footer">
-            <span id="clock"></span>
-            <span>mengfeiyan11@gmail.com</span>
-            <span></span>
         </div>
 
     </div>
 
-    <!-- 右侧滚动作品区 -->
-    <div class="right-panel" id="scrollArea">
-
-        <div class="work-title">SELECTED WORK</div>
-
-        <a href="project1.html" class="project-block" id="p1">
-            <div class="preview-meta">
-                <span>01</span>
-                <span>Project 01</span>
-                <span>2024</span>
-            </div>
-            <img src="images/cover1.jpg" alt="">
-        </a>
-
-        <a href="project2.html" class="project-block" id="p2">
-            <div class="preview-meta">
-                <span>02</span>
-                <span>Project 02</span>
-                <span>2023</span>
-            </div>
-            <img src="images/cover2.jpg" alt="">
-        </a>
-
-        <a href="project3.html" class="project-block" id="p3">
-            <div class="preview-meta">
-                <span>03</span>
-                <span>Project 03</span>
-                <span>2022</span>
-            </div>
-            <img src="images/cover3.jpg" alt="">
-        </a>
-
-        <a href="project4.html" class="project-block" id="p4">
-            <div class="preview-meta">
-                <span>04</span>
-                <span>Project 04</span>
-                <span>2021</span>
-            </div>
-            <img src="images/cover4.jpg" alt="">
-        </a>
-
-        <a href="project5.html" class="project-block" id="p5">
-            <div class="preview-meta">
-                <span>05</span>
-                <span>Project 05</span>
-                <span>2020</span>
-            </div>
-            <img src="images/cover5.jpg" alt="">
-        </a>
-
+    <!-- FOOTER -->
+    <div class="footer">
+        <span id="clock"></span>
+        <span>contact</span>
     </div>
 
 </div>
 
-<script src="script.js"></script>
+<!-- RIGHT -->
+<div class="right-panel">
+
+    <div class="work-title">SELECTED WORK</div>
+
+    <a class="project-block" id="p1">
+        <div class="preview-meta"><span>01</span><span>Project 01</span><span>2024</span></div>
+        <img src="images/cover1.jpg">
+    </a>
+
+    <a class="project-block" id="p2">
+        <div class="preview-meta"><span>02</span><span>Project 02</span><span>2023</span></div>
+        <img src="images/cover2.jpg">
+    </a>
+
+    <a class="project-block" id="p3">
+        <div class="preview-meta"><span>03</span><span>Project 03</span><span>2022</span></div>
+        <img src="images/cover3.jpg">
+    </a>
+
+    <a class="project-block" id="p4">
+        <div class="preview-meta"><span>04</span><span>Project 04</span><span>2021</span></div>
+        <img src="images/cover4.jpg">
+    </a>
+
+    <a class="project-block" id="p5">
+        <div class="preview-meta"><span>05</span><span>Project 05</span><span>2020</span></div>
+        <img src="images/cover5.jpg">
+    </a>
+
+</div>
+
+</div>
+
+<script>
+
+/* =========================
+   CLICK SCROLL
+========================= */
+
+document.querySelectorAll(".project-item").forEach(item=>{
+    item.addEventListener("click",()=>{
+        const target = document.getElementById(item.dataset.target);
+        target.scrollIntoView({behavior:"smooth"});
+    });
+});
+
+/* =========================
+   SCROLL SYNC (ACTIVE)
+========================= */
+
+const sections = document.querySelectorAll(".project-block");
+const items = document.querySelectorAll(".project-item");
+
+window.addEventListener("scroll",()=>{
+
+    let current = "";
+
+    sections.forEach(sec=>{
+        const top = sec.getBoundingClientRect().top;
+        if(top < window.innerHeight/2){
+            current = sec.id;
+        }
+    });
+
+    items.forEach(item=>{
+        item.classList.remove("active");
+        if(item.dataset.target === current){
+            item.classList.add("active");
+        }
+    });
+
+});
+
+</script>
 
 </body>
 </html>
