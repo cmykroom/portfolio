@@ -43,3 +43,10 @@ scrollArea.addEventListener("scroll", ()=>{
     if(current==="p4") navItems[3].classList.add("active");
     if(current==="p5") navItems[4].classList.add("active");
 });
+
+function scrollToTop(){
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
