@@ -206,6 +206,25 @@ body{
     margin-bottom: var(--space-md);
 }
 
+
+.right-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding: 40px 0;
+    font-size: var(--font-size-small);
+    color: var(--color-sub);
+}
+
+.right-footer .top-btn{
+    cursor:pointer;
+    color: var(--color-text);
+}
+
+.right-footer .top-btn:hover{
+    opacity:0.5;
+}
+
 /* =========================================================
    MOBILE
 ========================================================= */
