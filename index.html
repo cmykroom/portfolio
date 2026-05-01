@@ -3,47 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>极简作品集 - Cargo 风格</title>
+    <title>Portfolio - Index/Gallery Layout</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="logo"><a href="#">YOUR NAME / STUDIO</a></div>
-        <ul class="nav-links">
-            <li><a href="#">Work</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
+    <div class="main-wrapper">
+        <!-- 左侧固定栏 -->
+        <aside class="sidebar">
+            <div class="site-title">YOUR NAME</div>
+            <nav class="project-list">
+                <ul>
+                    <li><a href="#project1" class="nav-item">Ref. R/XTR-082</a></li>
+                    <li><a href="#project2" class="nav-item">R/PRT-017</a></li>
+                    <li><a href="#project3" class="nav-item">Ref. R/CXX-500</a></li>
+                    <li><a href="#project4" class="nav-item">Ref. R/ANV-310</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Information</p>
+                <p>Instagram / Email</p>
+            </div>
+        </aside>
 
-    <!-- 主体网格布局 -->
-    <main class="container">
-        <section class="gallery">
-            <!-- 每一个 gallery-item 代表一张图片/一个项目 -->
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/600x800" alt="Project 1">
-                <div class="caption">Project Title 01</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/600x600" alt="Project 2">
-                <div class="caption">Project Title 02</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/600x900" alt="Project 3">
-                <div class="caption">Project Title 03</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/600x700" alt="Project 4">
-                <div class="caption">Project Title 04</div>
-            </div>
-        </section>
-    </main>
+        <!-- 右侧滚动内容 -->
+        <main class="content">
+            <section id="project1" class="gallery-item">
+                <div class="item-info"><span>SED_DO</span><span>Ref. R/XTR-082</span><span>2049</span></div>
+                <img src="https://via.placeholder.com/1200x800/eeeeee/999999?text=Project+01" alt="">
+            </section>
+            
+            <section id="project2" class="gallery-item">
+                <div class="item-info"><span>SED_DO</span><span>R/PRT-017</span><span>2048</span></div>
+                <img src="https://via.placeholder.com/1200x1200/eeeeee/999999?text=Project+02" alt="">
+            </section>
 
-    <footer>
-        <p>© 2023 Built with Style</p>
-    </footer>
+            <section id="project3" class="gallery-item">
+                <div class="item-info"><span>SED_DO</span><span>Ref. R/CXX-500</span><span>2047</span></div>
+                <img src="https://via.placeholder.com/1200x700/eeeeee/999999?text=Project+03" alt="">
+            </section>
 
+            <section id="project4" class="gallery-item">
+                <div class="item-info"><span>SED_DO</span><span>Ref. R/ANV-310</span><span>2046</span></div>
+                <img src="https://via.placeholder.com/1200x900/eeeeee/999999?text=Project+04" alt="">
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
