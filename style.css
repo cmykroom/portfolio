@@ -10,7 +10,7 @@
     /* ===== FONT SIZE（字号系统） ===== */
     --text-xs: 12px;   /* footer / small */
     --text-sm: 13px;   /* nav / table */
-    --text-base: 14px; /* paragraph */
+    --text-base: 18px; /* paragraph */
     --text-md: 16px;   /* emphasis */
     --text-lg: 22px;   /* mobile title */
     --text-xl: 28px;   /* detail title */
