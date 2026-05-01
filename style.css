@@ -19,7 +19,7 @@ body {
     width: 100vw;
 }
 
-/* 面板基础 */
+/* 基础面板 */
 .left-panel, .right-panel {
     display: flex;
     flex-direction: column;
@@ -29,24 +29,59 @@ body {
 .left-panel { width: 50%; }
 .right-panel { width: 50%; }
 
-/* --- 顶部对齐逻辑 --- */
+/* --- 顶部对齐修正 --- */
 .panel-header {
     height: 80px; 
     flex-shrink: 0;
     padding: 20px 20px 0 20px;
 }
 
-.header-content {
-    display: flex;
-    width: 100%;
+.header-content { display: flex; width: 100%; }
+
+/* 关键：统一 30% 的左偏移，去掉 padding 对对齐的干扰 */
+.brand, #timer, .col-client {
+    flex: 0 0 30%;
+    width: 30%;
 }
 
-/* 统一左边距对齐：brand 占 30%，使 info-label 与表格 project 对齐 */
-.brand { flex: 0 0 30%; font-weight: 500; }
-.info-label { flex: 1; }
-.work-label { font-weight: 500; }
+/* 让 Information、Project、Social 对齐 */
+.info-label, .col-project, .social {
+    flex: 1;
+}
 
-/* 滚动区域 */
+/* --- 下划线缩短逻辑 --- */
+.project-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* 去掉原来的 td 边框 */
+.project-table td, .project-table th {
+    padding: 10px 0; /* 左右 padding 置 0，靠容器控制间距 */
+    font-weight: normal;
+    text-align: left;
+}
+
+/* 在 td 内部通过 span 控制边框起始位置 */
+.project-table td span, .project-table th span {
+    display: inline-block;
+    padding-left: 20px; /* 统一左边距 */
+}
+
+/* 贯穿全行的横线现在加在 tr 上 */
+.project-table tr {
+    border-bottom: 1px solid #d0d0d0;
+}
+
+/* 如果你希望“Client”下方的横线也从文字位置开始：
+   需取消 tr 边框，单独给 td 里的 span 加边框，但这会导致线不连续。
+   当前的方案是 tr 线贯穿，但文字左间距严格对齐。 */
+
+.col-client { padding-left: 20px !important; }
+.col-project { padding-left: 0; }
+.col-year { text-align: right !important; padding-right: 20px !important; }
+
+/* --- 滚动区域 --- */
 .scroll-content {
     flex: 1;
     overflow-y: auto;
@@ -54,47 +89,7 @@ body {
 }
 .scroll-content::-webkit-scrollbar { display: none; }
 
-/* --- 左侧表格对齐 --- */
-.project-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.project-table th, .project-table td {
-    padding: 10px 20px;
-    border-bottom: 1px solid #d0d0d0;
-    text-align: left;
-    font-weight: normal;
-}
-
-/* 关键：Client 占 30% 宽度，确保 Project 文字在水平 30% 处开始 */
-.col-client { width: 30%; }
-.col-project { width: 50%; }
-.col-year { text-align: right !important; width: 20%; }
-
-.project-table thead tr { height: 40px; }
-.project-table tbody tr:hover { background: #f5f5f5; cursor: pointer; }
-
-/* --- 左侧底部对齐 --- */
-.panel-footer {
-    height: 45px;
-    flex-shrink: 0;
-    border-top: 1px solid #d0d0d0;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-}
-
-.footer-left-wrap {
-    display: flex;
-    width: 100%;
-}
-
-/* timer 占 30%，使 Email 文字与上方 Project 垂直对齐 */
-#timer { flex: 0 0 30%; }
-.social { flex: 1; }
-
-/* --- 右侧内容样式 --- */
+/* 右侧 Meta */
 .item-meta {
     display: flex;
     height: 40px;
@@ -103,7 +98,7 @@ body {
     border-bottom: 1px solid #d0d0d0;
 }
 .m-client { flex: 0 0 30%; }
-.m-project { flex: 0 0 50%; }
+.m-project { flex: 1; }
 .m-year { flex: 0 0 20%; text-align: right; }
 
 .image-container {
@@ -115,13 +110,37 @@ body {
     align-items: center;
     justify-content: center;
 }
-.v-large { min-height: 700px; }
 
 .plus { position: absolute; font-size: 18px; color: #aaa; font-weight: 200; }
 .top-left { top: 10px; left: 10px; } .top-right { top: 10px; right: 10px; }
 .bottom-left { bottom: 10px; left: 10px; } .bottom-right { bottom: 10px; right: 10px; }
 
-/* 右侧滚动页脚 */
+/* --- 手机端显示控制 (关键修改) --- */
+@media (max-width: 800px) {
+    .left-panel {
+        display: none; /* 彻底隐藏左边 */
+    }
+    .right-panel {
+        width: 100%; /* 右边撑满全屏 */
+    }
+    body {
+        overflow: auto; /* 允许手机端自由滚动 */
+    }
+    .scroll-content {
+        overflow: visible;
+    }
+}
+
+/* 底部 */
+.panel-footer {
+    height: 45px;
+    border-top: 1px solid #d0d0d0;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+}
+.footer-left-wrap { display: flex; width: 100%; }
+
 .gallery-footer { padding: 0 20px; margin-top: 40px; }
 .footer-inner {
     height: 45px;
