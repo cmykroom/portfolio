@@ -16,35 +16,44 @@ body {
 .main-container {
     display: flex;
     height: 100vh;
-    width: 100vw;
 }
 
-/* 面板基础 */
+/* 布局基础 */
 .left-panel, .right-panel {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
-
 .left-panel { width: 50%; }
 .right-panel { width: 50%; }
 
-/* --- 顶部对齐逻辑 --- */
-.panel-header {
-    height: 80px; 
-    flex-shrink: 0;
-    padding: 20px 20px 0 20px;
-}
-
-.header-content {
+/* --- 通用网格行 (关键对齐逻辑) --- */
+.grid-row {
     display: flex;
     width: 100%;
+    padding: 0 20px; /* 统一左右留白 */
 }
 
-/* 统一左边距对齐：brand 占 30%，使 info-label 与表格 project 对齐 */
-.brand { flex: 0 0 30%; font-weight: 500; }
-.info-label { flex: 1; }
-.work-label { font-weight: 500; }
+/* 强制比例对齐：3:5:2 */
+.col-1 { flex: 0 0 30%; }
+.col-2 { flex: 0 0 50%; }
+.col-3 { flex: 0 0 20%; text-align: right; }
+.col-full { flex: 1; font-weight: 500; }
+
+/* Header & Footer */
+.panel-header {
+    height: 80px;
+    padding-top: 20px;
+    flex-shrink: 0;
+}
+
+.panel-footer {
+    height: 45px;
+    border-top: 1px solid #d0d0d0;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
 
 /* 滚动区域 */
 .scroll-content {
@@ -54,47 +63,22 @@ body {
 }
 .scroll-content::-webkit-scrollbar { display: none; }
 
-/* --- 左侧表格对齐 --- */
-.project-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.project-table th, .project-table td {
-    padding: 10px 20px;
-    border-bottom: 1px solid #d0d0d0;
-    text-align: left;
-    font-weight: normal;
-}
-
-/* 关键：Client 占 30% 宽度，确保 Project 文字在水平 30% 处开始 */
-.col-client { width: 30%; }
-.col-project { width: 50%; }
-.col-year { text-align: right !important; width: 20%; }
-
-.project-table thead tr { height: 40px; }
-.project-table tbody tr:hover { background: #f5f5f5; cursor: pointer; }
-
-/* --- 左侧底部对齐 --- */
-.panel-footer {
-    height: 45px;
-    flex-shrink: 0;
-    border-top: 1px solid #d0d0d0;
-    padding: 0 20px;
-    display: flex;
+/* 列表样式 */
+.table-head {
+    height: 40px;
     align-items: center;
+    border-bottom: 1px solid #d0d0d0;
 }
 
-.footer-left-wrap {
-    display: flex;
-    width: 100%;
+.project-item {
+    height: 40px;
+    align-items: center;
+    border-bottom: 1px solid #d0d0d0;
+    cursor: pointer;
 }
+.project-item:hover { background: #f9f9f9; }
 
-/* timer 占 30%，使 Email 文字与上方 Project 垂直对齐 */
-#timer { flex: 0 0 30%; }
-.social { flex: 1; }
-
-/* --- 右侧内容样式 --- */
+/* 右侧内容 */
 .item-meta {
     display: flex;
     height: 40px;
@@ -102,27 +86,23 @@ body {
     padding: 0 20px;
     border-bottom: 1px solid #d0d0d0;
 }
-.m-client { flex: 0 0 30%; }
-.m-project { flex: 0 0 50%; }
-.m-year { flex: 0 0 20%; text-align: right; }
 
 .image-container {
     position: relative;
     margin: 20px 20px 80px 20px;
     min-height: 450px;
     background-color: #f2f2f2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
-.v-large { min-height: 700px; }
 
-.plus { position: absolute; font-size: 18px; color: #aaa; font-weight: 200; }
-.top-left { top: 10px; left: 10px; } .top-right { top: 10px; right: 10px; }
-.bottom-left { bottom: 10px; left: 10px; } .bottom-right { bottom: 10px; right: 10px; }
+/* 装饰加号 */
+.plus { position: absolute; font-size: 16px; color: #aaa; }
+.top-left { top: 10px; left: 10px; }
+.top-right { top: 10px; right: 10px; }
+.bottom-left { bottom: 10px; left: 10px; }
+.bottom-right { bottom: 10px; right: 10px; }
 
 /* 右侧滚动页脚 */
-.gallery-footer { padding: 0 20px; margin-top: 40px; }
+.gallery-footer { padding: 0 20px; margin-top: 50px; }
 .footer-inner {
     height: 45px;
     border-top: 1px solid #d0d0d0;
@@ -131,3 +111,11 @@ body {
     justify-content: space-between;
 }
 .footer-inner a { color: #000; text-decoration: none; }
+
+/* --- 响应式：手机端只显示右侧 --- */
+@media (max-width: 800px) {
+    .left-panel { display: none; }
+    .right-panel { width: 100%; }
+    body { overflow: auto; }
+    .scroll-content { overflow: visible; }
+}
