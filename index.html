@@ -1,72 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio</title>
-<link rel="stylesheet" href="style.css">
+    <!-- Inter 字体引入 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MENGFEI YAN</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- 🔵 GLOBAL STYLE CONTROL（以后主要改这里或CSS变量） -->
+    <style>
+        :root {
+
+            /* ===== FONT SETTINGS（字体控制） ===== */
+            --font-main: Helvetica, Arial, sans-serif; /* 🔧主字体 */
+            --font-size-base: 15px; /* 🔧基础文字大小 */
+            --font-size-title: 16px; /* 🔧标题文字大小 */
+            --font-size-small: 12px; /* 🔧辅助文字 */
+
+            /* ===== COLOR SETTINGS（颜色控制） ===== */
+            --color-text: #000000; /* 🔧主文字颜色 */
+            --color-sub: #666666;  /* 🔧次要文字 */
+            --color-line: #000000; /* 🔧线条颜色 */
+            --color-bg: #ffffff;   /* 🔧背景颜色 */
+
+            /* ===== SPACING（间距控制） ===== */
+            --gap-small: 4px;
+            --gap-base: 10px;
+            --gap-large: 20px;
+        }
+    </style>
 </head>
 
 <body>
 
 <div class="container">
 
-    <!-- LEFT -->
-    <aside class="left-panel">
+    <!-- 左侧固定导航 -->
+    <div class="left-panel">
 
+        <!-- 🔵 TOP NAV -->
         <div class="top-nav">
-            <div>CLIENT</div>
-            <div>PROJECT</div>
-            <div>YEAR</div>
+            <span>MENGFEI YAN</span>
+            <span>INFORMATION</span>
+            <span></span>
         </div>
 
-        <div class="info">
-            <div>MENGFEI YAN</div>
-            <div>GRAPHIC DESIGNER</div>
-            <div>BASED IN JAPAN</div>
-        </div>
-
-        <div class="footer">
-            <div>EMAIL@XXX.COM</div>
-            <div>INSTAGRAM</div>
-        </div>
-
-    </aside>
-
-    <!-- RIGHT -->
-    <main class="right-panel">
-
+        <!-- 🔵 TABLE HEADER -->
         <div class="table-header">
             <span>Client</span>
             <span>Project</span>
             <span>Year</span>
         </div>
 
+        <!-- 🔵 PROJECT LIST -->
         <div class="project-list">
 
-            <div class="project-item">
-                <span>A</span>
-                <span>Project One</span>
-                <span>2025</span>
-            </div>
-
-            <div class="project-item">
-                <span>B</span>
-                <span>Project Two</span>
+            <div class="project-item active" onclick="scrollToProject('p1', this)">
+                <span>01</span>
+                <span>Project 01</span>
                 <span>2024</span>
             </div>
 
-            <div class="project-item">
-                <span>C</span>
-                <span>Project Three</span>
+            <div class="project-item" onclick="scrollToProject('p2', this)">
+                <span>02</span>
+                <span>Project 02</span>
                 <span>2023</span>
+            </div>
+
+            <div class="project-item" onclick="scrollToProject('p3', this)">
+                <span>03</span>
+                <span>Project 03</span>
+                <span>2022</span>
+            </div>
+
+            <div class="project-item" onclick="scrollToProject('p4', this)">
+                <span>04</span>
+                <span>Project 04</span>
+                <span>2021</span>
+            </div>
+
+            <div class="project-item" onclick="scrollToProject('p5', this)">
+                <span>05</span>
+                <span>Project 05</span>
+                <span>2020</span>
             </div>
 
         </div>
 
-    </main>
+        <!-- 🔵 FOOTER -->
+        <div class="footer">
+            <span id="clock"></span>
+            <span>mengfeiyan11@gmail.com</span>
+            <span></span>
+        </div>
+
+    </div>
+
+    <!-- 右侧滚动作品区 -->
+    <div class="right-panel" id="scrollArea">
+
+        <div class="work-title">SELECTED WORK</div>
+
+        <a href="project1.html" class="project-block" id="p1">
+            <div class="preview-meta">
+                <span>01</span>
+                <span>Project 01</span>
+                <span>2024</span>
+            </div>
+            <img src="images/cover1.jpg" alt="">
+        </a>
+
+        <a href="project2.html" class="project-block" id="p2">
+            <div class="preview-meta">
+                <span>02</span>
+                <span>Project 02</span>
+                <span>2023</span>
+            </div>
+            <img src="images/cover2.jpg" alt="">
+        </a>
+
+        <a href="project3.html" class="project-block" id="p3">
+            <div class="preview-meta">
+                <span>03</span>
+                <span>Project 03</span>
+                <span>2022</span>
+            </div>
+            <img src="images/cover3.jpg" alt="">
+        </a>
+
+        <a href="project4.html" class="project-block" id="p4">
+            <div class="preview-meta">
+                <span>04</span>
+                <span>Project 04</span>
+                <span>2021</span>
+            </div>
+            <img src="images/cover4.jpg" alt="">
+        </a>
+
+        <a href="project5.html" class="project-block" id="p5">
+            <div class="preview-meta">
+                <span>05</span>
+                <span>Project 05</span>
+                <span>2020</span>
+            </div>
+            <img src="images/cover5.jpg" alt="">
+        </a>
+        
+            <!-- 🔥 RIGHT FOOTER（就在这里！最底部） -->
+        <div class="right-footer">
+
+            <span class="top-btn" onclick="scrollToTop()">↑ Top</span>
+
+            <span>©2047 All Rights Reserved</span>
+
+        </div>
+
+    </div>
 
 </div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
