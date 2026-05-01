@@ -1,3 +1,4 @@
+/* 全局基础设置 */
 * {
     margin: 0;
     padding: 0;
@@ -7,7 +8,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-    font-size: 13px; /* 全局上调 1PT */
+    font-size: 13px; /* 提升 1pt 后的字体大小 */
     color: #000;
     background-color: #fff;
     overflow: hidden;
@@ -16,9 +17,10 @@ body {
 .main-container {
     display: flex;
     height: 100vh;
+    width: 100vw;
 }
 
-/* 布局面板 */
+/* 面板布局 */
 .left-panel, .right-panel {
     display: flex;
     flex-direction: column;
@@ -27,33 +29,36 @@ body {
 .left-panel { width: 50%; }
 .right-panel { width: 50%; }
 
-/* --- 核心网格行：确保像素级对齐 --- */
+/* 网格系统：像素级对齐的核心 */
 .grid-row {
     display: flex;
     width: 100%;
-    padding: 0 20px; /* 统一左右填充 */
-    align-items: center;
+    padding: 0 20px;
 }
 
-.col-1 { flex: 0 0 30%; padding: 0; } /* 关键：取消 Col-1 的内部 Padding */
-.col-2 { flex: 0 0 50%; padding: 0; }
-.col-3 { flex: 0 0 20%; padding: 0; text-align: right; }
+.col-1 { flex: 0 0 30%; }
+.col-2 { flex: 0 0 50%; }
+.col-3 { flex: 0 0 20%; text-align: right; }
 .col-full { flex: 1; font-weight: 500; }
 
-/* Header & Footer */
+/* Header 顶部对齐 */
 .panel-header {
     height: 80px;
     padding-top: 20px;
     flex-shrink: 0;
 }
 
+/* 核心修正：左侧底部高度对齐 */
 .panel-footer {
     height: 45px;
     border-top: 1px solid #d0d0d0;
     flex-shrink: 0;
+    display: flex;
+    align-items: flex-start; /* 顶部对齐线 */
+    padding-top: 15px; /* 与右侧 Top 高度一致 */
 }
 
-/* 滚动区域 */
+/* 滚动逻辑 */
 .scroll-content {
     flex: 1;
     overflow-y: auto;
@@ -64,27 +69,27 @@ body {
 /* 列表行样式 */
 .table-head {
     height: 40px;
+    align-items: center;
     border-bottom: 1px solid #d0d0d0;
 }
 
 .project-item {
     height: 40px;
+    align-items: center;
     border-bottom: 1px solid #d0d0d0;
     cursor: pointer;
 }
 .project-item:hover { background: #f9f9f9; }
 
-/* 右侧 Meta */
+/* 右侧内容 Meta */
 .item-meta {
     display: flex;
     height: 40px;
-    border-bottom: 1px solid #d0d0d0;
-    /* 这里继承 grid-row 的 padding 确保对齐 */
     padding: 0 20px;
     align-items: center;
+    border-bottom: 1px solid #d0d0d0;
 }
 
-/* 图片容器 */
 .image-container {
     position: relative;
     margin: 20px 20px 80px 20px;
@@ -93,25 +98,26 @@ body {
 }
 .v-large { min-height: 700px; }
 
-/* 装饰符号 */
+/* 加号装饰 */
 .plus { position: absolute; font-size: 16px; color: #aaa; font-weight: 200; }
 .top-left { top: 10px; left: 10px; }
 .top-right { top: 10px; right: 10px; }
 .bottom-left { bottom: 10px; left: 10px; }
 .bottom-right { bottom: 10px; right: 10px; }
 
-/* 右侧页脚 */
+/* 核心修正：右侧滚动页脚对齐 */
 .gallery-footer { padding: 0 20px; margin-top: 60px; }
 .footer-inner {
     height: 45px;
     border-top: 1px solid #d0d0d0;
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* 顶部对齐线 */
+    padding-top: 15px; /* 与左侧 Footer 高度一致 */
     justify-content: space-between;
 }
 .footer-inner a { color: #000; text-decoration: none; }
 
-/* 手机端 */
+/* 手机端响应式 */
 @media (max-width: 800px) {
     .left-panel { display: none; }
     .right-panel { width: 100%; }
