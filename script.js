@@ -1,12 +1,12 @@
-// 1. 跳转到项目
+// 跳转
 function to(id) {
     const el = document.getElementById(id);
     if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
 
-// 2. 回到顶部
+// 顶部
 function scrollToTop() {
     document.getElementById('gal').scrollTo({
         top: 0,
@@ -14,11 +14,12 @@ function scrollToTop() {
     });
 }
 
-// 3. 时钟
+// 时钟
 function updateClock() {
+    const timer = document.getElementById('timer');
+    if (!timer) return;
     const now = new Date();
-    const timeStr = now.toLocaleTimeString('en-GB', { hour12: false });
-    document.getElementById('timer').innerText = timeStr;
+    timer.innerText = now.toLocaleTimeString('en-GB', { hour12: false });
 }
 setInterval(updateClock, 1000);
 updateClock();
