@@ -5,7 +5,7 @@
 :root{
 
     /* ===== FONT（字体系统） ===== */
-    --font-main: Arial, Helvetica, sans-serif; /* 🔧主字体 */
+    --font-main: "Inter", Arial, Helvetica, sans-serif; /* 🔧主字体 */
 
     /* ===== FONT SIZE（字号系统） ===== */
     --text-xs: 12px;   /* footer / small */
