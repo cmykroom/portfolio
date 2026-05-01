@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. 点击左侧行，右侧滚动到对应 ID
+    // 1. 点击左侧表格行跳转到右侧对应项目
     const tableRows = document.querySelectorAll('.project-table tbody tr');
-    const scrollContainer = document.querySelector('.right-panel .scroll-content');
+    const galleryScrollContainer = document.getElementById('gal');
 
     tableRows.forEach(row => {
         row.addEventListener('click', () => {
@@ -18,20 +18,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 2. 实时时钟
-    const clockElement = document.getElementById('clock');
-    function updateTime() {
+    // 2. 实时时钟功能 (toLocaleTimeString 格式更整洁)
+    const timerElement = document.getElementById('timer');
+    function updateClock() {
         const now = new Date();
-        const timeStr = [now.getHours(), now.getMinutes(), now.getSeconds()]
-                        .map(n => String(n).padStart(2, '0')).join(':');
-        clockElement.textContent = timeStr;
+        timerElement.textContent = now.toLocaleTimeString('en-GB', { hour12: false });
     }
-    setInterval(updateTime, 1000);
-    updateTime();
+    setInterval(updateClock, 1000);
+    updateClock();
 
-    // 3. 回到顶部
-    document.getElementById('back-to-top').addEventListener('click', (e) => {
+    // 3. 回到顶部功能
+    const topButton = document.getElementById('back-to-top');
+    topButton.addEventListener('click', (e) => {
         e.preventDefault();
-        scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+        galleryScrollContainer.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
 });
