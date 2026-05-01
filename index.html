@@ -4,59 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MENGFEI YAN</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <!-- 🔵 GLOBAL STYLE CONTROL（以后主要改这里或CSS变量） -->
+    <style>
+        :root {
+
+            /* ===== FONT SETTINGS（字体控制） ===== */
+            --font-main: Helvetica, Arial, sans-serif; /* 🔧主字体 */
+            --font-size-base: 14px; /* 🔧基础文字大小 */
+            --font-size-title: 16px; /* 🔧标题文字大小 */
+            --font-size-small: 12px; /* 🔧辅助文字 */
+
+            /* ===== COLOR SETTINGS（颜色控制） ===== */
+            --color-text: #000000; /* 🔧主文字颜色 */
+            --color-sub: #666666;  /* 🔧次要文字 */
+            --color-line: #000000; /* 🔧线条颜色 */
+            --color-bg: #ffffff;   /* 🔧背景颜色 */
+
+            /* ===== SPACING（间距控制） ===== */
+            --gap-small: 4px;
+            --gap-base: 10px;
+            --gap-large: 20px;
+        }
+    </style>
 </head>
+
 <body>
 
 <div class="container">
 
     <!-- 左侧固定导航 -->
     <div class="left-panel">
+
+        <!-- 🔵 TOP NAV -->
         <div class="top-nav">
             <span>MENGFEI YAN</span>
             <span>INFORMATION</span>
             <span></span>
         </div>
 
+        <!-- 🔵 TABLE HEADER -->
         <div class="table-header">
             <span>Client</span>
             <span>Project</span>
             <span>Year</span>
         </div>
 
+        <!-- 🔵 PROJECT LIST -->
         <div class="project-list">
+
             <div class="project-item active" onclick="scrollToProject('p1', this)">
                 <span>01</span>
                 <span>Project 01</span>
                 <span>2024</span>
             </div>
+
             <div class="project-item" onclick="scrollToProject('p2', this)">
                 <span>02</span>
                 <span>Project 02</span>
                 <span>2023</span>
             </div>
+
             <div class="project-item" onclick="scrollToProject('p3', this)">
                 <span>03</span>
                 <span>Project 03</span>
                 <span>2022</span>
             </div>
+
             <div class="project-item" onclick="scrollToProject('p4', this)">
                 <span>04</span>
                 <span>Project 04</span>
                 <span>2021</span>
             </div>
+
             <div class="project-item" onclick="scrollToProject('p5', this)">
                 <span>05</span>
                 <span>Project 05</span>
                 <span>2020</span>
             </div>
+
         </div>
 
+        <!-- 🔵 FOOTER -->
         <div class="footer">
             <span id="clock"></span>
             <span>mengfeiyan11@gmail.com</span>
             <span></span>
         </div>
+
     </div>
 
     <!-- 右侧滚动作品区 -->
@@ -114,5 +151,6 @@
 </div>
 
 <script src="script.js"></script>
+
 </body>
 </html>
