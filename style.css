@@ -124,7 +124,7 @@ body{
 }
 
 /* =========================================================
-   FOOTER (LEFT + RIGHT 完全统一核心)
+   FOOTER (LEFT + RIGHT SYNC FINAL FIX)
 ========================================================= */
 
 .footer,
@@ -133,12 +133,11 @@ body{
     justify-content:space-between;
     align-items:center;
 
-    padding: 40px 0;
-
+    padding: 20px 0 12px;   /* ✔ 下沉关键 */
     font-size: var(--text-xs);
     color: var(--color-sub);
 
-    min-height: 80px; /* ✔ baseline 统一关键 */
+    min-height: 50px;       /* ✔ 更贴底 */
 }
 
 /* LEFT FOOTER */
