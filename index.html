@@ -3,53 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Index/Gallery Layout</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Cargo Portfolio Clone</title>
+    <style>
+        /* 1. 基础重置与字体 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 12px; /* 还原截图中的小字体 */
+            color: #000;
+            background-color: #fff;
+            overflow: hidden; /* 防止主页面滚动，由内部容器滚动 */
+        }
+
+        /* 2. 整体框架布局 */
+        .main-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* 3. 左侧栏 (Index) */
+        .left-panel {
+            width: 50%;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+        }
+
+        .header-top {
+            display: flex;
+            padding: 0 20px 40px 20px;
+        }
+        .header-top div { flex: 1; font-weight: 500; }
+
+        /* 表格列表样式 */
+        .project-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .project-table thead tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .project-table th, .project-table td {
+            text-align: left;
+            padding: 8px 20px;
+            font-weight: normal;
+        }
+        .project-table tr {
+            border-bottom: 1px solid #e0e0e0;
+            cursor: pointer;
+        }
+        .project-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        .col-client { width: 30%; }
+        .col-project { width: 50%; }
+        .col-year { width: 20%; text-align: right; }
+
+        /* 4. 右侧栏 (Gallery) */
+        .right-panel {
+            width: 50%;
+            overflow-y: auto;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        .gallery-item {
+            padding: 40px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        /* 图片容器和四个角的加号 */
+        .image-container {
+            position: relative;
+            width: 100%;
+            background-color: #efefef; /* 占位色 */
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        /* 加号装饰 */
+        .corner-plus {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            color: #999;
+            font-size: 16px;
+            line-height: 10px;
+            font-weight: 200;
+        }
+        .top-left { top: 10px; left: 10px; }
+        .top-right { top: 10px; right: 10px; }
+        .bottom-left { bottom: 10px; left: 10px; }
+        .bottom-right { bottom: 10px; right: 10px; }
+
+        .item-meta {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 10px;
+            text-transform: uppercase;
+        }
+
+        /* 5. 底部固定栏 */
+        .footer-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: #fff;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 100;
+        }
+        .footer-left { flex: 1; display: flex; }
+        .footer-left span { margin-right: 100px; }
+        .footer-right { flex: 1; display: flex; justify-content: space-between; }
+        .footer-bar a { color: #000; text-decoration: none; }
+
+        /* 占位图文字样式 */
+        .placeholder-text {
+            color: #aaa;
+            font-size: 10px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+    </style>
 </head>
 <body>
 
-    <div class="main-wrapper">
-        <!-- 左侧固定栏 -->
-        <aside class="sidebar">
-            <div class="site-title">YOUR NAME</div>
-            <nav class="project-list">
-                <ul>
-                    <li><a href="#project1" class="nav-item">Ref. R/XTR-082</a></li>
-                    <li><a href="#project2" class="nav-item">R/PRT-017</a></li>
-                    <li><a href="#project3" class="nav-item">Ref. R/CXX-500</a></li>
-                    <li><a href="#project4" class="nav-item">Ref. R/ANV-310</a></li>
-                </ul>
-            </nav>
-            <div class="sidebar-footer">
-                <p>Information</p>
-                <p>Instagram / Email</p>
+    <div class="main-container">
+        <!-- 左侧部分 -->
+        <aside class="left-panel">
+            <div class="header-top">
+                <div>Cargo® Demo</div>
+                <div>Information</div>
             </div>
+
+            <table class="project-table">
+                <thead>
+                    <tr>
+                        <th class="col-client">Client</th>
+                        <th class="col-project">Project</th>
+                        <th class="col-year">Year</th>
+                    </tr>
+                </thead>
+                <tbody id="index-list">
+                    <tr onclick="scrollToProject('p1')">
+                        <td>SED_DO</td>
+                        <td>Ref. R/XTR-082</td>
+                        <td class="col-year">2049</td>
+                    </tr>
+                    <tr onclick="scrollToProject('p2')">
+                        <td>SED_DO</td>
+                        <td>R/PRT-017</td>
+                        <td class="col-year">2048</td>
+                    </tr>
+                    <tr onclick="scrollToProject('p3')">
+                        <td>SED_DO</td>
+                        <td>Ref. R/CXX-500</td>
+                        <td class="col-year">2047</td>
+                    </tr>
+                    <tr onclick="scrollToProject('p4')">
+                        <td>SED_DO</td>
+                        <td>Ref. R/ANV-310</td>
+                        <td class="col-year">2046</td>
+                    </tr>
+                    <!-- 可根据需要添加更多行 -->
+                </tbody>
+            </table>
         </aside>
 
-        <!-- 右侧滚动内容 -->
-        <main class="content">
-            <section id="project1" class="gallery-item">
-                <div class="item-info"><span>SED_DO</span><span>Ref. R/XTR-082</span><span>2049</span></div>
-                <img src="https://via.placeholder.com/1200x800/eeeeee/999999?text=Project+01" alt="">
-            </section>
+        <!-- 右侧部分 -->
+        <main class="right-panel" id="gallery">
             
-            <section id="project2" class="gallery-item">
-                <div class="item-info"><span>SED_DO</span><span>R/PRT-017</span><span>2048</span></div>
-                <img src="https://via.placeholder.com/1200x1200/eeeeee/999999?text=Project+02" alt="">
+            <section class="gallery-item" id="p1">
+                <div class="image-container">
+                    <div class="corner-plus top-left">+</div>
+                    <div class="corner-plus top-right">+</div>
+                    <div class="corner-plus bottom-left">+</div>
+                    <div class="corner-plus bottom-right">+</div>
+                    <div class="placeholder-text">Cargo® Rectangular Placeholder<br>Image — Horizontal</div>
+                </div>
+                <div class="item-meta">
+                    <span>SED_DO</span>
+                    <span>Ref. R/XTR-082</span>
+                    <span>2049</span>
+                </div>
             </section>
 
-            <section id="project3" class="gallery-item">
-                <div class="item-info"><span>SED_DO</span><span>Ref. R/CXX-500</span><span>2047</span></div>
-                <img src="https://via.placeholder.com/1200x700/eeeeee/999999?text=Project+03" alt="">
+            <section class="gallery-item" id="p2">
+                <div class="image-container" style="min-height: 600px;">
+                    <div class="corner-plus top-left">+</div>
+                    <div class="corner-plus top-right">+</div>
+                    <div class="corner-plus bottom-left">+</div>
+                    <div class="corner-plus bottom-right">+</div>
+                </div>
+                <div class="item-meta">
+                    <span>SED_DO</span>
+                    <span>R/PRT-017</span>
+                    <span>2048</span>
+                </div>
             </section>
 
-            <section id="project4" class="gallery-item">
-                <div class="item-info"><span>SED_DO</span><span>Ref. R/ANV-310</span><span>2046</span></div>
-                <img src="https://via.placeholder.com/1200x900/eeeeee/999999?text=Project+04" alt="">
-            </section>
+            <!-- 更多项目... -->
+
         </main>
     </div>
 
-    <script src="script.js"></script>
+    <!-- 底部栏 -->
+    <footer class="footer-bar">
+        <div class="footer-left">
+            <span id="current-time">18:35:00</span>
+            <span>IG, Email</span>
+        </div>
+        <div class="footer-right">
+            <a href="#" onclick="document.getElementById('gallery').scrollTop = 0; return false;">↑ Top</a>
+            <span>©2047 All Rights Reserved</span>
+        </div>
+    </footer>
+
+    <script>
+        // 点击左侧跳转功能
+        function scrollToProject(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // 实时更新底部时间（可选）
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ":" + 
+                            now.getMinutes().toString().padStart(2, '0') + ":" + 
+                            now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('current-time').textContent = timeStr;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+
 </body>
 </html>
