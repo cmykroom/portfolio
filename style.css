@@ -58,6 +58,11 @@ body{
     padding: var(--space-lg);
 }
 
+/* 🔥 关键：中间弹性区域（防止footer消失） */
+.top-block{
+    flex:1;
+}
+
 /* TOP NAV */
 .top-nav{
     display:flex;
@@ -67,7 +72,7 @@ body{
     margin-bottom:var(--space-md);
 }
 
-/* GRID BASE */
+/* GRID */
 .table-header,
 .project-item,
 .preview-meta{
@@ -101,7 +106,7 @@ body{
     font-weight:500;
 }
 
-/* FOOTER */
+/* FOOTER（稳定显示） */
 .footer{
     display:flex;
     justify-content:space-between;
