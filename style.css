@@ -1,14 +1,54 @@
+/* =========================================================
+   🔵 DESIGN SYSTEM（全站控制区｜以后只改这里）
+========================================================= */
+
+:root{
+
+    /* ===== FONT（字体系统） ===== */
+    --font-main: Arial, Helvetica, sans-serif; /* 🔧主字体 */
+
+    /* ===== FONT SIZE（字号系统） ===== */
+    --text-xs: 12px;   /* footer / small */
+    --text-sm: 13px;   /* nav / table */
+    --text-base: 14px; /* paragraph */
+    --text-md: 16px;   /* emphasis */
+    --text-lg: 22px;   /* mobile title */
+    --text-xl: 28px;   /* detail title */
+
+    /* ===== COLOR（颜色系统） ===== */
+    --color-bg: #f5f5f3;  /* 🔧背景 */
+    --color-text: #111;   /* 🔧主文字 */
+    --color-sub: #666;    /* 🔧辅助文字 */
+    --color-line: #111;   /* 🔧线条 */
+
+    /* ===== SPACING（间距系统） ===== */
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 25px;
+    --space-lg: 30px;
+    --space-xl: 45px;
+    --space-xxl: 90px;
+}
+
+/* =========================================================
+   BASE
+========================================================= */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-main);
 }
 
 body{
-    background:#f5f5f3;
-    color:#111;
+    background: var(--color-bg);
+    color: var(--color-text);
 }
+
+/* =========================================================
+   LAYOUT
+========================================================= */
 
 .container{
     display:flex;
@@ -16,11 +56,11 @@ body{
     overflow:hidden;
 }
 
-/* ===== left ===== */
+/* ================= LEFT PANEL ================= */
 
 .left-panel{
     width:50%;
-    padding:30px 20px 30px 30px;
+    padding: var(--space-lg) var(--space-sm) var(--space-lg) var(--space-lg);
     display:flex;
     flex-direction:column;
     justify-content:space-between;
@@ -28,82 +68,88 @@ body{
     left:0;
     top:0;
     height:100vh;
-    background:#f5f5f3;
+    background: var(--color-bg);
     z-index:10;
 }
 
-/* 顶部单独网格 */
+/* TOP NAV */
 .top-nav{
     display:grid;
     grid-template-columns:1fr 1fr;
-    font-size:13px;
+    font-size: var(--text-sm);
     letter-spacing:0.5px;
     width:75%;
 }
 
+/* TABLE + LIST + FOOTER */
 .table-header,
 .project-item,
 .footer,
 .preview-meta{
     display:grid;
     grid-template-columns:0.6fr 1.4fr 0.7fr;
-    font-size:13px;
+    font-size: var(--text-sm);
     letter-spacing:0.5px;
 }
 
+/* PROJECT LIST */
 .project-list{
-    margin-top:25px;
+    margin-top: var(--space-md);
 }
 
 .table-header{
-    padding:12px 0;
-    border-bottom:1px solid #111;
+    padding: var(--space-sm) 0;
+    border-bottom:1px solid var(--color-line);
 }
 
 .project-item{
-    padding:12px 0;
-    border-bottom:1px solid #111;
+    padding: var(--space-sm) 0;
+    border-bottom:1px solid var(--color-line);
     cursor:pointer;
     transition:all .3s;
 }
 
+/* hover state */
 .project-item.active,
 .project-item:hover{
     opacity:0.35;
 }
 
+/* FOOTER */
 .footer{
-    font-size:12px;
-    color:#666;
+    font-size: var(--text-xs);
+    color: var(--color-sub);
 }
 
-/* ===== right ===== */
+/* =========================================================
+   RIGHT PANEL
+========================================================= */
 
 .right-panel{
     margin-left:50%;
     width:50%;
     height:100vh;
     overflow-y:scroll;
-    padding:30px 20px 30px 5px;
+    padding: var(--space-lg) var(--space-sm) var(--space-lg) 5px;
     scroll-behavior:smooth;
 }
 
 .work-title{
-    font-size:13px;
-    margin-bottom:45px;
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-xl);
     letter-spacing:0.5px;
 }
 
 .project-block{
     display:block;
     min-height:100vh;
-    margin-bottom:90px;
+    margin-bottom: var(--space-xxl);
     text-decoration:none;
-    color:#111;
+    color: var(--color-text);
 }
 
 .preview-meta{
-    margin-bottom:15px;
+    margin-bottom: var(--space-sm);
 }
 
 .project-block img{
@@ -113,46 +159,50 @@ body{
     display:block;
 }
 
-/* ===== detail ===== */
+/* =========================================================
+   DETAIL PAGE
+========================================================= */
 
 .detail-page{
-    padding:30px;
+    padding: var(--space-lg);
 }
 
 .detail-header{
     display:grid;
     grid-template-columns:1fr 1fr 1fr;
-    margin-bottom:50px;
-    font-size:13px;
+    margin-bottom: var(--space-xl);
+    font-size: var(--text-sm);
 }
 
 .detail-header a{
-    color:#111;
+    color: var(--color-text);
     text-decoration:none;
 }
 
 .detail-text{
-    margin-bottom:50px;
+    margin-bottom: var(--space-xl);
 }
 
 .detail-text h1{
-    margin-bottom:10px;
-    font-size:28px;
+    margin-bottom: var(--space-xs);
+    font-size: var(--text-xl);
     font-weight:normal;
 }
 
 .detail-text p{
     max-width:500px;
     line-height:1.7;
-    font-size:14px;
+    font-size: var(--text-base);
 }
 
 .detail-images img{
     width:100%;
-    margin-bottom:30px;
+    margin-bottom: var(--space-md);
 }
 
-/* ===== mobile ===== */
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media screen and (max-width: 768px){
 
@@ -163,22 +213,22 @@ body{
     .right-panel{
         margin-left:0;
         width:100%;
-        padding:15px;
+        padding: var(--space-sm);
     }
 
     .work-title{
-        font-size:12px;
-        margin-bottom:20px;
+        font-size: var(--text-xs);
+        margin-bottom: var(--space-md);
     }
 
     .project-block{
         min-height:auto;
-        margin-bottom:50px;
+        margin-bottom: var(--space-xl);
     }
 
     .preview-meta{
-        font-size:12px;
-        margin-bottom:10px;
+        font-size: var(--text-xs);
+        margin-bottom: var(--space-xs);
     }
 
     .project-block img{
@@ -187,22 +237,22 @@ body{
     }
 
     .detail-page{
-        padding:15px;
+        padding: var(--space-sm);
     }
 
     .detail-header{
         grid-template-columns:1fr;
         row-gap:8px;
-        margin-bottom:25px;
-        font-size:12px;
+        margin-bottom: var(--space-md);
+        font-size: var(--text-xs);
     }
 
     .detail-text h1{
-        font-size:22px;
+        font-size: var(--text-lg);
     }
 
     .detail-text p{
-        font-size:13px;
+        font-size: var(--text-sm);
         line-height:1.6;
     }
 }
