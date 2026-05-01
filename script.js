@@ -1,28 +1,24 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const tableRows = document.querySelectorAll('.project-table tbody tr');
-    const galleryScrollContainer = document.getElementById('gal');
-
-    tableRows.forEach(row => {
-        row.addEventListener('click', () => {
-            const targetId = row.getAttribute('data-target');
-            const targetElement = document.getElementById(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    });
-
-    const timerElement = document.getElementById('timer');
-    function updateClock() {
-        const now = new Date();
-        timerElement.textContent = now.toLocaleTimeString('en-GB', { hour12: false });
+// 1. 跳转到项目
+function to(id) {
+    const el = document.getElementById(id);
+    if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
     }
-    setInterval(updateClock, 1000);
-    updateClock();
+}
 
-    const topButton = document.getElementById('back-to-top');
-    topButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        galleryScrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+// 2. 回到顶部
+function scrollToTop() {
+    document.getElementById('gal').scrollTo({
+        top: 0,
+        behavior: 'smooth'
     });
-});
+}
+
+// 3. 时钟
+function updateClock() {
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('en-GB', { hour12: false });
+    document.getElementById('timer').innerText = timeStr;
+}
+setInterval(updateClock, 1000);
+updateClock();
