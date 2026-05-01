@@ -24,10 +24,10 @@
     /* ===== SPACING ===== */
     --space-xs: 8px;
     --space-sm: 12px;
-    --space-md: 25px;
+    --space-md: 20px;
     --space-lg: 30px;
     --space-xl: 45px;
-    --space-xxl: 90px;
+    --space-xxl: 60px;
 }
 
 /* =========================================================
@@ -92,11 +92,11 @@ body{
     letter-spacing:0.5px;
 }
 
-/* LIST TEXT */
+/* LEFT LIST TEXT */
 .table-header span,
 .project-item span {
-    font-size: 16px;   /* ✔ 修复 16 px → 16px */
-    line-height: 0.75; /* ✔ 更自然紧凑 */
+    font-size: 16px;
+    line-height: 0.95;
 }
 
 /* LIST */
@@ -122,11 +122,11 @@ body{
 }
 
 /* =========================================================
-   FOOTER（✔ 已修复核心）
+   FOOTER (LEFT)
 ========================================================= */
 
 .footer{
-    font-size: var(--text-xs); /* ✔ 修复变量错误 */
+    font-size: var(--text-xs);
     color: var(--color-sub);
 }
 
@@ -142,30 +142,37 @@ body{
     padding: var(--space-lg) var(--space-sm) var(--space-lg) 5px;
     scroll-behavior:smooth;
 
-    /* ✔ 关键：让 footer 能贴底 */
     display:flex;
     flex-direction:column;
 }
 
-/* WORK */
+/* TITLE */
 .work-title{
     font-size: var(--text-sm);
     margin-bottom: var(--space-xl);
     letter-spacing:0.5px;
 }
 
+/* =========================================================
+   PROJECT BLOCK（✔ 已优化间距）
+========================================================= */
+
 .project-block{
     display:block;
-    min-height:100vh;
-    margin-bottom: var(--space-xxl);
+    min-height:auto;               /* ✔ 改掉 100vh */
+    margin-bottom: var(--space-md);/* ✔ 间距变小 */
     text-decoration:none;
     color: var(--color-text);
 }
 
+/* META + LINE（✔ 新增统一黑线） */
 .preview-meta{
     margin-bottom: var(--space-sm);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--color-line);
 }
 
+/* IMAGE */
 .project-block img{
     width:100%;
     height:82vh;
@@ -174,18 +181,18 @@ body{
 }
 
 /* =========================================================
-   RIGHT FOOTER（✔ 已修复）
+   RIGHT FOOTER
 ========================================================= */
 
 .right-footer{
-    margin-top:auto; /* ✔ 关键：推到底部 */
+    margin-top:auto;
     display:flex;
     justify-content:space-between;
     align-items:center;
 
     padding: 40px 0;
 
-    font-size: var(--text-xs); /* ✔ 修复变量 */
+    font-size: var(--text-xs);
     color: var(--color-sub);
 }
 
