@@ -48,9 +48,9 @@ display: flex;
 
 /* 头部样式 */
 .panel-header {
-    height: 50px; /* 调整这个数值改变头部高度 */
+    height: 70px; /* 调整这个数值改变头部高度 */
     display: flex;
-    align-items: center; 
+    align-items: flex-start; /* ← 确保文字向上对齐 */
     flex-shrink: 0;
 }
 
