@@ -5,17 +5,26 @@
     -webkit-font-smoothing: antialiased;
 }
 
+:root {
+    --side-gap: 20px;       /* 整个网页四周的留白 */
+    --text-indent: 20px;    /* 文字相对于线条边缘的缩进 */
+    --line-color: #d0d0d0;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
     font-size: 14px;
     color: #000;
     background-color: #fff;
+    padding: var(--side-gap); /* 实现四周等宽留白 */
+    height: 100vh;
     overflow: hidden;
 }
 
 .main-container {
     display: flex;
-    height: 100vh;
+    height: 100%;
+    width: 100%;
 }
 
 .left-panel, .right-panel {
@@ -23,25 +32,41 @@ body {
     flex-direction: column;
     height: 100%;
 }
-.left-panel { width: 50%; border-right: 1px solid #d0d0d0; }
-.right-panel { width: 50%; }
 
-.grid-row {
+.left-panel { 
+    width: 50%; 
+    border-right: 1px solid var(--line-color); 
+}
+.right-panel { 
+    width: 50%; 
+}
+
+/* 行容器基础 */
+.panel-header, .table-head, .project-item, .item-meta, .panel-footer, .footer-inner {
     display: flex;
     width: 100%;
-}
-
-/* 核心对齐修改：线从文字位置开始 */
-.col-1 { flex: 0 0 30%; padding-left: 20px; }
-.col-2 { flex: 0 0 50%; }
-.col-3 { flex: 0 0 20%; text-align: right; padding-right: 20px; }
-.col-full { flex: 1; font-weight: 500; padding-left: 20px; }
-
-.panel-header {
-    height: 80px;
-    padding-top: 20px;
+    align-items: center;
     flex-shrink: 0;
 }
+
+/* 头部高度 */
+.panel-header {
+    height: 80px;
+    align-items: flex-start;
+    padding-top: 5px;
+}
+
+/* 列表行与线条：线条贯穿左右 */
+.table-head, .project-item, .item-meta {
+    height: 35px;
+    border-bottom: 1px solid var(--line-color);
+}
+
+/* 文字垂直对齐控制 */
+.col-1 { flex: 0 0 30%; padding-left: var(--text-indent); }
+.col-2 { flex: 0 0 50%; padding-left: 0; }
+.col-3 { flex: 0 0 20%; text-align: right; padding-right: var(--text-indent); }
+.col-full { flex: 1; padding-left: var(--text-indent); font-weight: 500; }
 
 .scroll-content {
     flex: 1;
@@ -50,35 +75,14 @@ body {
 }
 .scroll-content::-webkit-scrollbar { display: none; }
 
-/* 线条左对齐：将 border 设置在具有 margin-left 的容器上 */
-.table-head, .project-item {
-    height: 30px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #d0d0d0;
-    margin-left: 20px; /* 重要：线和文字一起向右移，避开最左侧边缘 */
-    cursor: pointer;
-}
+.project-item { cursor: pointer; }
+.project-item:hover { background-color: #fcfcfc; }
 
-.project-item:hover {
-    background-color: #f9f9f9;
-}
-
-.item-meta {
-    display: flex;
-    height: 30px;
-    align-items: center;
-    border-bottom: 1px solid #d0d0d0;
-    margin-left: 20px;
-}
-
-/* 图片容器 */
+/* 图片容器：左右间距对齐文字 */
 .image-container {
     position: relative;
-    margin: 0 20px 80px 20px; 
-    min-height: 450px;
+    margin: 0 var(--text-indent) 80px var(--text-indent); 
     background-color: #f2f2f2;
-    overflow: hidden;
 }
 .image-container img {
     width: 100%;
@@ -88,38 +92,31 @@ body {
 }
 .v-large { min-height: 700px; }
 
-/* 页脚样式 */
-.panel-footer {
-    height: 45px;
-    border-top: 1px solid #d0d0d0;
-    display: flex;
-    align-items: flex-start;
-    padding-top: 15px;
+/* 页脚 */
+.panel-footer, .gallery-footer {
+    height: 50px;
+    border-top: 1px solid var(--line-color);
+    margin-top: auto;
 }
-.panel-footer a { color: #000; text-decoration: none; }
-.panel-footer a:hover { text-decoration: underline; }
 
-.gallery-footer { padding-right: 20px; margin-top: 60px; }
 .footer-inner {
-    height: 45px;
-    border-top: 1px solid #d0d0d0;
-    margin-left: 20px;
-    display: flex;
-    align-items: flex-start;
-    padding-top: 15px;
     justify-content: space-between;
 }
-.footer-inner a { color: #000; text-decoration: none; }
 
-.plus { position: absolute; font-size: 16px; color: #aaa; font-weight: 200; z-index: 10; }
+.panel-footer a, .footer-inner a {
+    color: #000;
+    text-decoration: none;
+}
+
+/* 装饰加号 */
+.plus { position: absolute; font-size: 14px; color: #aaa; z-index: 10; }
 .top-left { top: 10px; left: 10px; }
 .top-right { top: 10px; right: 10px; }
 .bottom-left { bottom: 10px; left: 10px; }
 .bottom-right { bottom: 10px; right: 10px; }
 
 @media (max-width: 800px) {
+    body { padding: 10px; overflow: auto; }
     .left-panel { display: none; }
     .right-panel { width: 100%; }
-    body { overflow: auto; }
-    .scroll-content { overflow: visible; }
 }
