@@ -85,7 +85,7 @@ body {
 
 /* 统一行高 35px，确保左右横线视觉对齐 */
 .table-head, .project-item, .item-meta {
-    height: 35px; 
+    height: 30px; 
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--line-color);
