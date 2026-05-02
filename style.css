@@ -47,8 +47,14 @@ body {
     flex-direction: column; 
     min-height: 0; 
     padding-right: var(--page-gap); 
+
 }
 
+/* 专门针对右侧面板的头部进行微调 */
+.right-panel .panel-header {
+    height: 60px;         /* 这里的数值比 60px 大多少，线就下移多少 */
+    padding-top: 5px;    /* 同步增加文字上边距，保持视觉平衡 */
+}
 .scroll-content {
     flex: 1;
     overflow-y: auto;
