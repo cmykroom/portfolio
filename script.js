@@ -1,8 +1,9 @@
-// 平滑滚动
+// 平滑滚动至指定项目
 function to(id) {
     const el = document.getElementById(id);
     const container = document.getElementById('gal'); 
     if (el && container) {
+        // 计算相对于滚动容器的偏移量
         container.scrollTo({
             top: el.offsetTop,
             behavior: 'smooth'
@@ -18,7 +19,7 @@ function scrollToTop() {
     }
 }
 
-// 时钟
+// 数字时钟
 function updateClock() {
     const timer = document.getElementById('timer');
     if (timer) {
