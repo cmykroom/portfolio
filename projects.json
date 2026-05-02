@@ -1,0 +1,25 @@
+[
+  {
+    "id": "p1",
+    "client": "SED_DO",
+    "project": "Ref. R/XTR-082",
+    "year": "2049",
+    "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover1.jpg",
+    "tags": ["Branding", "Typography", "2049"],
+    "description": "这里是项目的详细介绍文字...",
+    "subImages": [
+      "https://path/to/sub1.jpg",
+      "https://path/to/sub2.jpg"
+    ]
+  },
+  {
+    "id": "p2",
+    "client": "SED_DO",
+    "project": "R/PRT-017",
+    "year": "2048",
+    "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover2.jpg",
+    "tags": ["Poster", "Layout"],
+    "description": "第二个项目的介绍...",
+    "subImages": ["...", "..."]
+  }
+]
