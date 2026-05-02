@@ -86,11 +86,11 @@ body {
 
 /* 底部对齐：文字沉底 */
 .panel-footer, .gallery-footer {
-    height: 15px;
+    height: 10px;
     border-top: 1px solid var(--line-color);
     display: flex;
     align-items: center; 
-    padding-bottom: 3px;
+    padding-bottom: 2px;
     flex-shrink: 0;
 }
 
