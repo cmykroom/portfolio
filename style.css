@@ -6,8 +6,8 @@
 }
 
 :root {
-    --page-gap: 18px;       /* 网页四周留白 */
-    --middle-gap: 20px;     /* 左右面板之间的物理空隙 */
+    --page-gap: 20px;       /* 网页四周留白 */
+    --middle-gap: 40px;     /* 左右面板间的物理空隙 */
     --line-color: #d0d0d0;
 }
 
@@ -18,44 +18,43 @@ body {
     background-color: #fff;
     padding: var(--page-gap); 
     height: 100vh;
-    overflow: hidden;
+    overflow: hidden; /* 防止浏览器出现双滚动条 */
 }
 
 .main-container {
     display: flex;
     height: 100%;
     width: 100%;
-    /* 关键：增加左右面板之间的空隙，且不显式画线 */
     gap: var(--middle-gap);
 }
 
+/* 布局基础 */
 .left-panel { width: 50%; display: flex; flex-direction: column; }
-.right-panel { width: 50%; display: flex; flex-direction: column; }
+.right-panel { width: 50%; height: 100%; }
 
-/* 头部高度 */
+/* 头部样式 */
 .panel-header {
-    height: 70px;         /* ← 1. 修改总高度 */
+    height: 70px; /* 调整这个数值改变头部高度 */
     display: flex;
-    align-items: flex-start; /* 文字对齐方式 */
+    align-items: center; 
     flex-shrink: 0;
-    padding-top: 0px;     /* ← 2. 修改文字距离网页顶部的距离 */
 }
 
-/* 列表列对齐比例 */
+/* 列表列宽比例 */
 .col-1 { flex: 0 0 32%; }
 .col-2 { flex: 0 0 48%; }
 .col-3 { flex: 0 0 20%; text-align: right; }
 .col-full { flex: 1; font-weight: 500; }
 
+/* 滚动容器 */
 .scroll-content {
     flex: 1;
     overflow-y: auto;
     min-height: 0;
 }
-/* 隐藏滚动条但保留功能 */
 .scroll-content::-webkit-scrollbar { display: none; }
 
-/* 线条：仅横向 */
+/* 线条 */
 .table-head, .project-item, .item-meta {
     height: 32px;
     display: flex;
@@ -66,38 +65,33 @@ body {
 .project-item { cursor: pointer; transition: opacity 0.2s; }
 .project-item:hover { opacity: 0.5; }
 
-/* 右侧图片与详情间距 */
-.item-meta {
-    margin-bottom: 25px; 
-}
-
+/* 图片区域 */
+.gallery-item { width: 100%; }
+.item-meta { margin-bottom: 25px; }
 .image-container {
     position: relative;
     background-color: #f2f2f2;
-    margin-bottom: 100px; /* 两个作品间的间距 */
+    margin-bottom: 100px; /* 作品之间的间距 */
     width: 100%;
 }
-
 .image-container img {
     width: 100%;
-    height: auto;      /* 保持原始比例 */
+    height: auto; /* 保持原图比例 */
     display: block;
 }
 
-/* 底部对齐：文字沉底 */
+/* 底部样式：实现上下居中效果 */
 .panel-footer, .gallery-footer {
-    height: 10px;
+    height: 60px; /* 调整此高度来改变文字离线和底部的距离 */
     border-top: 1px solid var(--line-color);
     display: flex;
-    align-items: center; 
-    padding-bottom: 2px;
+    align-items: center; /* 核心：垂直居中 */
     flex-shrink: 0;
 }
 
 .footer-inner {
     width: 100%;
     display: flex;
-    align-items: center;    /* 确保内部文字块也是居中的 */
     justify-content: space-between;
 }
 
@@ -107,15 +101,14 @@ body {
 }
 
 /* 装饰加号 */
-.plus { position: absolute; font-size: 18px; color: #aaa; font-weight: 200; z-index: 5; }
+.plus { position: absolute; font-size: 18px; color: #aaa; font-weight: 200; }
 .top-left { top: 15px; left: 15px; }
 .top-right { top: 15px; right: 15px; }
 .bottom-left { bottom: 15px; left: 15px; }
 .bottom-right { bottom: 15px; right: 15px; }
 
-/* 移动端适配 */
+/* 移动端 */
 @media (max-width: 800px) {
-    .main-container { gap: 0; }
     .left-panel { display: none; }
     .right-panel { width: 100%; }
 }
