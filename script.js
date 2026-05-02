@@ -10,7 +10,6 @@ const projectData = {
         img: 'https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover1.jpg',
         tags: ['✓ Layout', '✓ Typography', '✓ 2049 Edition'],
         text: '这是项目 1 的描述。点击右侧图片或标题即可看到这段文字。',
-        // --- 替换下方链接即可更改小图 01-04 ---
         subImages: [
             'https://via.placeholder.com/600x400/eeeeee?text=01', 
             'https://via.placeholder.com/600x400/eeeeee?text=02', 
@@ -54,6 +53,7 @@ const projectData = {
 
 /**
  * 【功能 1】左侧点击滚动
+ * 核心修复：确保 offset 减去的数值（60）与 CSS 中的 .panel-header 高度一致
  */
 function scrollToId(id) {
     // 如果在详情页，点击左侧列表应先返回列表视图
@@ -62,8 +62,9 @@ function scrollToId(id) {
     const container = document.getElementById('gal');
     const target = document.getElementById(id);
     if (target) {
-        // 确保 70 与 CSS 中 panel-header 的高度一致
-        const topPos = target.offsetTop - 70; 
+        // 关键点：offsetTop 计算的是元素相对于容器顶部的距离
+        // 减去 60px（Header的高度）能让项目标题横线完美对齐左侧表头下方
+        const topPos = target.offsetTop - 60; 
         container.scrollTo({ top: topPos, behavior: 'smooth' });
     }
 }
@@ -91,7 +92,7 @@ function showDetail(id) {
         tagsUl.appendChild(li);
     });
 
-    // 3. 【核心逻辑】循环填充 4 张辅助小图
+    // 3. 循环填充 4 张辅助小图
     if (data.subImages && data.subImages.length === 4) {
         for (let i = 1; i <= 4; i++) {
             const subImgEl = document.getElementById(`sub-img-${i}`);
