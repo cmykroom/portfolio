@@ -7,7 +7,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     color: #000;
     background-color: #fff;
     overflow: hidden;
@@ -52,7 +52,7 @@ body {
 
 /* 左侧行高固定 40px */
 .table-head, .project-item {
-    height: 40px;
+    height: 35px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid #d0d0d0;
@@ -61,11 +61,11 @@ body {
 /* 右侧信息行：去掉边框，保持 40px 高度 */
 .item-meta {
     display: flex;
-    height: 40px;
+    height: 35px;
     align-items: center;
     padding: 0 20px;
     /* 去掉这里的边框，让图片顶端对齐左侧的第一根横线 */
-    border-bottom: none; 
+    border-bottom: 1px solid #d0d0d0; 
 }
 
 /* 图片容器：调整 margin 达到对齐效果 */
