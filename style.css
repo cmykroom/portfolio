@@ -6,8 +6,8 @@
 }
 
 :root {
-    --page-gap: 20px;       /* 网页四周留白 */
-    --middle-gap: 40px;     /* 左右面板间的物理空隙 */
+    --page-gap: 15px;       /* 网页四周留白 */
+    --middle-gap: 30px;     /* 左右面板间的物理空隙 */
     --line-color: #d0d0d0;
 }
 
@@ -48,7 +48,7 @@ display: flex;
 
 /* 头部样式 */
 .panel-header {
-    height: 20px; /* 调整这个数值改变头部高度 */
+    height: 50px; /* 调整这个数值改变头部高度 */
     display: flex;
     align-items: center; 
     flex-shrink: 0;
