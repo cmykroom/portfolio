@@ -21,7 +21,7 @@
                     <div class="col-1">Client</div><div class="col-2">Project</div><div class="col-3">Year</div>
                 </div>
                 <div class="project-list">
-                    <!-- 左侧点击只负责平滑滚动到右侧对应 ID -->
+                    <!-- 左侧点击平滑滚动到右侧对应 ID -->
                     <div class="project-item" onclick="scrollToId('p1')"><div class="col-1">SED_DO</div><div class="col-2">Ref. R/XTR-082</div><div class="col-3">2049</div></div>
                     <div class="project-item" onclick="scrollToId('p2')"><div class="col-1">SED_DO</div><div class="col-2">R/PRT-017</div><div class="col-3">2048</div></div>
                     <div class="project-item" onclick="scrollToId('p3')"><div class="col-1">SED_DO</div><div class="col-2">Ref. R/CXX-500</div><div class="col-3">2047</div></div>
@@ -47,7 +47,6 @@
 
                 <!-- 视图 A: 图片滚动列表 -->
                 <div id="gallery-view">
-                    <!-- 每个项目点击图片或标题进入详情 -->
                     <section class="gallery-item" id="p1" onclick="showDetail('p1')">
                         <div class="item-meta">
                             <div class="col-1">SED_DO</div><div class="col-2">Ref. R/XTR-082</div><div class="col-3">2049</div>
@@ -65,6 +64,8 @@
                         </div>
                         <div class="image-container">
                             <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover2.jpg">
+                            <span class="plus top-left">+</span><span class="plus top-right">+</span>
+                            <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
                         </div>
                     </section>
 
@@ -74,6 +75,8 @@
                         </div>
                         <div class="image-container">
                             <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover3.jpg">
+                            <span class="plus top-left">+</span><span class="plus top-right">+</span>
+                            <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
                         </div>
                     </section>
 
@@ -83,6 +86,8 @@
                         </div>
                         <div class="image-container">
                             <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover4.jpg">
+                            <span class="plus top-left">+</span><span class="plus top-right">+</span>
+                            <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
                         </div>
                     </section>
 
@@ -92,6 +97,8 @@
                         </div>
                         <div class="image-container">
                             <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover5.jpg">
+                            <span class="plus top-left">+</span><span class="plus top-right">+</span>
+                            <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
                         </div>
                     </section>
                 </div>
@@ -103,15 +110,56 @@
                         <div class="col-2" id="d-project"></div>
                         <div class="col-3" id="d-year"></div>
                     </div>
+                    
+                    <!-- 主图 -->
                     <div class="image-container detail-main-img">
                         <img src="" id="d-img">
                         <span class="plus top-left">+</span><span class="plus top-right">+</span>
                         <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
                     </div>
+
+                    <!-- 介绍文字 -->
                     <div class="description-section">
                         <div class="info-tags"><ul id="d-tags"></ul></div>
                         <div class="info-text" id="d-text"></div>
                     </div>
+
+                    <!-- 新增：四张小图网格 (匹配图示 2x2 布局) -->
+                    <div class="project-grid">
+                        <div class="grid-item">
+                            <div class="image-container small">
+                                <img src="" id="sub-img-1">
+                                <span class="plus top-left">+</span><span class="plus top-right">+</span>
+                                <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
+                            </div>
+                            <div class="grid-num">01</div>
+                        </div>
+                        <div class="grid-item">
+                            <div class="image-container small">
+                                <img src="" id="sub-img-2">
+                                <span class="plus top-left">+</span><span class="plus top-right">+</span>
+                                <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
+                            </div>
+                            <div class="grid-num">02</div>
+                        </div>
+                        <div class="grid-item">
+                            <div class="image-container small">
+                                <img src="" id="sub-img-3">
+                                <span class="plus top-left">+</span><span class="plus top-right">+</span>
+                                <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
+                            </div>
+                            <div class="grid-num">03</div>
+                        </div>
+                        <div class="grid-item">
+                            <div class="image-container small">
+                                <img src="" id="sub-img-4">
+                                <span class="plus top-left">+</span><span class="plus top-right">+</span>
+                                <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
+                            </div>
+                            <div class="grid-num">04</div>
+                        </div>
+                    </div>
+
                     <div class="back-btn"><a href="#" onclick="showGallery(); return false;">← Back</a></div>
                 </div>
 
