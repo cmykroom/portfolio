@@ -1,3 +1,4 @@
+/* 基础重置 */
 * {
     margin: 0;
     padding: 0;
@@ -6,8 +7,8 @@
 }
 
 :root {
-    --page-gap: 15px; /* 页面内容边距 */
-    --middle-gap: 0px; /* 保持竖线对齐，中间不留额外间隙 */
+    --page-gap: 15px;      /* 页面左右最外侧的留白 */
+    --middle-gap: 40px;    /* 左右两栏中间的间隙高度 */
     --line-color: #d0d0d0;
 }
 
@@ -16,7 +17,6 @@ body {
     font-size: 14px;
     color: #000;
     background-color: #fff;
-    /* 核心修改：移除 body 外边框空白 */
     padding: 0; 
     height: 100vh;
     overflow: hidden;
@@ -26,25 +26,27 @@ body {
     display: flex;
     height: 100%;
     width: 100%;
-    gap: var(--middle-gap);
+    /* 核心：在中间建立物理间隙 */
+    gap: var(--middle-gap); 
     overflow: hidden;
 }
 
-/* 布局基础 */
+/* 左侧面板：贴左边，靠右侧 gap 与右侧拉开距离 */
 .left-panel { 
     width: 50%; 
     display: flex; 
     flex-direction: column; 
-    padding-left: var(--page-gap); /* 内部左边距 */
+    padding-left: var(--page-gap); 
 }
 
+/* 右侧面板：贴右边，靠左侧 gap 与左侧拉开距离 */
 .right-panel { 
     width: 50%; 
     height: 100%; 
     display: flex; 
     flex-direction: column; 
     min-height: 0; 
-    padding-right: var(--page-gap); /* 内部右边距 */
+    padding-right: var(--page-gap); 
 }
 
 .scroll-content {
@@ -56,11 +58,11 @@ body {
 }
 .scroll-content::-webkit-scrollbar { display: none; }
 
-/* 头部对齐 - 统一高度为 60px 以便 JS 精确计算 */
+/* 头部高度统一为 60px，确保 JS 滚动计算精准 */
 .panel-header {
     height: 60px; 
     display: flex;
-    align-items: center; /* 垂直居中对齐 */
+    align-items: center; 
     flex-shrink: 0;
     margin: 0;
     padding: 0;
@@ -76,9 +78,9 @@ body {
     line-height: 1; 
 }
 
-/* 统一行高与线条 */
+/* 统一行高 35px，确保左右横线视觉对齐 */
 .table-head, .project-item, .item-meta {
-    height: 35px; /* 统一高度，确保左右像素级对齐 */
+    height: 35px; 
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--line-color);
@@ -89,11 +91,11 @@ body {
 .project-item { cursor: pointer; transition: opacity 0.2s; }
 .project-item:hover { opacity: 0.5; }
 
-/* --- 核心修复：对齐与间距调整 --- */
+/* 右侧列表项目间距 */
 .gallery-item { 
     width: 100%; 
     cursor: pointer; 
-    /* 改用 padding-bottom 确保 offsetTop 从标题线开始计算 */
+    /* 使用 padding-bottom 确保点击左侧时 offsetTop 从标题线开始计算 */
     padding-bottom: 40px; 
 }
 
@@ -104,7 +106,7 @@ body {
     width: 100%;
     aspect-ratio: 4 / 3; 
     overflow: hidden;    
-    margin-top: 10px; /* 图片距离标题线的间距 */
+    margin-top: 10px; /* 图片距离上方标题线的距离 */
 }
 
 .image-container img { 
@@ -115,18 +117,9 @@ body {
     display: block; 
 }
 
-/* 详情页特有样式 */
-#detail-view {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-.detail-main-img { 
-    margin-bottom: 30px; 
-    aspect-ratio: 4 / 3; 
-}
-
+/* 详情页样式 */
+#detail-view { width: 100%; }
+.detail-main-img { margin-bottom: 30px; aspect-ratio: 4 / 3; }
 .description-section { display: flex; gap: 40px; margin-top: 20px; padding-bottom: 20px; }
 .info-tags { flex: 0 0 32%; color: #666; line-height: 1.8; }
 .info-tags ul { list-style: none; }
@@ -140,26 +133,17 @@ body {
     margin-top: 40px;
     width: 100%;
 }
-
 .grid-item { display: flex; flex-direction: column; }
-.image-container.small {
-    aspect-ratio: 4 / 3; 
-    margin-bottom: 10px; 
-}
-
-.grid-num {
-    font-size: 12px;
-    color: #666;
-    margin-bottom: 40px; 
-}
+.image-container.small { aspect-ratio: 4 / 3; margin-bottom: 10px; }
+.grid-num { font-size: 12px; color: #666; margin-bottom: 40px; }
 
 /* 返回按钮 */
 .back-btn { margin: 40px 0 100px 0; }
 .back-btn a { color: #000; text-decoration: none; border-bottom: 1px solid #000; }
 
-/* 底部 */
+/* 底部面板 */
 .panel-footer, .gallery-footer {
-    height: 40px; /* 稍微增加高度以匹配视觉平衡 */
+    height: 40px;
     border-top: 1px solid var(--line-color);
     display: flex;
     align-items: center;
@@ -175,6 +159,7 @@ body {
 .bottom-left { bottom: 15px; left: 15px; }
 .bottom-right { bottom: 15px; right: 15px; }
 
+/* 响应式 */
 @media (max-width: 800px) {
     .left-panel { display: none; }
     .right-panel { width: 100%; padding: 0 var(--page-gap); }
