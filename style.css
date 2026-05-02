@@ -6,7 +6,7 @@
 }
 
 :root {
-    --page-gap: 20px;       /* 网页四周留白 */
+    --page-gap: 18px;       /* 网页四周留白 */
     --middle-gap: 20px;     /* 左右面板之间的物理空隙 */
     --line-color: #d0d0d0;
 }
@@ -38,7 +38,7 @@ body {
     display: flex;
     align-items: flex-start; /* 文字对齐方式 */
     flex-shrink: 0;
-    padding-top: 3px;     /* ← 2. 修改文字距离网页顶部的距离 */
+    padding-top: 1px;     /* ← 2. 修改文字距离网页顶部的距离 */
 }
 
 /* 列表列对齐比例 */
