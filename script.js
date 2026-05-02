@@ -53,17 +53,15 @@ const projectData = {
 
 /**
  * 【功能 1】左侧点击滚动
- * 核心修复：确保 offset 减去的数值（60）与 CSS 中的 .panel-header 高度一致
  */
 function scrollToId(id) {
-    // 如果在详情页，点击左侧列表应先返回列表视图
+    // 如果当前在详情页或信息页，点击左侧列表应先返回列表视图
     showGallery();
     
     const container = document.getElementById('gal');
     const target = document.getElementById(id);
     if (target) {
-        // 关键点：offsetTop 计算的是元素相对于容器顶部的距离
-        // 减去 60px（Header的高度）能让项目标题横线完美对齐左侧表头下方
+        // 减去 60px 偏移量以对齐顶部 Header
         const topPos = target.offsetTop - 60; 
         container.scrollTo({ top: topPos, behavior: 'smooth' });
     }
@@ -92,7 +90,7 @@ function showDetail(id) {
         tagsUl.appendChild(li);
     });
 
-    // 3. 循环填充 4 张辅助小图
+    // 3. 填充 4 张辅助小图
     if (data.subImages && data.subImages.length === 4) {
         for (let i = 1; i <= 4; i++) {
             const subImgEl = document.getElementById(`sub-img-${i}`);
@@ -102,22 +100,37 @@ function showDetail(id) {
         }
     }
 
-    // 4. 视图切换
+    // 4. 视图切换：隐藏列表和信息，显示详情
     document.getElementById('gallery-view').style.display = 'none';
+    document.getElementById('info-view').style.display = 'none';
     document.getElementById('detail-view').style.display = 'block';
-    document.getElementById('right-title').innerText = 'Project Detail';
     
-    // 自动滚动到顶部显示详情
+    document.getElementById('right-title').innerText = 'Project Detail';
     document.getElementById('gal').scrollTo({ top: 0 });
 }
 
 /**
- * 【功能 3】返回列表
+ * 【功能 3】显示作品列表 (Default)
  */
 function showGallery() {
     document.getElementById('gallery-view').style.display = 'block';
     document.getElementById('detail-view').style.display = 'none';
+    document.getElementById('info-view').style.display = 'none';
+    
     document.getElementById('right-title').innerText = 'Selected Work';
+}
+
+/**
+ * 【功能 4】显示个人信息 (Information)
+ */
+function showInfo() {
+    document.getElementById('gallery-view').style.display = 'none';
+    document.getElementById('detail-view').style.display = 'none';
+    document.getElementById('info-view').style.display = 'block';
+    
+    document.getElementById('right-title').innerText = 'Information';
+    // 切换后滚动到顶部
+    document.getElementById('gal').scrollTo({ top: 0 });
 }
 
 /**
@@ -125,7 +138,13 @@ function showGallery() {
  */
 function updateClock() {
     const el = document.getElementById('timer');
-    if (el) el.innerText = new Date().toTimeString().split(' ')[0];
+    if (el) {
+        const now = new Date();
+        const h = String(now.getHours()).padStart(2, '0');
+        const m = String(now.getMinutes()).padStart(2, '0');
+        const s = String(now.getSeconds()).padStart(2, '0');
+        el.innerText = `${h}:${m}:${s}`;
+    }
 }
 setInterval(updateClock, 1000);
 updateClock();
