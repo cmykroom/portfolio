@@ -37,6 +37,9 @@ body {
     flex: 1;
     overflow-y: auto;
     width: 100%;
+    /* 显式声明起始位置，消除浏览器差异 */
+    display: flex;
+    flex-direction: column;
 }
 .scroll-content::-webkit-scrollbar { display: none; }
 
