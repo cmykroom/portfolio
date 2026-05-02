@@ -13,7 +13,8 @@
         <aside class="left-panel">
             <header class="panel-header">
                 <div class="col-1">MENGFEI YAN ® </div>
-                <div class="col-2" style="cursor:pointer" onclick="showGallery()">Information</div>
+                <!-- 点击切换到信息简介视图 -->
+                <div class="col-2 clickable" onclick="showInfo()">Information</div>
             </header>
             
             <div class="scroll-content">
@@ -21,7 +22,6 @@
                     <div class="col-1">Client</div><div class="col-2">Project</div><div class="col-3">Year</div>
                 </div>
                 <div class="project-list">
-                    <!-- 左侧点击平滑滚动到右侧对应 ID -->
                     <div class="project-item" onclick="scrollToId('p1')"><div class="col-1">SED_DO</div><div class="col-2">Ref. R/XTR-082</div><div class="col-3">2049</div></div>
                     <div class="project-item" onclick="scrollToId('p2')"><div class="col-1">SED_DO</div><div class="col-2">R/PRT-017</div><div class="col-3">2048</div></div>
                     <div class="project-item" onclick="scrollToId('p3')"><div class="col-1">SED_DO</div><div class="col-2">Ref. R/CXX-500</div><div class="col-3">2047</div></div>
@@ -64,8 +64,6 @@
                         </div>
                         <div class="image-container">
                             <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover2.jpg">
-                            <span class="plus top-left">+</span><span class="plus top-right">+</span>
-                            <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
                         </div>
                     </section>
 
@@ -75,91 +73,73 @@
                         </div>
                         <div class="image-container">
                             <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover3.jpg">
-                            <span class="plus top-left">+</span><span class="plus top-right">+</span>
-                            <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
-                        </div>
-                    </section>
-
-                    <section class="gallery-item" id="p4" onclick="showDetail('p4')">
-                        <div class="item-meta">
-                            <div class="col-1">SED_DO</div><div class="col-2">Ref. R/ANV-310</div><div class="col-3">2046</div>
-                        </div>
-                        <div class="image-container">
-                            <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover4.jpg">
-                            <span class="plus top-left">+</span><span class="plus top-right">+</span>
-                            <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
-                        </div>
-                    </section>
-
-                    <section class="gallery-item" id="p5" onclick="showDetail('p5')">
-                        <div class="item-meta">
-                            <div class="col-1">SED_DO</div><div class="col-2">Ref. R/FTH-053</div><div class="col-3">2045</div>
-                        </div>
-                        <div class="image-container">
-                            <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover5.jpg">
-                            <span class="plus top-left">+</span><span class="plus top-right">+</span>
-                            <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
                         </div>
                     </section>
                 </div>
 
-                <!-- 视图 B: 作品详情 (默认隐藏) -->
+                <!-- 视图 B: Information 简介 (匹配截屏排版) -->
+                <div id="info-view" style="display: none;">
+                    <!-- Profile 部分 -->
+                    <div class="info-row">
+                        <div class="info-label">Profile</div>
+                        <div class="info-content">
+                            Cras ut dictum mi. Sed quis lorem semper, elementum mauris vitae, consectetur orci. 
+                            Cras volutpat eget elit porta facilisis. Aenean fermentum arcu mauris, eu faucibus nisl blandit ac. 
+                            Proin eget euismod mauris. Quisque vulputate mauris quis tellus ultrices euismod. 
+                            Quisque eu purus convallis, gravida tortor sed, rutrum velit. 
+                            Donec placerat pretium sem vel lacinia. Maecenas elementum dolor at posuere auctor.
+                        </div>
+                    </div>
+
+                    <!-- Education 部分 -->
+                    <div class="info-row">
+                        <div class="info-label">Education</div>
+                        <div class="info-content">
+                            Vestibulum Euismod Ultrices (Congue)<br>
+                            Suspendisse Aenean Lectus<br>
+                            2023<br><br>
+                            Vestibulum Euismod Ultrices (Tincidunt)<br><br>
+                            Aliquam Faucibus Tellus<br>
+                            (3 years)
+                        </div>
+                    </div>
+
+                    <!-- Employment 部分 -->
+                    <div class="info-row">
+                        <div class="info-label">Employment</div>
+                        <div class="info-content">
+                            Vestibulum Ultricies<br>
+                            Suspendisse Aenean Vestibulum<br>
+                            2023 - 2024<br><br>
+                            Pellentesque Habitant<br>
+                            'Morbi Tristique Senectus'<br>
+                            Nunc Euismod Faucibus,<br>
+                            Porta Libero<br>
+                            2021
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 视图 C: 作品详情 -->
                 <div id="detail-view" style="display: none;">
                     <div class="item-meta">
                         <div class="col-1" id="d-client"></div>
                         <div class="col-2" id="d-project"></div>
                         <div class="col-3" id="d-year"></div>
                     </div>
-                    
-                    <!-- 主图 -->
                     <div class="image-container detail-main-img">
                         <img src="" id="d-img">
-                        <span class="plus top-left">+</span><span class="plus top-right">+</span>
-                        <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
                     </div>
-
-                    <!-- 介绍文字 -->
                     <div class="description-section">
                         <div class="info-tags"><ul id="d-tags"></ul></div>
                         <div class="info-text" id="d-text"></div>
                     </div>
-
-                    <!-- 新增：四张小图网格 (匹配图示 2x2 布局) -->
                     <div class="project-grid">
-                        <div class="grid-item">
-                            <div class="image-container small">
-                                <img src="" id="sub-img-1">
-                                <span class="plus top-left">+</span><span class="plus top-right">+</span>
-                                <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
-                            </div>
-                            <div class="grid-num">01</div>
-                        </div>
-                        <div class="grid-item">
-                            <div class="image-container small">
-                                <img src="" id="sub-img-2">
-                                <span class="plus top-left">+</span><span class="plus top-right">+</span>
-                                <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
-                            </div>
-                            <div class="grid-num">02</div>
-                        </div>
-                        <div class="grid-item">
-                            <div class="image-container small">
-                                <img src="" id="sub-img-3">
-                                <span class="plus top-left">+</span><span class="plus top-right">+</span>
-                                <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
-                            </div>
-                            <div class="grid-num">03</div>
-                        </div>
-                        <div class="grid-item">
-                            <div class="image-container small">
-                                <img src="" id="sub-img-4">
-                                <span class="plus top-left">+</span><span class="plus top-right">+</span>
-                                <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
-                            </div>
-                            <div class="grid-num">04</div>
-                        </div>
+                        <div class="grid-item"><div class="image-container small"><img src="" id="sub-img-1"></div><div class="grid-num">01</div></div>
+                        <div class="grid-item"><div class="image-container small"><img src="" id="sub-img-2"></div><div class="grid-num">02</div></div>
+                        <div class="grid-item"><div class="image-container small"><img src="" id="sub-img-3"></div><div class="grid-num">03</div></div>
+                        <div class="grid-item"><div class="image-container small"><img src="" id="sub-img-4"></div><div class="grid-num">04</div></div>
                     </div>
-
                     <div class="back-btn"><a href="#" onclick="showGallery(); return false;">← Back</a></div>
                 </div>
 
