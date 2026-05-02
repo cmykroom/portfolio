@@ -13,7 +13,7 @@
         <aside class="left-panel">
             <header class="panel-header">
                 <div class="col-1">MENGFEI YAN ® </div>
-                <!-- 点击切换到信息简介视图 -->
+                <!-- 点击切换到 Information 视图 -->
                 <div class="col-2 clickable" onclick="showInfo()">Information</div>
             </header>
             
@@ -40,12 +40,14 @@
 
         <!-- 右侧面板 -->
         <main class="right-panel">
-            <div class="scroll-content" id="gal">
-                <header class="panel-header">
-                    <div class="col-full" id="right-title">Selected Work</div>
-                </header>
+            <header class="panel-header">
+                <div class="col-header-left" id="right-title">Selected Work</div>
+                <!-- 仅在 Information 页面显示的 Index 按钮 -->
+                <div id="index-btn" class="col-header-right clickable" onclick="showGallery()" style="display: none;">Index</div>
+            </header>
 
-                <!-- 视图 A: 图片滚动列表 -->
+            <div class="scroll-content" id="gal">
+                <!-- 视图 A: 图片滚动列表 (首页) -->
                 <div id="gallery-view">
                     <section class="gallery-item" id="p1" onclick="showDetail('p1')">
                         <div class="item-meta">
@@ -64,6 +66,8 @@
                         </div>
                         <div class="image-container">
                             <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover2.jpg">
+                            <span class="plus top-left">+</span><span class="plus top-right">+</span>
+                            <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
                         </div>
                     </section>
 
@@ -73,54 +77,13 @@
                         </div>
                         <div class="image-container">
                             <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover3.jpg">
+                            <span class="plus top-left">+</span><span class="plus top-right">+</span>
+                            <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
                         </div>
                     </section>
                 </div>
 
-                <!-- 视图 B: Information 简介 (匹配截屏排版) -->
-                <div id="info-view" style="display: none;">
-                    <!-- Profile 部分 -->
-                    <div class="info-row">
-                        <div class="info-label">Profile</div>
-                        <div class="info-content">
-                            Cras ut dictum mi. Sed quis lorem semper, elementum mauris vitae, consectetur orci. 
-                            Cras volutpat eget elit porta facilisis. Aenean fermentum arcu mauris, eu faucibus nisl blandit ac. 
-                            Proin eget euismod mauris. Quisque vulputate mauris quis tellus ultrices euismod. 
-                            Quisque eu purus convallis, gravida tortor sed, rutrum velit. 
-                            Donec placerat pretium sem vel lacinia. Maecenas elementum dolor at posuere auctor.
-                        </div>
-                    </div>
-
-                    <!-- Education 部分 -->
-                    <div class="info-row">
-                        <div class="info-label">Education</div>
-                        <div class="info-content">
-                            Vestibulum Euismod Ultrices (Congue)<br>
-                            Suspendisse Aenean Lectus<br>
-                            2023<br><br>
-                            Vestibulum Euismod Ultrices (Tincidunt)<br><br>
-                            Aliquam Faucibus Tellus<br>
-                            (3 years)
-                        </div>
-                    </div>
-
-                    <!-- Employment 部分 -->
-                    <div class="info-row">
-                        <div class="info-label">Employment</div>
-                        <div class="info-content">
-                            Vestibulum Ultricies<br>
-                            Suspendisse Aenean Vestibulum<br>
-                            2023 - 2024<br><br>
-                            Pellentesque Habitant<br>
-                            'Morbi Tristique Senectus'<br>
-                            Nunc Euismod Faucibus,<br>
-                            Porta Libero<br>
-                            2021
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 视图 C: 作品详情 -->
+                <!-- 视图 B: 作品详情 -->
                 <div id="detail-view" style="display: none;">
                     <div class="item-meta">
                         <div class="col-1" id="d-client"></div>
@@ -129,18 +92,51 @@
                     </div>
                     <div class="image-container detail-main-img">
                         <img src="" id="d-img">
+                        <span class="plus top-left">+</span><span class="plus top-right">+</span>
+                        <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
                     </div>
                     <div class="description-section">
                         <div class="info-tags"><ul id="d-tags"></ul></div>
                         <div class="info-text" id="d-text"></div>
                     </div>
                     <div class="project-grid">
-                        <div class="grid-item"><div class="image-container small"><img src="" id="sub-img-1"></div><div class="grid-num">01</div></div>
-                        <div class="grid-item"><div class="image-container small"><img src="" id="sub-img-2"></div><div class="grid-num">02</div></div>
-                        <div class="grid-item"><div class="image-container small"><img src="" id="sub-img-3"></div><div class="grid-num">03</div></div>
-                        <div class="grid-item"><div class="image-container small"><img src="" id="sub-img-4"></div><div class="grid-num">04</div></div>
+                        <div class="grid-item">
+                            <div class="image-container small">
+                                <img src="" id="sub-img-1">
+                                <span class="plus top-left">+</span><span class="plus top-right">+</span>
+                                <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
+                            </div>
+                            <div class="grid-num">01</div>
+                        </div>
+                        <div class="grid-item">
+                            <div class="image-container small">
+                                <img src="" id="sub-img-2">
+                                <span class="plus top-left">+</span><span class="plus top-right">+</span>
+                                <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
+                            </div>
+                            <div class="grid-num">02</div>
+                        </div>
                     </div>
                     <div class="back-btn"><a href="#" onclick="showGallery(); return false;">← Back</a></div>
+                </div>
+
+                <!-- 视图 C: Information 页面 -->
+                <div id="info-view" style="display: none;">
+                    <div class="info-row">
+                        <div class="info-label">Bio</div>
+                        <div class="info-content">
+                            Cras ut dictum mi. Sed quis lorem semper, elementum mauris vitae, 
+                            consectetur orci. Cras volutpat eget elit porta facilisis. 
+                            Aenean fermentum arcu mauris, eu faucibus nisl blandit ac.
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Contact</div>
+                        <div class="info-content">
+                            mengfeiyan11@gmail.com<br>
+                            Instagram: @mengfei.yan
+                        </div>
+                    </div>
                 </div>
 
                 <footer class="gallery-footer">
