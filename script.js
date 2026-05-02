@@ -1,12 +1,10 @@
-// 平滑滚动到指定项目
+// 平滑滚动
 function to(id) {
     const el = document.getElementById(id);
     const container = document.getElementById('gal'); 
     if (el && container) {
-        // 计算目标元素在滚动容器内的位置
-        const topPos = el.offsetTop;
         container.scrollTo({
-            top: topPos,
+            top: el.offsetTop,
             behavior: 'smooth'
         });
     }
@@ -20,7 +18,7 @@ function scrollToTop() {
     }
 }
 
-// 实时时钟 (24小时制)
+// 时钟
 function updateClock() {
     const timer = document.getElementById('timer');
     if (timer) {
