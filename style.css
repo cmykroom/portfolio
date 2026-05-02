@@ -7,7 +7,7 @@
 
 :root {
     --page-gap: 15px; /* 设置内容距离屏幕边缘的内边距 */
-    --middle-gap: 0px; /* 左右两栏中间不需要额外间距，通过各自的 padding 控制 */
+    --middle-gap: 10px; /* 左右两栏中间不需要额外间距，通过各自的 padding 控制 */
     --line-color: #d0d0d0;
 }
 
