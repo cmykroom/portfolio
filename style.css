@@ -34,7 +34,7 @@ body {
 
 /* 头部高度 */
 .panel-header {
-    height: 85px;         /* ← 1. 修改总高度 */
+    height: 70px;         /* ← 1. 修改总高度 */
     display: flex;
     align-items: flex-start; /* 文字对齐方式 */
     flex-shrink: 0;
@@ -97,6 +97,7 @@ body {
 .footer-inner {
     width: 100%;
     display: flex;
+    align-items: center;    /* 确保内部文字块也是居中的 */
     justify-content: space-between;
 }
 
