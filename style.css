@@ -62,10 +62,10 @@ body {
 .panel-header {
     height: 60px; 
     display: flex;
-    align-items: flex-start; 
+    align-items: flex-start; /* 2. 将居中对齐改为顶部对齐 */
+    padding-top: 5px;     /* 3. 通过这个值微调文字距离最顶端的精确距离 */
     flex-shrink: 0;
     margin: 0;
-    padding: 0;
 }
 
 /* 列宽比例 */
