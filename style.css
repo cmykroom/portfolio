@@ -26,12 +26,11 @@ body {
     display: flex;
     height: 100%;
     width: 100%;
-    /* 核心：在中间建立物理间隙 */
     gap: var(--middle-gap); 
     overflow: hidden;
 }
 
-/* 左侧面板：贴左边，靠右侧 gap 与右侧拉开距离 */
+/* 左侧面板 */
 .left-panel { 
     width: 50%; 
     display: flex; 
@@ -39,7 +38,7 @@ body {
     padding-left: var(--page-gap); 
 }
 
-/* 右侧面板：贴右边，靠左侧 gap 与左侧拉开距离 */
+/* 右侧面板 */
 .right-panel { 
     width: 50%; 
     height: 100%; 
@@ -47,9 +46,7 @@ body {
     flex-direction: column; 
     min-height: 0; 
     padding-right: var(--page-gap); 
-
 }
-
 
 .scroll-content {
     flex: 1;
@@ -60,15 +57,17 @@ body {
 }
 .scroll-content::-webkit-scrollbar { display: none; }
 
-/* 头部高度统一为 60px，确保 JS 滚动计算精准 */
+/* 头部样式：现在作为滚动内容的第一行 */
 .panel-header {
     height: 60px; 
     display: flex;
-    justify-content: space-between; /* 左右对齐 */
+    justify-content: space-between; 
     align-items: flex-start; 
     padding-top: 5px;     
     flex-shrink: 0;
     margin: 0;
+    /* 核心修改：增加底边框，使其成为视觉上的第一根线 */
+    border-bottom: 1px solid var(--line-color);
 }
 
 /* 列宽比例与通用布局 */
@@ -83,7 +82,7 @@ body {
 .col-header-left { font-weight: normal; }
 .col-header-right { text-align: right; }
 
-/* 统一行高 35px，确保左右横线视觉对齐 */
+/* 列表行高调整 */
 .table-head, .project-item, .item-meta {
     height: 30px; 
     display: flex;
@@ -93,6 +92,12 @@ body {
     margin: 0;
 }
 
+/* 移除重复的顶部边框 */
+#gallery-view .item-meta:first-of-type,
+#info-view .info-row:first-child {
+    border-top: none;
+}
+
 .project-item { cursor: pointer; transition: opacity 0.2s; }
 .project-item:hover { opacity: 0.5; }
 
@@ -100,18 +105,17 @@ body {
 .gallery-item { 
     width: 100%; 
     cursor: pointer; 
-    /* 使用 padding-bottom 确保点击左侧时 offsetTop 从标题线开始计算 */
     padding-bottom: 40px; 
 }
 
-/* 图片容器：4:3 比例与居中裁切 */
+/* 图片容器 */
 .image-container {
     position: relative;
     background-color: #f2f2f2;
     width: 100%;
     aspect-ratio: 4 / 3; 
     overflow: hidden;    
-    margin-top: 10px; /* 图片距离上方标题线的距离 */
+    margin-top: 10px; 
 }
 
 .image-container img { 
@@ -139,7 +143,7 @@ body {
 .info-row {
     display: flex;
     border-bottom: 1px solid var(--line-color);
-    padding: 10px 0 40px 0;
+    padding: 15px 0 40px 0; /* 略微增加了间距 */
     margin-bottom: 0;
 }
 
@@ -152,7 +156,7 @@ body {
     flex: 1;
     font-size: 15px;
     line-height: 1.6;
-    max-width: 500px; /* 限制文本宽度增加易读性 */
+    max-width: 500px; 
 }
 
 /* 2x2 网格小图 */
@@ -171,13 +175,14 @@ body {
 .back-btn { margin: 40px 0 100px 0; }
 .back-btn a { color: #000; text-decoration: none; border-bottom: 1px solid #000; }
 
-/* 底部面板 */
+/* 底部面板：现在跟随内容滚动 */
 .panel-footer, .gallery-footer {
     height: 40px;
     border-top: 1px solid var(--line-color);
     display: flex;
     align-items: center;
     flex-shrink: 0;
+    margin-top: 20px;
 }
 .footer-inner { width: 100%; display: flex; justify-content: space-between; }
 .panel-footer a, .footer-inner a { color: #000; text-decoration: none; }
