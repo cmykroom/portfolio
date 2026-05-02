@@ -40,15 +40,17 @@
 
         <!-- 右侧面板 -->
         <main class="right-panel">
-            <header class="panel-header">
-                <div class="col-header-left" id="right-title">Selected Work</div>
-                <!-- 仅在 Information 页面显示的 Index 按钮 -->
-                <div id="index-btn" class="col-header-right clickable" onclick="showGallery()" style="display: none;">Index</div>
-            </header>
-
+            <!-- 注意：为了让标题跟随滑动，我们将右侧整体的 header 移入 scroll-content 内部 -->
             <div class="scroll-content" id="gal">
+                
                 <!-- 视图 A: 图片滚动列表 (首页) -->
                 <div id="gallery-view">
+                    <!-- 将标题移入此处 -->
+                    <header class="panel-header">
+                        <div class="col-header-left" id="right-title">Selected Work</div>
+                        <div id="index-btn" class="col-header-right clickable" onclick="showGallery()" style="display: none;">Index</div>
+                    </header>
+
                     <section class="gallery-item" id="p1" onclick="showDetail('p1')">
                         <div class="item-meta">
                             <div class="col-1">SED_DO</div><div class="col-2">Ref. R/XTR-082</div><div class="col-3">2049</div>
@@ -85,6 +87,11 @@
 
                 <!-- 视图 B: 作品详情 -->
                 <div id="detail-view" style="display: none;">
+                    <!-- 详情页同样需要一个随内容滑动的头部（可选，根据需求） -->
+                    <header class="panel-header">
+                        <div class="col-header-left">Selected Work</div>
+                        <div class="col-header-right clickable" onclick="showGallery()">Index</div>
+                    </header>
                     <div class="item-meta">
                         <div class="col-1" id="d-client"></div>
                         <div class="col-2" id="d-project"></div>
@@ -122,44 +129,45 @@
 
                 <!-- 视图 C: Information 页面 -->
                 <div id="info-view" style="display: none;">
+                    <!-- 将 Profile 标题移入此处，确保随内容滚动 -->
+                    <header class="panel-header">
+                        <div class="col-header-left">Profile</div>
+                        <div class="col-header-right clickable" onclick="showGallery()">Index</div>
+                    </header>
+
                     <div class="info-row">
                         <div class="info-label">About</div>
                         <div class="info-content">
                             YAN MENGFEI<br>
-                           1987年上海生まれ。幼少から美術を専攻し、広告制作会社経って、その後日本に渡り、2023年桑沢デザイン研究所卒業。企業のロゴや広告・ポスター、ミニカード、アーティストのZINEなどのグラフィックデザインを中心に活動。日本で、タイポグラフィー自主制作しながら、社会問題を扱うプロジェクトなどにグラフィックも活躍し始める。日々グラフィックデザインが多様化するグローバルな社会どのような形で変化しているか探求しています。<br>
-I was born in Shanghai in 1987 and have been specializing in art since childhood. After working at an advertising production company, My primary focus is on artwork, typography, and branding systems.  I moved to Japan and graduated from Kuwasawa Design School in 2023.
-
-My work primarily focuses on graphic design, including corporate logos, advertisements, posters, mini cards, and artist ZINEs.
-While independently exploring typography in Japan, I have also begun contributing to projects addressing social issues through graphic expression.
-
-I’m always exploring how graphic design is changing around the world as it takes on more diverse forms and roles.
+                            1987年上海生まれ。幼少から美術を専攻し、広告制作会社経って、その後日本に渡り、2023年桑沢デザイン研究所卒業。企業のロゴや広告・ポスター、ミニカード、アーティストのZINEなどのグラフィックデザインを中心に活动。日本で、タイポグラフィー自主制作しながら、社会問題を扱うプロジェクトなどにグラフィックも活跃し始める。日々グラフィックデザインが多様化するグローバルな社会どのような形で変化しているか探求しています。<br>
+                            I was born in Shanghai in 1987 and have been specializing in art since childhood. After working at an advertising production company, My primary focus is on artwork, typography, and branding systems.  I moved to Japan and graduated from Kuwasawa Design School in 2023.
                         </div>
                     </div>
-                     <div class="info-row">
+                    <div class="info-row">
                         <div class="info-label">Education</div>
                         <div class="info-content">
-2003- HUASHAN ART SCHOOL ( SHANGHAI )<br>
-2010- EAST CHINA NORMAL UNIVERSIT  ( SHANGHAI )<br>
-2013- A SUBSIDIARY OF THE AMERICAN ASSOCIATION OF ADVERTISING AGENCIE<br>
-2020-2023 KUWASAWA DESIGN SCHOOL ( TOKYO )<br>
-2023- CURIOSITY ( TOKYO )
+                            2003- HUASHAN ART SCHOOL ( SHANGHAI )<br>
+                            2010- EAST CHINA NORMAL UNIVERSIT  ( SHANGHAI )<br>
+                            2013- A SUBSIDIARY OF THE AMERICAN ASSOCIATION OF ADVERTISING AGENCIE<br>
+                            2020-2023 KUWASAWA DESIGN SCHOOL ( TOKYO )<br>
+                            2023- CURIOSITY ( TOKYO )
                         </div>
                     </div>
-                     <div class="info-row">
+                    <div class="info-row">
                         <div class="info-label">Awards</div>
                         <div class="info-content">
-                        2022.10.26- 優秀作品入選、または「広告界就職ガイド2024]へ掲載　主催：宣伝会議グループ<br> 
-                        2022.9.26-「日本平面設計協會年鑑展 JAGDA POSTER EXHIBITION」 CL:マカオポスターデザイン協会<br>
-                        2021.10.26-「JAGDA国際学生ポスターアワード2021」 CL:公益社団法人日本グラフィックデザイナー協会<br>
+                            2022.10.26- 优秀作品入选、または「广告界就职ガイド2024]へ掲載　主催：宣伝会议グループ<br> 
+                            2022.9.26-「日本平面设计协会年鉴展 JAGDA POSTER EXHIBITION」 CL:マカオポスターデザイン协会<br>
+                            2021.10.26-「JAGDA国际学生ポスターアワード2021」 CL:公益社団法人日本グラフィックデザイナー协会<br>
                         </div>
                     </div>
                     <div class="info-row">
                         <div class="info-label">Client</div>
                         <div class="info-content">
-・Kiehl's<br>・Princess Cruises<br>・Porsche<br>・Kanebo<br>・Aveniretoile ( M-I-D )<br>・GINZA XIAOMA
+                            ・Kiehl's<br>・Princess Cruises<br>・Porsche<br>・Kanebo<br>・Aveniretoile ( M-I-D )<br>・GINZA XIAOMA
                         </div>
                     </div>
-                     <div class="info-row">
+                    <div class="info-row">
                         <div class="info-label">Contact</div>
                         <div class="info-content">
                             mengfeiyan11@gmail.com<br>
@@ -167,6 +175,7 @@ I’m always exploring how graphic design is changing around the world as it tak
                     </div>
                 </div>
 
+                <!-- 底部的 Top 按钮和版权信息也放在这里，确保它在滚动内容的最后 -->
                 <footer class="gallery-footer">
                     <div class="footer-inner">
                         <a href="#" onclick="scrollToTop(); return false;">↑ Top</a>
