@@ -7,7 +7,7 @@
 
 :root {
     --page-gap: 20px;       /* 网页四周留白 */
-    --middle-gap: 40px;     /* 左右面板之间的物理空隙 */
+    --middle-gap: 20px;     /* 左右面板之间的物理空隙 */
     --line-color: #d0d0d0;
 }
 
