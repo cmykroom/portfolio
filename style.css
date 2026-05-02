@@ -1,3 +1,4 @@
+/* 全局基础设置 */
 * {
     margin: 0;
     padding: 0;
@@ -18,15 +19,15 @@ body {
     background-color: #fff;
     padding: var(--page-gap); 
     height: 100vh;
-    overflow: hidden; /* 防止浏览器出现双滚动条 */
+    overflow: hidden; 
 }
 
 .main-container {
-display: flex;
-    height: 100%;       /* 必须是 100% */
+    display: flex;
+    height: 100%;       
     width: 100%;
     gap: var(--middle-gap);
-    overflow: hidden;   /* 防止外层容器出现滚动条 */
+    overflow: hidden;   
 }
 
 /* 布局基础 */
@@ -34,23 +35,23 @@ display: flex;
 .right-panel { 
     width: 50%; 
     height: 100%; 
-    position: relative; /* 增加定位辅助 */
-    display: flex;      /* 确保它也是一个 flex 容器 */
+    position: relative; 
+    display: flex;      
     flex-direction: column; 
-    min-height: 0;      /* 关键：防止 Chrome 将高度撑开 */
+    min-height: 0;      
 }
-/* 确保右侧滚动容器能够正确识别剩余空间 */
+
 .right-panel .scroll-content {
-    flex: 1;            /* 占据父级剩余的所有高度 */
-    overflow-y: auto;   /* 允许垂直滑动 */
+    flex: 1;            
+    overflow-y: auto;   
     width: 100%;
 }
 
 /* 头部样式 */
 .panel-header {
-    height: 70px; /* 调整这个数值改变头部高度 */
+    height: 70px; 
     display: flex;
-    align-items: flex-start; /* ← 确保文字向上对齐 */
+    align-items: flex-start; 
     flex-shrink: 0;
 }
 
@@ -80,26 +81,63 @@ display: flex;
 .project-item:hover { opacity: 0.5; }
 
 /* 图片区域 */
-.gallery-item { width: 100%; }
+.gallery-item { width: 100%; cursor: pointer; }
 .item-meta { margin-bottom: 18px; }
 .image-container {
     position: relative;
     background-color: #f2f2f2;
-    margin-bottom: 100px; /* 作品之间的间距 */
+    margin-bottom: 100px; /* 作品列表时的间距 */
     width: 100%;
 }
 .image-container img {
     width: 100%;
-    height: auto; /* 保持原图比例 */
+    height: auto; 
     display: block;
 }
 
-/* 底部样式：实现上下居中效果 */
+/* --- 详情页专用样式 --- */
+#detail-view {
+    padding-bottom: 100px;
+}
+
+.main-view {
+    margin-bottom: 30px !important; /* 详情大图下方的间距缩小 */
+}
+
+.description-section {
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.info-tags {
+    flex: 0 0 32%; /* 与左侧 Client 列对齐 */
+    color: #666;
+    line-height: 1.8;
+}
+
+.info-tags ul { list-style: none; }
+
+.info-text {
+    flex: 1;
+    line-height: 1.6;
+}
+
+.back-btn { margin: 60px 0; }
+.back-btn a { 
+    color: #000; 
+    text-decoration: none; 
+    border-bottom: 1px solid #000; 
+    padding-bottom: 2px;
+}
+/* -------------------- */
+
+/* 底部样式 */
 .panel-footer, .gallery-footer {
-    height: 20px; /* 调整此高度来改变文字离线和底部的距离 */
+    height: 30px; 
     border-top: 1px solid var(--line-color);
     display: flex;
-    align-items: center; /* 核心：垂直居中 */
+    align-items: center; 
     flex-shrink: 0;
 }
 
@@ -115,39 +153,15 @@ display: flex;
 }
 
 /* 装饰加号 */
-.plus { position: absolute; font-size: 18px; color: #aaa; font-weight: 200; }
+.plus { position: absolute; font-size: 18px; color: #aaa; font-weight: 200; pointer-events: none;}
 .top-left { top: 15px; left: 15px; }
 .top-right { top: 15px; right: 15px; }
 .bottom-left { bottom: 15px; left: 15px; }
 .bottom-right { bottom: 15px; right: 15px; }
 
-/* 详情页特有样式 */
-.description-section {
-    display: flex;
-    gap: 40px;
-    margin-top: 20px;
-    padding-bottom: 60px;
-}
-
-.info-tags {
-    flex: 0 0 32%; /* 与左侧 Client 列宽度对齐 */
-    color: #666;
-    line-height: 1.8;
-}
-
-.info-tags ul { list-style: none; }
-
-.info-text {
-    flex: 1;
-    line-height: 1.6;
-    font-size: 14px;
-}
-
-.back-btn { margin: 40px 0; }
-.back-btn a { color: #000; text-decoration: none; border-bottom: 1px solid #000; }
-
 /* 移动端 */
 @media (max-width: 800px) {
     .left-panel { display: none; }
     .right-panel { width: 100%; }
+    .description-section { flex-direction: column; gap: 20px; }
 }
