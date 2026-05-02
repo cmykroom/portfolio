@@ -37,32 +37,39 @@ body {
     flex: 1;
     overflow-y: auto;
     width: 100%;
-    /* 显式声明起始位置，消除浏览器差异 */
     display: flex;
     flex-direction: column;
 }
 .scroll-content::-webkit-scrollbar { display: none; }
 
-/* 头部 */
+/* --- 核心修复：强制头部高度对齐 --- */
 .panel-header {
-    height: 60px;
+    height: 70px; /* 增加到 70px 并严格固定 */
     display: flex;
     align-items: flex-start;
     flex-shrink: 0;
+    margin: 0;
+    padding: 0;
 }
 
 /* 列宽比例 */
 .col-1 { flex: 0 0 32%; }
 .col-2 { flex: 0 0 48%; }
 .col-3 { flex: 0 0 20%; text-align: right; }
-.col-full { flex: 1; font-weight: 500; }
+.col-full { 
+    flex: 1; 
+    font-weight: 500; 
+    line-height: 1; /* 强制单倍行高，防止偏移 */
+}
 
-/* 列表线条 */
+/* --- 核心修复：对齐线条和文字高度 --- */
 .table-head, .project-item, .item-meta {
-    height: 32px;
+    height: 32px; /* 严格固定每一行的高度 */
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--line-color);
+    box-sizing: border-box;
+    margin: 0;
 }
 
 .project-item { cursor: pointer; transition: opacity 0.2s; }
@@ -70,7 +77,12 @@ body {
 
 /* 图片容器 */
 .gallery-item { width: 100%; cursor: pointer; }
-.item-meta { margin-bottom: 18px; }
+
+/* 详情页和滚动列表的 Meta 信息 */
+.item-meta { 
+    margin-bottom: 18px; /* 线条下方的间距 */
+}
+
 .image-container {
     position: relative;
     background-color: #f2f2f2;
@@ -80,11 +92,18 @@ body {
 .image-container img { width: 100%; height: auto; display: block; }
 
 /* 详情页特有样式 */
+#detail-view {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .detail-main-img { margin-bottom: 30px; }
 .description-section { display: flex; gap: 40px; margin-top: 20px; padding-bottom: 20px; }
 .info-tags { flex: 0 0 32%; color: #666; line-height: 1.8; }
 .info-tags ul { list-style: none; }
 .info-text { flex: 1; line-height: 1.6; font-size: 14px; }
+
 .back-btn { margin: 40px 0 100px 0; }
 .back-btn a { color: #000; text-decoration: none; border-bottom: 1px solid #000; }
 
