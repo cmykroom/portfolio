@@ -85,7 +85,7 @@ body {
 
 /* 底部对齐：文字沉底 */
 .panel-footer, .gallery-footer {
-    height: 40px;
+    height: 20px;
     border-top: 1px solid var(--line-color);
     display: flex;
     align-items: flex-end; 
