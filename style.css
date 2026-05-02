@@ -7,6 +7,7 @@
 
 :root {
     --page-gap: 20px;       /* 网页四周留白 */
+    --middle-gap: 40px;     /* 左右面板之间的物理空隙 */
     --line-color: #d0d0d0;
 }
 
@@ -24,12 +25,14 @@ body {
     display: flex;
     height: 100%;
     width: 100%;
+    /* 关键：增加左右面板之间的空隙，且不显式画线 */
+    gap: var(--middle-gap);
 }
 
 .left-panel { width: 50%; display: flex; flex-direction: column; }
 .right-panel { width: 50%; display: flex; flex-direction: column; }
 
-/* 头部 */
+/* 头部高度 */
 .panel-header {
     height: 80px;
     display: flex;
@@ -37,7 +40,7 @@ body {
     flex-shrink: 0;
 }
 
-/* 列表对齐：修正比例确保左右文字严格对齐 */
+/* 列表列对齐比例 */
 .col-1 { flex: 0 0 32%; }
 .col-2 { flex: 0 0 48%; }
 .col-3 { flex: 0 0 20%; text-align: right; }
@@ -48,9 +51,10 @@ body {
     overflow-y: auto;
     min-height: 0;
 }
+/* 隐藏滚动条但保留功能 */
 .scroll-content::-webkit-scrollbar { display: none; }
 
-/* 线条 */
+/* 线条：仅横向 */
 .table-head, .project-item, .item-meta {
     height: 32px;
     display: flex;
@@ -58,32 +62,28 @@ body {
     border-bottom: 1px solid var(--line-color);
 }
 
-.project-item { cursor: pointer; }
+.project-item { cursor: pointer; transition: opacity 0.2s; }
 .project-item:hover { opacity: 0.5; }
 
-/* 图片容器：关键修改 */
-.gallery-item {
-    width: 100%;
-}
-
+/* 右侧图片与详情间距 */
 .item-meta {
-    margin-bottom: 25px; /* 线条与图片的间距 */
+    margin-bottom: 25px; 
 }
 
 .image-container {
     position: relative;
     background-color: #f2f2f2;
-    margin-bottom: 80px; /* 两个作品之间的间距 */
+    margin-bottom: 100px; /* 两个作品间的间距 */
     width: 100%;
 }
 
 .image-container img {
     width: 100%;
-    height: auto;      /* 强制保持图片原始比例，不再填满容器 */
+    height: auto;      /* 保持原始比例 */
     display: block;
 }
 
-/* 底部对齐：时钟与链接沉底 */
+/* 底部对齐：文字沉底 */
 .panel-footer, .gallery-footer {
     height: 40px;
     border-top: 1px solid var(--line-color);
@@ -111,7 +111,9 @@ body {
 .bottom-left { bottom: 15px; left: 15px; }
 .bottom-right { bottom: 15px; right: 15px; }
 
+/* 移动端适配 */
 @media (max-width: 800px) {
+    .main-container { gap: 0; }
     .left-panel { display: none; }
     .right-panel { width: 100%; }
 }
