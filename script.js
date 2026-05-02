@@ -1,17 +1,15 @@
-// 平滑滚动至指定项目
+// 平滑滚动
 function to(id) {
     const el = document.getElementById(id);
     const container = document.getElementById('gal'); 
     if (el && container) {
-        // 计算相对于滚动容器的偏移量
         container.scrollTo({
-            top: el.offsetTop,
+            top: el.offsetTop - 70, // 减去header的高度以获得更好的视觉对齐
             behavior: 'smooth'
         });
     }
 }
 
-// 返回顶部
 function scrollToTop() {
     const container = document.getElementById('gal');
     if (container) {
@@ -19,7 +17,7 @@ function scrollToTop() {
     }
 }
 
-// 数字时钟
+// 时钟
 function updateClock() {
     const timer = document.getElementById('timer');
     if (timer) {
@@ -30,6 +28,5 @@ function updateClock() {
         timer.innerText = `${h}:${m}:${s}`;
     }
 }
-
 setInterval(updateClock, 1000);
 updateClock();
