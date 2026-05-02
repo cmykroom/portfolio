@@ -52,23 +52,22 @@ const projectData = {
 };
 
 /**
- * 【功能 1】左侧点击滚动
+ * 【功能 1】左侧项目列表点击滚动
  */
 function scrollToId(id) {
-    // 如果当前在详情页或信息页，点击左侧列表应先返回列表视图
+    // 如果当前在详情页或信息页，点击左侧列表应先返回首页视图
     showGallery();
     
     const container = document.getElementById('gal');
     const target = document.getElementById(id);
     if (target) {
-        // 减去 60px 偏移量以对齐顶部 Header
         const topPos = target.offsetTop - 60; 
         container.scrollTo({ top: topPos, behavior: 'smooth' });
     }
 }
 
 /**
- * 【功能 2】右侧点击进入详情
+ * 【功能 2】右侧点击进入详情页
  */
 function showDetail(id) {
     const data = projectData[id];
@@ -100,36 +99,43 @@ function showDetail(id) {
         }
     }
 
-    // 4. 视图切换：隐藏列表和信息，显示详情
+    // 4. 视图切换
     document.getElementById('gallery-view').style.display = 'none';
-    document.getElementById('info-view').style.display = 'none';
+    document.getElementById('info-view').style.display = 'none'; // 确保关闭信息页
     document.getElementById('detail-view').style.display = 'block';
     
+    // 5. 标题与 Index 按钮处理
     document.getElementById('right-title').innerText = 'Project Detail';
+    document.getElementById('index-btn').style.display = 'none'; // 详情页隐藏 Index
+    
     document.getElementById('gal').scrollTo({ top: 0 });
 }
 
 /**
- * 【功能 3】显示作品列表 (Default)
+ * 【功能 3】返回列表 (首页)
  */
 function showGallery() {
     document.getElementById('gallery-view').style.display = 'block';
     document.getElementById('detail-view').style.display = 'none';
     document.getElementById('info-view').style.display = 'none';
     
+    // 标题恢复，且隐藏 Index 按钮
     document.getElementById('right-title').innerText = 'Selected Work';
+    document.getElementById('index-btn').style.display = 'none';
 }
 
 /**
- * 【功能 4】显示个人信息 (Information)
+ * 【功能 4】显示 Information 页面
  */
 function showInfo() {
     document.getElementById('gallery-view').style.display = 'none';
     document.getElementById('detail-view').style.display = 'none';
     document.getElementById('info-view').style.display = 'block';
     
-    document.getElementById('right-title').innerText = 'Information';
-    // 切换后滚动到顶部
+    // 切换标题为 Profile，并显示右上角的 Index 按钮
+    document.getElementById('right-title').innerText = 'Profile';
+    document.getElementById('index-btn').style.display = 'block';
+    
     document.getElementById('gal').scrollTo({ top: 0 });
 }
 
@@ -138,13 +144,7 @@ function showInfo() {
  */
 function updateClock() {
     const el = document.getElementById('timer');
-    if (el) {
-        const now = new Date();
-        const h = String(now.getHours()).padStart(2, '0');
-        const m = String(now.getMinutes()).padStart(2, '0');
-        const s = String(now.getSeconds()).padStart(2, '0');
-        el.innerText = `${h}:${m}:${s}`;
-    }
+    if (el) el.innerText = new Date().toTimeString().split(' ')[0];
 }
 setInterval(updateClock, 1000);
 updateClock();
