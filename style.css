@@ -1,4 +1,3 @@
-/* 全局基础设置 */
 * {
     margin: 0;
     padding: 0;
@@ -7,8 +6,8 @@
 }
 
 :root {
-    --page-gap: 10px;       /* 网页四周留白 */
-    --middle-gap: 20px;     /* 左右面板间的物理空隙 */
+    --page-gap: 10px;
+    --middle-gap: 20px;
     --line-color: #d0d0d0;
 }
 
@@ -19,57 +18,43 @@ body {
     background-color: #fff;
     padding: var(--page-gap); 
     height: 100vh;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .main-container {
     display: flex;
-    height: 100%;       
+    height: 100%;
     width: 100%;
     gap: var(--middle-gap);
-    overflow: hidden;   
+    overflow: hidden;
 }
 
 /* 布局基础 */
 .left-panel { width: 50%; display: flex; flex-direction: column; }
-.right-panel { 
-    width: 50%; 
-    height: 100%; 
-    position: relative; 
-    display: flex;      
-    flex-direction: column; 
-    min-height: 0;      
-}
+.right-panel { width: 50%; height: 100%; display: flex; flex-direction: column; min-height: 0; }
 
-.right-panel .scroll-content {
-    flex: 1;            
-    overflow-y: auto;   
+.scroll-content {
+    flex: 1;
+    overflow-y: auto;
     width: 100%;
 }
+.scroll-content::-webkit-scrollbar { display: none; }
 
-/* 头部样式 */
+/* 头部 */
 .panel-header {
-    height: 70px; 
+    height: 70px;
     display: flex;
-    align-items: flex-start; 
+    align-items: flex-start;
     flex-shrink: 0;
 }
 
-/* 列表列宽比例 */
+/* 列宽比例 */
 .col-1 { flex: 0 0 32%; }
 .col-2 { flex: 0 0 48%; }
 .col-3 { flex: 0 0 20%; text-align: right; }
 .col-full { flex: 1; font-weight: 500; }
 
-/* 滚动容器 */
-.scroll-content {
-    flex: 1;
-    overflow-y: auto;
-    min-height: 0;
-}
-.scroll-content::-webkit-scrollbar { display: none; }
-
-/* 线条 */
+/* 列表线条 */
 .table-head, .project-item, .item-meta {
     height: 32px;
     display: flex;
@@ -80,86 +65,44 @@ body {
 .project-item { cursor: pointer; transition: opacity 0.2s; }
 .project-item:hover { opacity: 0.5; }
 
-/* 图片区域 */
+/* 图片容器 */
 .gallery-item { width: 100%; cursor: pointer; }
 .item-meta { margin-bottom: 18px; }
 .image-container {
     position: relative;
     background-color: #f2f2f2;
-    margin-bottom: 100px; /* 作品列表时的间距 */
+    margin-bottom: 100px;
     width: 100%;
 }
-.image-container img {
-    width: 100%;
-    height: auto; 
-    display: block;
-}
+.image-container img { width: 100%; height: auto; display: block; }
 
-/* --- 详情页专用样式 --- */
-#detail-view {
-    padding-bottom: 100px;
-}
-
-.main-view {
-    margin-bottom: 30px !important; /* 详情大图下方的间距缩小 */
-}
-
-.description-section {
-    display: flex;
-    gap: 40px;
-    margin-top: 20px;
-}
-
-.info-tags {
-    flex: 0 0 32%; /* 与左侧 Client 列对齐 */
-    color: #666;
-    line-height: 1.8;
-}
-
+/* 详情页特有样式 */
+.detail-main-img { margin-bottom: 30px; }
+.description-section { display: flex; gap: 40px; margin-top: 20px; padding-bottom: 20px; }
+.info-tags { flex: 0 0 32%; color: #666; line-height: 1.8; }
 .info-tags ul { list-style: none; }
+.info-text { flex: 1; line-height: 1.6; font-size: 14px; }
+.back-btn { margin: 40px 0 100px 0; }
+.back-btn a { color: #000; text-decoration: none; border-bottom: 1px solid #000; }
 
-.info-text {
-    flex: 1;
-    line-height: 1.6;
-}
-
-.back-btn { margin: 60px 0; }
-.back-btn a { 
-    color: #000; 
-    text-decoration: none; 
-    border-bottom: 1px solid #000; 
-    padding-bottom: 2px;
-}
-/* -------------------- */
-
-/* 底部样式 */
+/* 底部 */
 .panel-footer, .gallery-footer {
-    height: 30px; 
+    height: 20px;
     border-top: 1px solid var(--line-color);
     display: flex;
-    align-items: center; 
+    align-items: center;
     flex-shrink: 0;
 }
-
-.footer-inner {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-
-.panel-footer a, .footer-inner a {
-    color: #000;
-    text-decoration: none;
-}
+.footer-inner { width: 100%; display: flex; justify-content: space-between; }
+.panel-footer a, .footer-inner a { color: #000; text-decoration: none; }
 
 /* 装饰加号 */
-.plus { position: absolute; font-size: 18px; color: #aaa; font-weight: 200; pointer-events: none;}
+.plus { position: absolute; font-size: 18px; color: #aaa; font-weight: 200; pointer-events: none; }
 .top-left { top: 15px; left: 15px; }
 .top-right { top: 15px; right: 15px; }
 .bottom-left { bottom: 15px; left: 15px; }
 .bottom-right { bottom: 15px; right: 15px; }
 
-/* 移动端 */
 @media (max-width: 800px) {
     .left-panel { display: none; }
     .right-panel { width: 100%; }
