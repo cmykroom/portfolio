@@ -22,15 +22,29 @@ body {
 }
 
 .main-container {
-    display: flex;
-    height: 100%;
+display: flex;
+    height: 100%;       /* 必须是 100% */
     width: 100%;
     gap: var(--middle-gap);
+    overflow: hidden;   /* 防止外层容器出现滚动条 */
 }
 
 /* 布局基础 */
 .left-panel { width: 50%; display: flex; flex-direction: column; }
-.right-panel { width: 50%; height: 100%; }
+.right-panel { 
+    width: 50%; 
+    height: 100%; 
+    position: relative; /* 增加定位辅助 */
+    display: flex;      /* 确保它也是一个 flex 容器 */
+    flex-direction: column; 
+    min-height: 0;      /* 关键：防止 Chrome 将高度撑开 */
+}
+/* 确保右侧滚动容器能够正确识别剩余空间 */
+.right-panel .scroll-content {
+    flex: 1;            /* 占据父级剩余的所有高度 */
+    overflow-y: auto;   /* 允许垂直滑动 */
+    width: 100%;
+}
 
 /* 头部样式 */
 .panel-header {
