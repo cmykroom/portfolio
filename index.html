@@ -1,107 +1,102 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MENGFEI YAN</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<div class="main-container">
+    <!-- 左侧面板 -->
+    <aside class="left-panel">
+        <header class="panel-header">
+            <div class="col-1">MENGFEI YAN ® </div>
+            <div class="col-2" style="cursor:pointer" onclick="showGallery()">Information</div>
+        </header>
+        
+        <div class="scroll-content">
+            <div class="table-head">
+                <div class="col-1">Client</div><div class="col-2">Project</div><div class="col-3">Year</div>
+            </div>
+            <div class="project-list">
+                <!-- 修改这里：左侧点击只负责【滚动】 -->
+                <div class="project-item" onclick="scrollToId('p1')"><div class="col-1">SED_DO</div><div class="col-2">Ref. R/XTR-082</div><div class="col-3">2049</div></div>
+                <div class="project-item" onclick="scrollToId('p2')"><div class="col-1">SED_DO</div><div class="col-2">R/PRT-017</div><div class="col-3">2048</div></div>
+                <div class="project-item" onclick="scrollToId('p3')"><div class="col-1">SED_DO</div><div class="col-2">Ref. R/CXX-500</div><div class="col-3">2047</div></div>
+                <div class="project-item" onclick="scrollToId('p4')"><div class="col-1">SED_DO</div><div class="col-2">Ref. R/ANV-310</div><div class="col-3">2046</div></div>
+                <div class="project-item" onclick="scrollToId('p5')"><div class="col-1">SED_DO</div><div class="col-2">Ref. R/FTH-053</div><div class="col-3">2045</div></div>
+            </div>
+        </div>
+        <!-- footer 保持不变 -->
+    </aside>
 
-    <div class="main-container">
-        <!-- 左侧面板：保持固定 -->
-        <aside class="left-panel">
+    <!-- 右侧面板 -->
+    <main class="right-panel">
+        <div class="scroll-content" id="gal">
             <header class="panel-header">
-                <div class="col-1">MENGFEI YAN ® </div>
-                <div class="col-2" style="cursor:pointer" onclick="showGallery()">Information</div>
+                <div class="col-full" id="right-title">Selected Work</div>
             </header>
-            
-            <div class="scroll-content">
-                <div class="table-head">
-                    <div class="col-1">Client</div><div class="col-2">Project</div><div class="col-3">Year</div>
-                </div>
-                <div class="project-list">
-                    <!-- 注意：这里的 to('p1') 现在会触发详情页切换 -->
-                    <div class="project-item" onclick="to('p1')"><div class="col-1">SED_DO</div><div class="col-2">Ref. R/XTR-082</div><div class="col-3">2049</div></div>
-                    <div class="project-item" onclick="to('p2')"><div class="col-1">SED_DO</div><div class="col-2">R/PRT-017</div><div class="col-3">2048</div></div>
-                    <div class="project-item" onclick="to('p3')"><div class="col-1">SED_DO</div><div class="col-2">Ref. R/CXX-500</div><div class="col-3">2047</div></div>
-                    <div class="project-item" onclick="to('p4')"><div class="col-1">SED_DO</div><div class="col-2">Ref. R/ANV-310</div><div class="col-3">2046</div></div>
-                    <div class="project-item" onclick="to('p5')"><div class="col-1">SED_DO</div><div class="col-2">Ref. R/FTH-053</div><div class="col-3">2045</div></div>
+
+            <!-- 视图容器 A: 首页 5 个大图滑动列表 -->
+            <div id="gallery-view">
+                <div class="gallery-list">
+                    <!-- 项目 1 -->
+                    <section class="gallery-item" id="p1" onclick="showDetail('p1')">
+                        <div class="item-meta">
+                            <div class="col-1">SED_DO</div><div class="col-2">Ref. R/XTR-082</div><div class="col-3">2049</div>
+                        </div>
+                        <div class="image-container">
+                            <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover1.jpg">
+                            <span class="plus top-left">+</span><span class="plus top-right">+</span>
+                            <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
+                        </div>
+                    </section>
+                    <!-- 项目 2 -->
+                    <section class="gallery-item" id="p2" onclick="showDetail('p2')">
+                        <div class="item-meta">
+                            <div class="col-1">SED_DO</div><div class="col-2">R/PRT-017</div><div class="col-3">2048</div>
+                        </div>
+                        <div class="image-container"><img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover2.jpg"></div>
+                    </section>
+                    <!-- 项目 3 -->
+                    <section class="gallery-item" id="p3" onclick="showDetail('p3')">
+                        <div class="item-meta">
+                            <div class="col-1">SED_DO</div><div class="col-2">Ref. R/CXX-500</div><div class="col-3">2047</div>
+                        </div>
+                        <div class="image-container"><img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover3.jpg"></div>
+                    </section>
+                    <!-- 项目 4 -->
+                    <section class="gallery-item" id="p4" onclick="showDetail('p4')">
+                        <div class="item-meta">
+                            <div class="col-1">SED_DO</div><div class="col-2">Ref. R/ANV-310</div><div class="col-3">2046</div>
+                        </div>
+                        <div class="image-container"><img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover4.jpg"></div>
+                    </section>
+                    <!-- 项目 5 -->
+                    <section class="gallery-item" id="p5" onclick="showDetail('p5')">
+                        <div class="item-meta">
+                            <div class="col-1">SED_DO</div><div class="col-2">Ref. R/FTH-053</div><div class="col-3">2045</div>
+                        </div>
+                        <div class="image-container"><img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover5.jpg"></div>
+                    </section>
                 </div>
             </div>
 
-            <footer class="panel-footer">
-                <div class="col-1" id="timer">00:00:00</div>
-                <div class="col-2">
-                    <a href="#">IG</a>, <a href="mailto:mengfeiyan11@gmail.com">Email</a>
+            <!-- 视图容器 B: 作品详情 (默认隐藏) -->
+            <div id="detail-view" style="display: none;">
+                <div class="item-meta">
+                    <div class="col-1" id="d-client"></div><div class="col-2" id="d-project"></div><div class="col-3" id="d-year"></div>
+                </div>
+                <div class="image-container main-view">
+                    <img src="" id="d-img">
+                    <span class="plus top-left">+</span><span class="plus top-right">+</span>
+                    <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
+                </div>
+                <div class="description-section">
+                    <div class="info-tags"><ul id="d-tags"></ul></div>
+                    <div class="info-text" id="d-text"></div>
+                </div>
+                <div class="back-btn"><a href="#" onclick="showGallery(); return false;">← Back</a></div>
+            </div>
+
+            <footer class="gallery-footer">
+                <div class="footer-inner">
+                    <a href="#" onclick="scrollToTop(); return false;">↑ Top</a>
+                    <span>©2026 All Rights Reserved</span>
                 </div>
             </footer>
-        </aside>
-
-        <!-- 右侧面板 -->
-        <main class="right-panel">
-            <div class="scroll-content" id="gal">
-                <!-- 动态标题：点击列表或详情时会变 -->
-                <header class="panel-header">
-                    <div class="col-full" id="right-title">Selected Work</div>
-                </header>
-
-                <!-- 视图容器 A: 项目列表 (首页) -->
-                <div id="gallery-view">
-                    <div class="gallery-list">
-                        <!-- 每个项目增加 onclick，点击图片也能进详情 -->
-                        <section class="gallery-item" onclick="to('p1')">
-                            <div class="item-meta">
-                                <div class="col-1">SED_DO</div><div class="col-2">Ref. R/XTR-082</div><div class="col-3">2049</div>
-                            </div>
-                            <div class="image-container">
-                                <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover1.jpg">
-                                <span class="plus top-left">+</span><span class="plus top-right">+</span>
-                                <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
-                            </div>
-                        </section>
-                        <!-- 其他项目同理... -->
-                    </div>
-                </div>
-
-                <!-- 视图容器 B: 作品详情 (默认隐藏) -->
-                <div id="detail-view" style="display: none;">
-                    <!-- 详情页顶栏 -->
-                    <div class="item-meta">
-                        <div class="col-1" id="d-client"></div>
-                        <div class="col-2" id="d-project"></div>
-                        <div class="col-3" id="d-year"></div>
-                    </div>
-
-                    <!-- 详情页大图 -->
-                    <div class="image-container main-view">
-                        <img src="" id="d-img">
-                        <span class="plus top-left">+</span><span class="plus top-right">+</span>
-                        <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
-                    </div>
-
-                    <!-- 详情页双栏描述 -->
-                    <div class="description-section">
-                        <div class="info-tags">
-                            <ul id="d-tags"></ul>
-                        </div>
-                        <div class="info-text" id="d-text"></div>
-                    </div>
-
-                    <div class="back-btn">
-                        <a href="#" onclick="showGallery(); return false;">← Back</a>
-                    </div>
-                </div>
-
-                <footer class="gallery-footer">
-                    <div class="footer-inner">
-                        <a href="#" onclick="scrollToTop(); return false;">↑ Top</a>
-                        <span>©2026 All Rights Reserved</span>
-                    </div>
-                </footer>
-            </div>
-        </main>
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+        </div>
+    </main>
+</div>
