@@ -34,7 +34,7 @@ body {
 
 /* 头部样式 */
 .panel-header {
-    height: 70px; /* 调整这个数值改变头部高度 */
+    height: 20px; /* 调整这个数值改变头部高度 */
     display: flex;
     align-items: center; 
     flex-shrink: 0;
@@ -82,7 +82,7 @@ body {
 
 /* 底部样式：实现上下居中效果 */
 .panel-footer, .gallery-footer {
-    height: 60px; /* 调整此高度来改变文字离线和底部的距离 */
+    height: 20px; /* 调整此高度来改变文字离线和底部的距离 */
     border-top: 1px solid var(--line-color);
     display: flex;
     align-items: center; /* 核心：垂直居中 */
