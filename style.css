@@ -81,7 +81,7 @@ display: flex;
 
 /* 图片区域 */
 .gallery-item { width: 100%; }
-.item-meta { margin-bottom: 25px; }
+.item-meta { margin-bottom: 18px; }
 .image-container {
     position: relative;
     background-color: #f2f2f2;
