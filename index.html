@@ -42,7 +42,11 @@
                 <div id="gallery-view">
                     <header class="panel-header">
                         <div class="col-header-left" id="right-title">Selected Work</div>
-                        <div id="index-btn" class="col-header-right clickable" onclick="showGallery()" style="display: none;">Index</div>
+                        <div class="col-header-right">
+                            <!-- 新增：仅在手机版显示的 LIST 按钮 -->
+                            <span id="mobile-list-btn" class="clickable" onclick="toggleMobileList()" style="display: none; margin-right: 15px;">List</span>
+                            <span id="index-btn" class="clickable" onclick="showGallery()" style="display: none;">Index</span>
+                        </div>
                     </header>
                     <!-- 容器：JS 会把右侧图片大图注入到这里 -->
                     <div id="js-gallery-content">
@@ -102,7 +106,6 @@
                             2023- CURIOSITY ( TOKYO )
                         </div>
                     </div>
-                    <!-- ... 其他 info 内容保持不变 ... -->
                     <div class="info-row">
                         <div class="info-label">Contact</div>
                         <div class="info-content">
@@ -110,19 +113,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 右侧面板首页视图 -->
-<div id="gallery-view">
-    <header class="panel-header">
-        <div class="col-header-left" id="right-title">Selected Work</div>
-        <div class="col-header-right">
-            <!-- 仅在手机版显示的 LIST 按钮 -->
-            <span id="mobile-list-btn" class="clickable" onclick="toggleMobileList()">List</span>
-            <span id="index-btn" class="clickable" onclick="showGallery()" style="display: none;">Index</span>
-        </div>
-    </header>
-    <div id="js-gallery-content"></div>
-</div>
 
                 <!-- 滚动区域底部的页脚 -->
                 <footer class="gallery-footer">
