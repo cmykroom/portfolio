@@ -1,4 +1,6 @@
-/* 基础重置 */
+/* ==========================================================================
+   基础重置与全局变量
+   ========================================================================== */
 *{
     margin:0;
     padding:0;
@@ -34,15 +36,37 @@ a{
     overflow:hidden;
 }
 
-/* 左侧面板基础 */
+/* ==========================================================================
+   左侧面板 (LEFT PANEL)
+   ========================================================================== */
 .left-panel{
     width:50%;
     display:flex;
     flex-direction:column;
     padding-left:var(--page-gap);
+    position: relative; /* 重要：为右下角图片提供定位基准 */
 }
 
-/* 右侧面板基础 */
+/* 新增：左侧右下角图片容器 */
+.left-panel-corner-img {
+    position: absolute;
+    bottom: 70px;  /* 位于 footer 之上，可根据视觉微调 */
+    right: 0;      /* 与右侧边框对齐，或设为 20px 留出间距 */
+    width: 120px;  /* 图片宽度，按需调整 */
+    z-index: 5;
+    pointer-events: none; /* 鼠标穿透，不影响点击下层的列表 */
+}
+
+.left-panel-corner-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* filter: grayscale(100%); 如果需要黑白效果可以开启 */
+}
+
+/* ==========================================================================
+   右侧面板 (RIGHT PANEL)
+   ========================================================================== */
 .right-panel{
     width:50%;
     display:flex;
@@ -62,7 +86,10 @@ a{
     display:none;
 }
 
-/* 顶部 Header */
+/* ==========================================================================
+   网格对齐系统 (Grid Alignment)
+   ========================================================================== */
+
 .panel-header{
     height:60px;
     display:flex;
@@ -73,35 +100,12 @@ a{
     flex-shrink:0;
 }
 
-/* ==========================================================================
-   网格对齐系统：统一第二列 (col-2) 的宽度，确保垂直对齐
-   ========================================================================== */
+/* 统一 col-2 的宽度确保 Information, Project, IG 在同一列 */
+.panel-header .col-2 { flex: 0 0 48%; text-align: left; }
+.table-head .col-2   { flex: 0 0 48%; text-align: left; }
+.project-item .col-2 { flex: 0 0 48%; text-align: left; }
+.panel-footer .col-2 { flex: 0 0 48%; text-align: left; }
 
-/* 顶部 Header 的第二列 (Information) */
-.panel-header .col-2 {
-    flex: 0 0 48%; 
-    text-align: left;
-}
-
-/* 列表表头的第二列 (Project) */
-.table-head .col-2 {
-    flex: 0 0 48%;
-    text-align: left;
-}
-
-/* 列表内容的第二列 */
-.project-item .col-2 {
-    flex: 0 0 48%;
-    text-align: left;
-}
-
-/* 底部页脚的第二列 (IG, Email) */
-.panel-footer .col-2 {
-    flex: 0 0 48%;
-    text-align: left;
-}
-
-/* 其他列宽定义 */
 .col-1{ flex:0 0 32%; }
 .col-3{ flex:0 0 20%; text-align:right; }
 
@@ -110,21 +114,13 @@ a{
     font-weight:normal;
 }
 
-.clickable{
-    cursor:pointer;
-}
-.clickable:hover{
-    opacity:.5;
-}
+/* 交互 */
+.clickable{ cursor:pointer; }
+.clickable:hover{ opacity:.5; }
 
-.desktop-title{
-    display:inline;
-}
-.mobile-title{
-    display:none;
-}
+.desktop-title{ display:inline; }
+.mobile-title{ display:none; }
 
-/* 顶部导航右平齐 */
 .top-links,
 .mobile-links{
     display:flex;
@@ -133,7 +129,7 @@ a{
     text-align:right;
 }
 
-/* 列表 */
+/* 列表行 */
 .table-head,
 .project-item,
 .item-meta{
@@ -143,20 +139,34 @@ a{
     border-bottom:1px solid var(--line-color);
 }
 
-.project-item{
-    cursor:pointer;
-}
-.project-item:hover{
-    opacity:.5;
+.project-item:hover{ opacity:.5; }
+
+/* ==========================================================================
+   页脚微调 (Footer)
+   ========================================================================== */
+
+.panel-footer,
+.gallery-footer{
+    height:38px;
+    border-top:1px solid var(--line-color);
+    display:flex;
+    align-items:center;
+    margin-top:20px;
+    flex-shrink:0;
+    /* 核心修改：文字精准上提 1px */
+    transform: translateY(-1px);
 }
 
-.gallery-item{
+.footer-inner{
     width:100%;
-    cursor:pointer;
-    padding-bottom:40px;
+    display:flex;
+    justify-content:space-between;
 }
 
-/* 图片 */
+/* ==========================================================================
+   其他组件 (详情页、Info、Gallery 等)
+   ========================================================================== */
+
 .image-container{
     position:relative;
     width:100%;
@@ -173,15 +183,6 @@ a{
     display:block;
 }
 
-/* 详情页 */
-#detail-view{
-    width:100%;
-}
-
-.detail-main-img{
-    margin-bottom:30px;
-}
-
 .description-section{
     display:flex;
     gap:40px;
@@ -189,20 +190,9 @@ a{
     padding-bottom:20px;
 }
 
-.info-tags{
-    flex:0 0 32%;
-    color:#666;
-    line-height:1.8;
-}
-.info-tags ul{
-    list-style:none;
-}
-
-.info-text{
-    flex:1;
-    font-size:14px;
-    line-height:1.6;
-}
+.info-tags{ flex:0 0 32%; color:#666; line-height:1.8; }
+.info-tags ul{ list-style:none; }
+.info-text{ flex:1; font-size:14px; line-height:1.6; }
 
 .project-grid{
     display:grid;
@@ -211,257 +201,41 @@ a{
     margin-top:40px;
 }
 
-.image-container.small{
-    margin-bottom:10px;
-}
-
-.grid-num{
-    font-size:12px;
-    color:#666;
-    margin-bottom:40px;
-}
-
-.back-btn{
-    margin:40px 0 100px 0;
-}
-
-/* info页 */
 .info-row{
     display:flex;
     border-bottom:1px solid var(--line-color);
     padding:15px 0 40px 0;
 }
 
-.info-label{
-    flex:0 0 32%;
-}
+.info-label{ flex:0 0 32%; }
+.info-content{ flex:1; line-height:1.6; max-width:500px; }
 
-.info-content{
-    flex:1;
-    line-height:1.6;
-    max-width:500px;
-}
-
-/* ==========================================================================
-   FOOTER：微调文字上移 1px
-   ========================================================================== */
-
-.panel-footer {
-    height: 38px;
-    border-top: 1px solid var(--line-color);
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-    flex-shrink: 0;
-    /* 上移文字 */
-    transform: translateY(-1px);
-}
-
-.gallery-footer {
-    height: 38px;
-    border-top: 1px solid var(--line-color);
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-    flex-shrink: 0;
-    /* 上移文字 */
-    transform: translateY(-1px);
-}
-
-.footer-inner{
-    width:100%;
-    display:flex;
-    justify-content:space-between;
-}
-
-/* 手机版底部 */
-.mobile-bottom-info{
-    display:none;
-}
-
-/* 加号 */
-.plus{
-    position:absolute;
-    font-size:18px;
-    color:#aaa;
-    z-index:10;
-}
+/* 加号装饰 */
+.plus{ position:absolute; font-size:18px; color:#aaa; z-index:10; }
 .top-left{top:15px;left:15px;}
 .top-right{top:15px;right:15px;}
 .bottom-left{bottom:15px;left:15px;}
 .bottom-right{bottom:15px;right:15px;}
 
-/* fade */
-.view-fade{
-    opacity:0;
-    transition:opacity .22s ease;
-}
-.view-fade.show{
-    opacity:1;
-}
-
-/* 手机版控制 */
-#mobile-list-view,
-#mobile-list-btn{
-    display:none;
-}
-
-.desktop-hide {
-    display: none;
-}
+/* 桌面端隐藏手机专属导航 */
+.desktop-hide { display: none; }
 
 /* ==========================================================================
-   GALLERY PAGE - SYSTEM
+   响应式布局 (MOBILE)
    ========================================================================== */
-
-.objects-page {
-    width: 100%;
-    padding: 0 var(--page-gap);
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.objects-page .panel-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding-top: 5px;
-    height: 60px;
-    border-bottom: none !important;
-}
-
-.objects-grid {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    column-gap: 40px; 
-    row-gap: 80px;   
-    padding: 60px 10% 120px 10%; 
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.object-item {
-    display: flex;
-    flex-direction: column;
-}
-
-.object-cover {
-    width: 100%;
-    aspect-ratio: 1 / 1; 
-    overflow: hidden;
-    background-color: #f2f2f2;
-}
-
-.object-cover img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.object-number {
-    margin-top: 15px;
-    font-size: 10px; 
-    color: #666;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-}
-
-.objects-page .panel-footer {
-    width: 100%;
-    height: 38px;
-    border-top: 1px solid var(--line-color);
-    display: flex;
-    align-items: center;
-    margin-top: auto;
-}
-
-/* ==========================================================================
-   MOBILE RESPONSIVE
-   ========================================================================== */
-
 @media (max-width:800px){
-
-    body{
-        font-size:14px;
-    }
-
-    .left-panel{
-        display:none;
-    }
-
-    .right-panel{
-        width:100%;
-        padding:0 var(--page-gap);
-    }
-
-    .desktop-title{
-        display:none;
-    }
-
-    .mobile-title{
-        display:inline;
-    }
-
-    #mobile-list-btn{
-        display:inline;
-    }
-
-    /* 手机端显示右侧隐藏的导航 */
-    .desktop-hide {
-        display: flex;
-    }
-
-    .gallery-footer,
-    .panel-footer{
-        display:none;
-    }
-
-    .panel-header{
-        height:52px;
-        font-size:14px;
-    }
-
-    .table-head,
-    .project-item,
-    .item-meta{
-        height:34px;
-        font-size:14px;
-    }
-
-    .gallery-item{
-        padding-bottom:28px;
-    }
-
-    .description-section{
-        flex-direction:column;
-        gap:15px;
-        margin-top:10px;
-    }
-
-    .project-grid{
-        grid-template-columns:1fr;
-        gap:15px;
-        margin-top:25px;
-    }
-
-    .info-row{
-        flex-direction:column;
-        gap:10px;
-        padding:15px 0 25px 0;
-    }
-
-    .info-label,
-    .info-content{
-        width:100%;
-        max-width:none;
-        font-size:14px;
-    }
-
+    body{ font-size:14px; }
+    .left-panel{ display:none; } /* 手机端隐藏左侧及图片 */
+    
+    .right-panel{ width:100%; padding:0 var(--page-gap); }
+    .desktop-title{ display:none; }
+    .mobile-title{ display:inline; }
+    
+    .desktop-hide { display: flex; }
+    
+    .panel-header{ height:52px; }
+    .gallery-footer, .panel-footer{ display:none; }
+    
     .mobile-bottom-info{
         display:block;
         width:100%;
@@ -469,20 +243,9 @@ a{
         margin-top:26px;
         padding:10px 0 22px 0;
     }
-
     .mobile-bottom-inner{
-        width:100%;
         display:flex;
         justify-content:space-between;
-        align-items:center;
         font-size:13px;
-    }
-
-    /* gallery mobile */
-    .objects-grid{
-        grid-template-columns:repeat(2,1fr);
-        column-gap:12px;
-        row-gap:30px;
-        padding: 40px 0;
     }
 }
