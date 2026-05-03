@@ -285,7 +285,7 @@ a{
     align-items: flex-start;
     padding-top: 5px;
     height: 60px; /* 同步主页高度 */
-    border-bottom: 1px solid var(--line-color);
+    border-bottom: none !important; /* 原来 1px solid var(--line-color); */
 }
 
 /* 3. 网格区域：增加呼吸感，同时控制宽度 */
@@ -299,7 +299,7 @@ a{
     row-gap: 80px;   
     
     /* 这里的 padding 让 5 列图片收缩在中间，更有精致感 */
-    padding: 80px 10% 120px 10%; 
+    padding: 60px 10% 120px 10%; 
     
     width: 100%;
     box-sizing: border-box;
