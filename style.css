@@ -267,78 +267,52 @@ a{
    GALLERY PAGE
 ========================= */
 
-.objects-page{
-    width:100%;
-    min-height:100vh;
-    padding:0 15px;
-    display:flex;
-    flex-direction:column;
-    background:#fff;
+/* --- GALLERY PAGE STYLES --- */
+
+.objects-grid {
+    display: grid;
+    /* 核心修改：将 repeat 的参数从 3 改为 5 */
+    grid-template-columns: repeat(5, 1fr); 
+    
+    /* 间距建议：因为一行的图变多了，间距可以稍微缩小一点，保持精致感 */
+    column-gap: 15px; 
+    row-gap: 40px; 
+    
+    padding: 40px 0;
+    width: 100%;
 }
 
-.objects-header{
-    height:60px;
-    border-bottom:1px solid var(--line-color);
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    padding-top:5px;
-    margin-bottom:40px;
+.object-item {
+    display: flex;
+    flex-direction: column;
 }
 
-.obj-left,
-.obj-right{
-    font-size:15px;
+.object-cover img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
 }
 
-.objects-title{
-    font-size:15px;
-    margin-bottom:35px;
+.object-name {
+    margin-top: 10px; /* 缩小间距，匹配更小的图片尺寸 */
+    font-size: 11px;  /* 稍微缩小字号，避免文字过长导致排版错乱 */
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
 }
 
-.objects-grid{
-    width:100%;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    column-gap:22px;
-    row-gap:50px;
-    flex:1;
+/* 响应式调整：在小屏幕上不能排5个，否则图太小了 */
+@media (max-width: 1024px) {
+    .objects-grid {
+        grid-template-columns: repeat(3, 1fr); /* 平板端显示 3 列 */
+    }
 }
 
-.object-item{
-    width:100%;
-}
-
-.object-cover{
-    width:100%;
-    overflow:hidden;
-    background:#f2f2f2;
-    margin-bottom:10px;
-}
-
-.object-cover img{
-    width:100%;
-    height:auto;
-    display:block;
-    transition:opacity .25s ease;
-}
-
-.object-cover:hover img{
-    opacity:.94;
-}
-
-.object-name{
-    font-size:13px;
-}
-
-.objects-footer{
-    height:40px;
-    border-top:1px solid var(--line-color);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:60px;
-    font-size:13px;
+@media (max-width: 600px) {
+    .objects-grid {
+        grid-template-columns: repeat(2, 1fr); /* 手机端显示 2 列 */
+    }
 }
 
 /* =========================
