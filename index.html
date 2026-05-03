@@ -12,12 +12,11 @@
 
     <!-- 左侧桌面栏 -->
     <aside class="left-panel">
-        <!-- 头部网格：确保 Information 对齐下面的 Project -->
+        <!-- 头部网格：确保与右侧标题对齐 -->
         <header class="panel-header grid-row">
             <div class="col-1 clickable" onclick="showGallery()">MENGFEI YAN ®</div>
             <div class="col-2 top-links">
                 <span class="clickable" onclick="showInfo()">Information</span>
-                <!-- Gallery 链接在网格内部会通过 CSS 靠右 -->
                 <a href="gallery/">Gallery</a>
             </div>
             <div class="col-3"></div>
@@ -31,13 +30,13 @@
                 <div class="col-3">Year</div>
             </div>
 
-            <!-- 项目列表：由 JS 生成，确保 JS 中也带有 grid-row 类 -->
+            <!-- 项目列表：由 JS 生成 -->
             <div class="project-list" id="js-project-list"></div>
         </div>
 
-        <!-- 左侧右下角图片 -->
+        <!-- 左下角装饰图标 -->
         <div class="left-panel-corner-img">
-            <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/icon1.png" alt="Corner Image">
+            <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/icon1.png" alt="Icon">
         </div>
 
         <!-- 页脚网格 -->
@@ -50,7 +49,7 @@
         </footer>
     </aside>
 
-    <!-- 右侧面板 (恢复 Flex 布局，不使用全局 Grid) -->
+    <!-- 右侧面板 -->
     <main class="right-panel">
         <div class="scroll-content view-fade show" id="gal">
 
@@ -62,6 +61,7 @@
                         <span class="mobile-title">MENGFEI YAN</span>
                     </div>
 
+                    <!-- 仅在移动端显示的链接 -->
                     <div class="col-header-right mobile-links desktop-hide">
                         <span id="mobile-list-btn" class="clickable" onclick="showMobileList()">List</span>
                         <span class="clickable" onclick="showInfo()">Information</span>
@@ -70,13 +70,6 @@
                 </header>
 
                 <div id="js-gallery-content"></div>
-
-                <div class="mobile-bottom-info">
-                    <div class="mobile-bottom-inner">
-                        <div>©2026 All Rights Reserved</div>
-                        <div><a href="#">IG</a>, <a href="mailto:mengfeiyan11@gmail.com">Email</a></div>
-                    </div>
-                </div>
             </div>
 
             <!-- 手机版列表视图 -->
@@ -93,13 +86,6 @@
                 </div>
 
                 <div id="mobile-project-list"></div>
-
-                <div class="mobile-bottom-info">
-                    <div class="mobile-bottom-inner">
-                        <div>©2026 All Rights Reserved</div>
-                        <div><a href="#">IG</a>, <a href="mailto:mengfeiyan11@gmail.com">Email</a></div>
-                    </div>
-                </div>
             </div>
 
             <!-- 详情视图 -->
@@ -109,7 +95,7 @@
                     <div class="col-header-right clickable" onclick="showGallery()">Index</div>
                 </header>
 
-                <!-- 详情页 Meta 行：使用 grid-row 保持对齐节奏 -->
+                <!-- 详情页 Meta 行：对齐左侧节奏 -->
                 <div class="item-meta grid-row">
                     <div class="col-1" id="d-client"></div>
                     <div class="col-2" id="d-project"></div>
@@ -134,13 +120,6 @@
                 <div class="back-btn">
                     <a href="#" onclick="showGallery();return false;">← Back</a>
                 </div>
-
-                <div class="mobile-bottom-info">
-                    <div class="mobile-bottom-inner">
-                        <div>©2026 All Rights Reserved</div>
-                        <div><a href="#">IG</a>, <a href="mailto:mengfeiyan11@gmail.com">Email</a></div>
-                    </div>
-                </div>
             </div>
 
             <!-- 个人信息视图 -->
@@ -154,41 +133,21 @@
                     <div class="info-label">About</div>
                     <div class="info-content">
                         YAN MENGFEI<br>
-                        1987年上海生まれ。幼少から美術を専攻し、広告制作会社経って、その後日本に渡り、2023年桑沢デザイン研究所卒業。企業のロゴや広告・ポスター、ミニカード、アーティストのZINEなどのグラフィックデザインを中心に活动。日本で、タイポグラフィー自主制作しながら、社会問題を扱うプロジェクトなどにグラフィックも活跃し始める。日々グラフィックデザインが多様化するグローバルな社会どのような形で変化しているか探求しています。<br><br>
-                        I was born in Shanghai in 1987 and have been specializing in art since childhood. After working at an advertising production company, my primary focus is on artwork, typography, and branding systems. I moved to Japan and graduated from Kuwasawa Design School in 2023.
-                    </div>
-                </div>
-
-                <div class="info-row">
-                    <div class="info-label">Education</div>
-                    <div class="info-content">
-                        2003- HUASHAN ART SCHOOL (SHANGHAI)<br>
-                        2010- EAST CHINA NORMAL UNIVERSITY (SHANGHAI)<br>
-                        2013- A SUBSIDIARY OF THE AMERICAN ASSOCIATION OF ADVERTISING AGENCIES<br>
-                        2020-2023 KUWASAWA DESIGN SCHOOL (TOKYO)<br>
-                        2023- CURIOSITY (TOKYO)
+                        1987年上海生まれ。幼少から美術を専攻し、広告制作会社経って、その後日本に渡り、2023年桑沢デザイン研究所卒業。<br><br>
+                        I was born in Shanghai in 1987. My primary focus is on artwork, typography, and branding systems.
                     </div>
                 </div>
 
                 <div class="info-row">
                     <div class="info-label">Contact</div>
-                    <div class="info-content">
-                        mengfeiyan11@gmail.com
-                    </div>
-                </div>
-
-                <div class="mobile-bottom-info">
-                    <div class="mobile-bottom-inner">
-                        <div>©2026 All Rights Reserved</div>
-                        <div><a href="#">IG</a>, <a href="mailto:mengfeiyan11@gmail.com">Email</a></div>
-                    </div>
+                    <div class="info-content">mengfeiyan11@gmail.com</div>
                 </div>
             </div>
 
-            <!-- 页脚 -->
+            <!-- 修复后的底部 Footer (彻底解决换行混乱) -->
             <footer class="gallery-footer">
                 <div class="footer-inner">
-                    <a href="#" onclick="scrollToTop();return false;">↑ Top</a>
+                    <a href="#" onclick="scrollToTop();return false;" class="clickable">↑ Top</a>
                     <span>©2026 All Rights Reserved</span>
                 </div>
             </footer>
