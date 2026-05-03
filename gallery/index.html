@@ -4,38 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GALLERY — MENGFEI YAN</title>
+    <!-- 引用上一级目录的全局样式表 -->
     <link rel="stylesheet" href="../style.css">
 </head>
 <body class="gallery-body">
 
-<div class="viewport-wrapper">
-    <!-- 顶部导航：严格左、中、右分布 -->
-    <header class="site-header">
-        <div class="nav-section left"><a href="../index.html">MENGFEI YAN ®</a></div>
-        <div class="nav-section center"><a href="../information.html">Information</a></div>
-        <div class="nav-section right"><a href="../index.html">Selected Work</a></div>
+<div class="objects-page">
+    
+    <!-- 顶部导航：严格同步主页的 .panel-header 结构 -->
+    <!-- 使用与主页相同的 col-1, col-2, col-3 类名确保对齐 -->
+    <header class="panel-header">
+        <div class="col-1">
+            <a href="../index.html" class="clickable">MENGFEI YAN ®</a>
+        </div>
+        <div class="col-2" style="text-align: center;">
+            <a href="../information.html" class="clickable">Information</a>
+        </div>
+        <div class="col-3">
+            <div class="top-links">
+                <a href="../index.html" class="clickable">Selected Work</a>
+            </div>
+        </div>
     </header>
 
-    <!-- 5列网格 -->
-    <main class="gallery-container">
-        <div class="objects-grid" id="objects-grid">
-            <!-- JS 动态注入图片 -->
-        </div>
+    <!-- 中间内容区域：5列网格布局 -->
+    <main class="objects-grid" id="objects-grid">
+        <!-- 此处内容将由 gallery.js 自动注入 -->
+        <!-- 注入结构包含 .object-item, .object-cover 和 .object-number -->
     </main>
 
-    <!-- 页脚：单横线 + 严格左、中、右分布 -->
-    <footer class="site-footer">
-        <div class="footer-line"></div>
-        <div class="footer-content">
-            <div class="footer-section left" id="digital-clock">00:00:00</div>
-            <div class="footer-section center">
-                <a href="#">IG</a>, <a href="mailto:mengfeiyan11@gmail.com">Email</a>
+    <!-- 底部页脚：严格同步主页的 .panel-footer 结构 -->
+    <footer class="panel-footer">
+        <div class="footer-inner">
+            <!-- 左侧：数字时钟 -->
+            <div id="digital-clock" class="col-header-left">00:00:00</div>
+            
+            <!-- 中间：社交与联系方式 -->
+            <div style="text-align: center;">
+                <a href="#" class="clickable">IG</a>, 
+                <a href="mailto:mengfeiyan11@gmail.com" class="clickable">Email</a>
             </div>
-            <div class="footer-section right">©2026 All Rights Reserved</div>
+            
+            <!-- 右侧：版权信息 -->
+            <div class="col-header-right">©2026 All Rights Reserved</div>
         </div>
     </footer>
+
 </div>
 
+<!-- 引入业务逻辑脚本 -->
 <script src="gallery.js"></script>
 </body>
 </html>
