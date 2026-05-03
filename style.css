@@ -1,5 +1,5 @@
 /* ==========================================================================
-   FINAL OPTIMIZED CSS
+   FINAL STABLE CSS - 彻底修复崩溃
    ========================================================================== */
 *{
     margin:0;
@@ -12,8 +12,12 @@
     --page-gap: 15px;
     --middle-gap: 20px;
     --line-color: #d0d0d0;
-    --header-height: 30px; /* 极致压缩，确保文字紧贴顶部 */
-    --footer-height: 40px; /* 统一左右页脚高度 */
+    --header-height: 30px; 
+    --footer-height: 40px; 
+    /* 定义统一比例变量 */
+    --col-1-w: 32%;
+    --col-2-w: 48%;
+    --col-3-w: 20%;
 }
 
 body{
@@ -25,8 +29,6 @@ body{
     overflow: hidden;
 }
 
-a{ color: #000; text-decoration: none; }
-
 .main-container{
     display: flex;
     width: 100%;
@@ -34,50 +36,58 @@ a{ color: #000; text-decoration: none; }
     gap: var(--middle-gap);
 }
 
-/* ==========================================================================
-   1. 顶部 Header 修复 (解决靠上、靠边、多余文字问题)
-   ========================================================================== */
+/* --- 通用行容器：不再使用 Grid 强制分配，改用 Flex 确保结构安全 --- */
+.row-layout {
+    display: flex;
+    width: 100%;
+}
 
+.col-1 { width: var(--col-1-w); flex-shrink: 0; }
+.col-2 { width: var(--col-2-w); flex-shrink: 0; }
+.col-3 { width: var(--col-3-w); flex-shrink: 0; text-align: right; }
+
+/* --- 顶部 Header --- */
 .panel-header {
     height: var(--header-height);
-    display: flex;
-    align-items: flex-start; /* 强制贴顶 */
     border-bottom: 1px solid var(--line-color);
-    padding: 0; 
-}
-
-/* 隐藏右侧多余的 MENGFEI YAN 文字 */
-.right-panel .mobile-title {
-    display: none !important;
-}
-
-/* 左侧 Header 网格 */
-.left-panel .panel-header.grid-row {
-    display: grid;
-    grid-template-columns: 32% 48% 20%;
+    padding-top: 4px;
     align-items: flex-start;
 }
 
-/* 右侧 Header 文字贴左 */
-.right-panel .panel-header {
-    justify-content: flex-start; 
+.top-links {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-right: 20px;
 }
 
-/* ==========================================================================
-   2. 底部 Footer 修复 (解决左右对齐问题)
-   ========================================================================== */
+/* --- 列表与内容 --- */
+.table-head, .project-item, .item-meta {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--line-color);
+}
 
-.panel-footer,
-.gallery-footer {
+/* --- 面板基础 --- */
+.left-panel, .right-panel {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.left-panel { padding-left: var(--page-gap); position: relative; }
+.right-panel { padding-right: var(--page-gap); }
+
+.scroll-content { flex: 1; overflow-y: auto; }
+.scroll-content::-webkit-scrollbar { display: none; }
+
+/* --- 底部 Footer --- */
+.panel-footer, .gallery-footer {
     height: var(--footer-height);
     border-top: 1px solid var(--line-color);
     display: flex;
-    align-items: center; /* 确保文字在横线下垂直居中 */
-    margin-top: auto; 
-}
-
-.left-panel .panel-footer.grid-row {
-    display: grid;
     align-items: center;
 }
 
@@ -85,67 +95,26 @@ a{ color: #000; text-decoration: none; }
     display: flex;
     justify-content: space-between;
     width: 100%;
-    font-size: 13px;
 }
 
-/* ==========================================================================
-   3. 布局与内容对齐
-   ========================================================================== */
+/* 隐藏多余文字 */
+.desktop-title { display: block; }
+.mobile-title { display: none; }
 
-.left-panel{
-    width: 50%;
-    padding-left: var(--page-gap);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
-
-.right-panel{
-    width: 50%;
-    padding-right: var(--page-gap);
-    display: flex;
-    flex-direction: column;
-}
-
-.scroll-content {
-    flex: 1;
-    overflow-y: auto;
-}
-.scroll-content::-webkit-scrollbar { display: none; }
-
-/* 统一列表行高 */
-.table-head.grid-row, 
-.project-item.grid-row,
-.item-meta.grid-row {
-    height: 30px;
-    align-items: center;
-    border-bottom: 1px solid var(--line-color);
-}
-
-.col-3 { text-align: right; }
-
-/* 左下角图标位置微调 */
+/* 装饰图标 */
 .left-panel-corner-img {
     position: absolute;
-    bottom: 45px; 
+    bottom: 45px;
     right: 0;
     width: 25px;
     pointer-events: none;
 }
 .left-panel-corner-img img { width: 100%; height: auto; }
 
-/* ==========================================================================
-   4. 移动端兼容
-   ========================================================================== */
-@media (max-width: 800px){
-    .left-panel { display: none; }
-    .right-panel { width: 100%; padding: 0 var(--page-gap); }
-    /* 移动端恢复显示标题 */
-    .right-panel .mobile-title { display: inline !important; }
-    .right-panel .desktop-title { display: none; }
-}
-
-/* 隐藏桌面端不需要的内容 */
-@media (min-width: 801px) {
-    .desktop-hide { display: none !important; }
+/* 详情页图片 */
+.image-container {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #f2f2f2;
+    margin-top: 10px;
 }
