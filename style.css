@@ -263,65 +263,32 @@ a{
     display:none;
 }
 
-
 /* ==========================================================================
-   GALLERY PAGE - ZERO-JUMP ALIGNMENT SYSTEM
+   GALLERY PAGE - BREATHABLE GRID (5-COLUMN)
    ========================================================================== */
 
-/* 1. 基础页面容器：强制同步主页左右边距 */
 .objects-page {
     width: 100%;
-    /* 核心：这里的 padding 必须与你 index.html 主页容器的左右 padding 像素级一致 */
-    padding: 0 20px; 
+    padding: 0 20px; /* 保持与主页基础对齐线一致 */
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
 }
 
-/* 2. Header 同步：确保位置大小与首页 Selected Work 完全重合 */
-.objects-page .main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 20px 0; /* 高度必须与主页 header 一致 */
-}
-
-/* 3. 导航三分法：左-中-右 严格对齐 */
-.objects-page .header-left, 
-.objects-page .header-right,
-.objects-page .header-center {
-    flex: 1;
-}
-
-.objects-page .header-center {
-    text-align: center;
-}
-
-.objects-page .header-right {
-    text-align: right;
-}
-
-.objects-page .main-header a {
-    text-decoration: none;
-    color: #000;
-    font-size: 13px; /* 确保与主页字号一致 */
-    text-transform: uppercase;
-}
-
-/* 4. 5列网格布局：仅调整中间内容的节奏 */
+/* 核心：通过增加容器的内边距，让网格区域整体“内缩”，图片随之变小 */
 .objects-grid {
-    flex: 1;
     display: grid;
-    /* 强制 5 列 */
-    grid-template-columns: repeat(5, 1fr); 
-    column-gap: 20px; 
-    row-gap: 45px; 
-    /* 顶部的 padding 决定了图片开始的位置，建议与主页作品列表的起始位置对齐 */
-    padding: 60px 0 100px 0; 
+    grid-template-columns: repeat(5, 1fr);
+    
+    /* 增加呼吸感的关键：加大间距 */
+    column-gap: 40px; /* 增加列间距，让图片显得更小 */
+    row-gap: 80px;   /* 增加行间距，产生纵向的韵律感 */
+    
+    /* 增加左右内缩，让图片在视觉上更精致，不显得局促 */
+    padding: 80px 5% 120px 5%; 
+    
+    width: 100%;
+    box-sizing: border-box;
 }
 
-/* 5. 图片与数字编号：极致简约 */
 .object-item {
     display: flex;
     flex-direction: column;
@@ -329,7 +296,7 @@ a{
 
 .object-cover {
     width: 100%;
-    aspect-ratio: 1 / 1; /* 保持正方形对齐，如有需要可改为 auto */
+    aspect-ratio: 1 / 1; /* 保持正方形有助于维持网格的严谨感 */
     overflow: hidden;
     background-color: #f7f7f7;
 }
@@ -341,56 +308,29 @@ a{
     display: block;
 }
 
+/* 编号样式微调：增加一点间距 */
 .object-number {
-    margin-top: 10px;
-    font-size: 11px;
+    margin-top: 15px;
+    font-size: 10px; /* 稍微调小一点字号，增加精致感 */
     color: #000;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.05em;
 }
 
-/* 6. Footer 同步：横线与三段式分布 */
-.objects-page .main-footer {
-    padding-bottom: 25px;
-    margin-top: auto; /* 确保 footer 始终在底部 */
+/* 响应式适配：确保在不同屏幕下依然有呼吸感 */
+@media (max-width: 1200px) {
+    .objects-grid {
+        column-gap: 30px;
+        padding: 60px 2%;
+    }
 }
 
-.objects-page .footer-line {
-    width: 100%;
-    height: 1px;
-    background-color: #000;
-    margin-bottom: 12px;
+@media (max-width: 768px) {
+    .objects-grid {
+        grid-template-columns: repeat(3, 1fr); /* 平板显示 3 列 */
+        column-gap: 20px;
+        row-gap: 40px;
+    }
 }
-
-.objects-page .footer-content {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-}
-
-/* Footer 三分法对齐 */
-.objects-page .footer-content > div {
-    flex: 1;
-}
-
-.objects-page .footer-content > div:nth-child(2) {
-    text-align: center;
-}
-
-.objects-page .footer-content > div:nth-child(3) {
-    text-align: right;
-}
-
-/* 7. 响应式：针对窄屏的保护 */
-@media (max-width: 1024px) {
-    .objects-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (max-width: 640px) {
-    .objects-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
 
 
 /* =========================
