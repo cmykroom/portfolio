@@ -1,13 +1,13 @@
-/* --- PC 原始核心样式 (请勿改动) --- */
+/* --- 基础设置 --- */
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
 
 :root { 
-    --page-gap: 20px; 
+    --page-gap: 20px;     /* 页面边距 */
     --line-color: #d0d0d0; 
 }
 
 body { 
-    font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif; 
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; 
     font-size: 15px; 
     color: #000; 
     background-color: #fff; 
@@ -22,27 +22,29 @@ body {
     overflow: hidden; 
 }
 
-/* PC 版布局：左右各 50%，左侧带有一条分割线 */
+/* PC布局：左侧 50%，带有一条精确的中间分割线 */
 .left-panel { 
     width: 50%; 
     display: flex; 
     flex-direction: column; 
     padding-left: var(--page-gap); 
-    border-right: 1px solid var(--line-color); /* 回归原始中间竖线 */
+    border-right: 1px solid var(--line-color); 
 }
 
+/* PC布局：右侧 50%，内容带内边距 */
 .right-panel { 
     width: 50%; 
     height: 100%; 
     display: flex; 
     flex-direction: column; 
     padding-right: var(--page-gap); 
-    padding-left: var(--page-gap); /* PC 版右侧面板的内边距 */
+    padding-left: var(--page-gap); 
 }
 
 .scroll-content { flex: 1; overflow-y: auto; display: flex; flex-direction: column; }
 .scroll-content::-webkit-scrollbar { display: none; }
 
+/* 头部导航对齐 */
 .panel-header { 
     height: 60px; 
     display: flex; 
@@ -53,7 +55,7 @@ body {
     flex-shrink: 0; 
 }
 
-/* 原始对齐比例 */
+/* 恢复原始 32/48/20 的像素对齐比例 */
 .col-1 { flex: 0 0 32%; } 
 .col-2 { flex: 0 0 48%; } 
 .col-3 { flex: 0 0 20%; text-align: right; }
@@ -63,7 +65,11 @@ body {
     display: flex; 
     align-items: center; 
     border-bottom: 1px solid var(--line-color); 
+    cursor: pointer;
 }
+
+.image-container { position: relative; width: 100%; margin-top: 10px; padding-bottom: 20px; }
+.image-container img { width: 100%; display: block; }
 
 .panel-footer, .gallery-footer { 
     height: 40px; 
@@ -71,35 +77,41 @@ body {
     display: flex; 
     align-items: center; 
     margin-top: 20px; 
+    font-size: 14px;
 }
 
-.footer-inner { width: 100%; display: flex; justify-content: space-between; }
-#mobile-list-btn { display: none; } /* PC 端隐藏 */
+.clickable { cursor: pointer; }
+.clickable:hover { opacity: 0.5; }
 
-/* --- 手机版专用：独立逻辑，不影响 PC --- */
+/* 十字加号 */
+.plus { position: absolute; font-size: 18px; color: #000; z-index: 10; font-weight: 300; }
+.top-left { top: 15px; left: 15px; } .top-right { top: 15px; right: 15px; }
+
+/* --- 手机响应式 (独立隔离) --- */
 @media (max-width: 800px) {
     body { overflow: auto; }
     #mobile-list-btn { display: inline-block !important; }
-    
+
     .left-panel { 
         position: fixed; 
         top: 0; 
-        right: -100%; /* 从右侧滑入 */
-        left: auto;
+        right: -100%; /* 初始位置：屏幕右侧外 */
         width: 100%; 
         height: 100%; 
         background: #fff; 
         z-index: 9999; 
-        transition: right 0.3s ease; 
+        transition: right 0.3s ease-in-out; 
         padding: 0 var(--page-gap) !important; 
-        border-right: none; /* 手机端不需要那条竖线 */
+        border-right: none; 
     }
+    .left-panel.active { right: 0; } /* 激活时滑入 */
     
-    .left-panel.active { right: 0; }
-    .left-panel .panel-footer { display: none !important; } /* 菜单底部邮箱时钟不要 */
+    .left-panel .panel-footer { display: none !important; } /* 菜单内隐藏时钟邮箱 */
 
     .right-panel { 
         width: 100%; 
         padding: 0 var(--page-gap); 
     }
+    
+    .gallery-footer { padding-bottom: 80px; } /* 手机底部留白 */
 }
