@@ -1,53 +1,33 @@
-/* 基础重置与 PC 样式保持不变 */
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
 :root { --page-gap: 15px; --middle-gap: 20px; --line-color: #d0d0d0; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif; font-size: 15px; color: #000; background-color: #fff; height: 100vh; overflow: hidden; }
+body { font-family: -apple-system, sans-serif; font-size: 15px; color: #000; background-color: #fff; height: 100vh; overflow: hidden; }
 .main-container { display: flex; height: 100%; width: 100%; gap: var(--middle-gap); overflow: hidden; }
-.left-panel { width: 50%; display: flex; flex-direction: column; padding-left: var(--page-gap); }
+.left-panel { width: 50%; display: flex; flex-direction: column; padding-left: var(--page-gap); border-right: 1px solid var(--line-color); }
 .right-panel { width: 50%; height: 100%; display: flex; flex-direction: column; padding-right: var(--page-gap); }
-.scroll-content { flex: 1; overflow-y: auto; width: 100%; display: flex; flex-direction: column; }
+.scroll-content { flex: 1; overflow-y: auto; display: flex; flex-direction: column; }
 .scroll-content::-webkit-scrollbar { display: none; }
-.panel-header { height: 60px; display: flex; justify-content: space-between; align-items: flex-start; padding-top: 5px; border-bottom: 1px solid var(--line-color); flex-wrap: nowrap; }
+.panel-header { height: 60px; display: flex; justify-content: space-between; align-items: flex-start; padding-top: 5px; border-bottom: 1px solid var(--line-color); flex-shrink: 0; }
 .col-1 { flex: 0 0 32%; } .col-2 { flex: 0 0 48%; } .col-3 { flex: 0 0 20%; text-align: right; }
-.clickable { cursor: pointer; } .clickable:hover { opacity: 0.5; }
-.col-header-right { text-align: right; display: flex; gap: 15px; justify-content: flex-end; }
+.clickable { cursor: pointer; transition: opacity 0.2s; } .clickable:hover { opacity: 0.5; }
+.col-header-right { text-align: right; display: flex; gap: 15px; }
 .table-head, .project-item, .item-meta { height: 30px; display: flex; align-items: center; border-bottom: 1px solid var(--line-color); }
-.gallery-item { width: 100%; cursor: pointer; padding-bottom: 40px; }
-.image-container { position: relative; background-color: #f2f2f2; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; margin-top: 10px; }
+.image-container { position: relative; background: #f2f2f2; width: 100%; aspect-ratio: 4/3; margin-top: 10px; overflow: hidden; }
 .image-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .info-row { display: flex; border-bottom: 1px solid var(--line-color); padding: 15px 0 40px 0; }
+.info-label { flex: 0 0 32%; } .info-content { flex: 1; line-height: 1.6; }
 .panel-footer, .gallery-footer { height: 40px; border-top: 1px solid var(--line-color); display: flex; align-items: center; margin-top: 20px; }
 .footer-inner { width: 100%; display: flex; justify-content: space-between; }
-.plus { position: absolute; font-size: 18px; color: #aaa; pointer-events: none; }
-.top-left { top: 15px; left: 15px; } .top-right { top: 15px; right: 15px; } .bottom-left { bottom: 15px; left: 15px; } .bottom-right { bottom: 15px; right: 15px; }
-
+.plus { position: absolute; font-size: 18px; color: #aaa; z-index: 10; }
+.top-left { top: 15px; left: 15px; } .top-right { top: 15px; right: 15px; }
 #mobile-list-btn { display: none; }
 
-/* --- 手机版专用响应式样式 --- */
 @media (max-width: 800px) {
     body { overflow: auto; }
+    .main-container { gap: 0; }
     #mobile-list-btn { display: inline-block !important; }
-
-    .left-panel {
-        position: fixed;
-        top: 0;
-        right: -100%; /* 从右侧滑入 */
-        left: auto;
-        width: 100%;
-        height: 100%;
-        background: #fff;
-        z-index: 9999;
-        transition: right 0.3s ease;
-        padding: 0 var(--page-gap) !important;
-        display: flex !important;
-    }
+    .left-panel { position: fixed; top: 0; right: -100%; width: 100%; height: 100%; background: #fff; z-index: 9999; transition: right 0.3s ease; padding: 0 var(--page-gap) !important; border: none; }
     .left-panel.active { right: 0; }
-
-    /* 隐藏手机菜单内的页脚 */
     .left-panel .panel-footer { display: none !important; }
-
-    .right-panel { width: 100%; padding: 0 var(--page-gap); overflow: visible; }
-    .info-row { flex-direction: column; gap: 10px; padding: 20px 0; }
-    .gallery-footer { padding-top: 40px; padding-bottom: 80px; height: auto; }
-    .footer-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .right-panel { width: 100%; padding: 0 var(--page-gap); }
+    .gallery-footer { padding-bottom: 80px; height: auto; flex-direction: column; align-items: flex-start; gap: 10px; }
 }
