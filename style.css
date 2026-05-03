@@ -194,6 +194,49 @@ body {
 .bottom-left { bottom: 15px; left: 15px; }
 .bottom-right { bottom: 15px; right: 15px; }
 
+/* --- 网页版保持不变：隐藏手机按钮 --- */
+#mobile-list-btn {
+    display: none;
+}
+
+/* --- 手机版专用样式 --- */
+@media (max-width: 800px) {
+    #mobile-list-btn {
+        display: inline-block; /* 手机端显示 */
+        margin-right: 15px;
+    }
+
+    /* 改造左侧面板为手机端全屏遮罩 */
+    .left-panel {
+        position: fixed;
+        top: 0;
+        left: -100%; /* 初始位置在屏幕外 */
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        z-index: 9999;
+        transition: left 0.3s ease; /* 平滑滑入效果 */
+        padding-right: var(--page-gap) !important;
+        display: flex !important; /* 覆盖之前的 display: none */
+    }
+
+    /* 当激活时，滑入屏幕 */
+    .left-panel.active {
+        left: 0;
+    }
+
+    /* 手机端列表内的滚动区域恢复 */
+    .left-panel .scroll-content {
+        display: block !important;
+    }
+
+    /* 调整手机端 header 间距 */
+    .left-panel .panel-header {
+        margin-bottom: 20px;
+    }
+}
+
+
 /* 响应式 */
 @media (max-width: 800px) {
     .left-panel { display: none; }
