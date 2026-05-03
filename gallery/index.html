@@ -4,51 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GALLERY — MENGFEI YAN</title>
-    <!-- 引用主页的样式表以保持视觉统一 -->
     <link rel="stylesheet" href="../style.css">
 </head>
-<body>
+<body class="gallery-body">
 
-<div class="objects-page">
-
-    <!-- 顶部导航：与主页结构完全一致 -->
-    <header class="main-header">
-        <div class="header-left">
-            <a href="../index.html">MENGFEI YAN ®</a>
-        </div>
-        <nav class="header-right">
-            <a href="../index.html">Selected Work</a>
-            <a href="index.html" class="active">Gallery</a>
-            <a href="../information.html">Information</a>
-        </nav>
+<div class="viewport-wrapper">
+    <!-- 顶部导航：严格左、中、右分布 -->
+    <header class="site-header">
+        <div class="nav-section left"><a href="../index.html">MENGFEI YAN ®</a></div>
+        <div class="nav-section center"><a href="../information.html">Information</a></div>
+        <div class="nav-section right"><a href="../index.html">Selected Work</a></div>
     </header>
 
-    <!-- 页面标题：大标题保持呼吸感 -->
-    <div class="objects-title-section">
-        <h1 class="objects-title">GALLERY</h1>
-    </div>
+    <!-- 5列网格 -->
+    <main class="gallery-container">
+        <div class="objects-grid" id="objects-grid">
+            <!-- JS 动态注入图片 -->
+        </div>
+    </main>
 
-    <!-- Are.na 图片容器：由 JS 驱动生成 5 列网格 -->
-    <div class="objects-grid" id="objects-grid">
-        <!-- 内容将由 gallery.js 注入 -->
-    </div>
-
-    <!-- 底部：包含横线、时钟、联系方式和版权 -->
-    <footer class="main-footer">
+    <!-- 页脚：单横线 + 严格左、中、右分布 -->
+    <footer class="site-footer">
         <div class="footer-line"></div>
         <div class="footer-content">
-            <div class="footer-item" id="digital-clock">00:00:00</div>
-            <div class="footer-item">
-                <a href="https://www.instagram.com/" target="_blank">IG</a>, 
-                <a href="mailto:mengfeiyan11@gmail.com">EMAIL</a>
+            <div class="footer-section left" id="digital-clock">00:00:00</div>
+            <div class="footer-section center">
+                <a href="#">IG</a>, <a href="mailto:mengfeiyan11@gmail.com">Email</a>
             </div>
-            <div class="footer-item">©2026 ALL RIGHTS RESERVED</div>
+            <div class="footer-section right">©2026 All Rights Reserved</div>
         </div>
     </footer>
-
 </div>
 
-<!-- 引入逻辑脚本 -->
 <script src="gallery.js"></script>
 </body>
 </html>
