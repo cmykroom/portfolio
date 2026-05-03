@@ -265,66 +265,53 @@ a{
 
 
 /* ==========================================================================
-   GALLERY PAGE - ABSOLUTE MINIMALIST SYSTEM
+   GALLERY PAGE - NUMERIC INDEX SYSTEM
    ========================================================================== */
 
-/* 1. 全局容器：确保与首页对齐线完全吻合 */
+/* 全局容器控制 */
 .viewport-wrapper {
-    padding: 0 20px; /* 请确保此数值与首页 header 的左右边距一致 */
+    padding: 0 20px; /* 必须与主页对齐线一致 */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    box-sizing: border-box;
 }
 
-/* 2. 顶部导航：严格三分法 (左-中-右) */
+/* 顶部导航三分法 */
 .site-header {
     display: flex;
     padding: 20px 0;
     font-size: 13px;
     text-transform: uppercase;
-    width: 100%;
 }
 
-.nav-section { 
-    flex: 1; 
-}
-.nav-section.center { 
-    text-align: center; 
-}
-.nav-section.right { 
-    text-align: right; 
-}
-.nav-section a { 
-    text-decoration: none; 
-    color: #000; 
-}
+.nav-section { flex: 1; }
+.nav-section.center { text-align: center; }
+.nav-section.right { text-align: right; }
+.nav-section a { text-decoration: none; color: #000; }
 
-/* 3. 网格容器：呼吸感与对齐 */
+/* 5列网格布局 */
 .gallery-container {
     flex: 1;
-    padding: 60px 0; /* 标题与网格之间的间距 */
+    padding: 60px 0;
 }
 
 .objects-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5列等分 */
-    column-gap: 20px; /* 图片之间的水平间距 */
-    row-gap: 40px;    /* 图片之间的垂直间距 */
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 20px;
+    row-gap: 50px; /* 增加行间距，给编号留出空间 */
 }
 
-/* 4. 图片项目：纯净无文字模式 */
 .object-item {
-    width: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .object-cover {
     width: 100%;
-    aspect-ratio: 1 / 1; /* 强制正方形，如需原始比例可改为 height: auto */
+    aspect-ratio: 1 / 1; /* 保持正方形对齐 */
     overflow: hidden;
-    background-color: #f7f7f7; /* 加载前的精致浅灰底色 */
+    background-color: #f7f7f7;
 }
 
 .object-cover img {
@@ -334,10 +321,19 @@ a{
     display: block;
 }
 
-/* 5. 页脚：单横线 + 严格三分法分布 */
+/* 数字编号样式：替代原文件名 */
+.object-number {
+    margin-top: 12px;
+    font-size: 11px; /* 极简小字号 */
+    color: #000;
+    font-family: inherit;
+    letter-spacing: 0.02em;
+}
+
+/* 页脚单横线布局 */
 .site-footer {
     margin-top: 100px;
-    padding-bottom: 30px;
+    padding-bottom: 25px;
 }
 
 .footer-line {
@@ -349,43 +345,14 @@ a{
 
 .footer-content {
     display: flex;
-    width: 100%;
-    font-size: 12px;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
+    width: 100%;
 }
 
-.footer-section { 
-    flex: 1; 
-}
-.footer-section.center { 
-    text-align: center; 
-}
-.footer-section.right { 
-    text-align: right; 
-}
-.footer-section a { 
-    text-decoration: none; 
-    color: #000; 
-}
-
-/* 6. 移动端优化 */
-@media (max-width: 1024px) {
-    .objects-grid {
-        grid-template-columns: repeat(3, 1fr); /* 平板显示 3 列 */
-    }
-}
-
-@media (max-width: 640px) {
-    .objects-grid {
-        grid-template-columns: repeat(2, 1fr); /* 手机显示 2 列 */
-    }
-    .site-header, .footer-content {
-        /* 在极窄屏幕下，如果文字重叠，可开启以下注释改为垂直布局 */
-        /* flex-direction: column; 
-           text-align: left !important; */
-    }
-}
+.footer-section { flex: 1; }
+.footer-section.center { text-align: center; }
+.footer-section.right { text-align: right; }
 
 
 
