@@ -1,14 +1,50 @@
-// 全局变量存储从 JSON 读取的数据
+// 全局项目数据
 let allProjects = [];
+
+/* 页面淡入切换函数 */
+function fadeSwitch(showId) {
+    const views = ['gallery-view', 'detail-view', 'info-view', 'mobile-list-view'];
+
+    views.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.classList.remove('show');
+            el.classList.add('view-fade');
+        }
+    });
+
+    setTimeout(() => {
+        views.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+
+        const target = document.getElementById(showId);
+        if (target) {
+            target.style.display = 'block';
+            setTimeout(() => {
+                target.classList.add('show');
+            }, 20);
+        }
+    }, 180);
+}
 
 // 初始化
 window.onload = () => {
     loadProjects();
     updateClock();
     setInterval(updateClock, 1000);
+
+    setTimeout(() => {
+        const gallery = document.getElementById('gallery-view');
+        if (gallery) {
+            gallery.classList.add('view-fade');
+            gallery.classList.add('show');
+        }
+    }, 50);
 };
 
-// 读取 JSON
+// 读取JSON
 async function loadProjects() {
     try {
         const response = await fetch('projects.json');
@@ -17,14 +53,14 @@ async function loadProjects() {
         allProjects = await response.json();
 
         renderList();
-        renderMobileList();
         renderGallery();
+        renderMobileList();
     } catch (error) {
         console.error("项目加载失败:", error);
     }
 }
 
-// 左侧桌面文字列表
+// 左侧桌面列表
 function renderList() {
     const listContainer = document.getElementById('js-project-list');
     if (!listContainer) return;
@@ -38,13 +74,13 @@ function renderList() {
     `).join('');
 }
 
-// 手机LIST文字列表
+// 手机list列表
 function renderMobileList() {
-    const listContainer = document.getElementById('js-mobile-project-list');
-    if (!listContainer) return;
+    const mobileList = document.getElementById('js-mobile-project-list');
+    if (!mobileList) return;
 
-    listContainer.innerHTML = allProjects.map(p => `
-        <div class="project-item" onclick="mobileScrollToId('${p.id}')">
+    mobileList.innerHTML = allProjects.map(p => `
+        <div class="project-item" onclick="showDetail('${p.id}')">
             <div class="col-1">${p.client}</div>
             <div class="col-2">${p.project}</div>
             <div class="col-3">${p.year}</div>
@@ -52,7 +88,7 @@ function renderMobileList() {
     `).join('');
 }
 
-// 右侧首页图片列表
+// 首页图片流
 function renderGallery() {
     const galleryContainer = document.getElementById('js-gallery-content');
     if (!galleryContainer) return;
@@ -66,14 +102,16 @@ function renderGallery() {
             </div>
             <div class="image-container">
                 <img src="${p.cover}" alt="${p.project}">
-                <span class="plus top-left">+</span><span class="plus top-right">+</span>
-                <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
+                <span class="plus top-left">+</span>
+                <span class="plus top-right">+</span>
+                <span class="plus bottom-left">+</span>
+                <span class="plus bottom-right">+</span>
             </div>
         </section>
     `).join('');
 }
 
-// 显示作品详情
+// 详情页
 function showDetail(id) {
     const project = allProjects.find(p => p.id === id);
     if (!project) return;
@@ -95,84 +133,53 @@ function showDetail(id) {
             <div class="grid-item">
                 <div class="image-container small">
                     <img src="${imgUrl}">
-                    <span class="plus top-left">+</span><span class="plus top-right">+</span>
-                    <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
+                    <span class="plus top-left">+</span>
+                    <span class="plus top-right">+</span>
+                    <span class="plus bottom-left">+</span>
+                    <span class="plus bottom-right">+</span>
                 </div>
                 <div class="grid-num">${String(index + 1).padStart(2, '0')}</div>
             </div>
         `).join('');
     }
 
-    document.getElementById('gallery-view').style.display = 'none';
-    document.getElementById('mobile-list-view').style.display = 'none';
-    document.getElementById('info-view').style.display = 'none';
-    document.getElementById('detail-view').style.display = 'block';
-
+    fadeSwitch('detail-view');
     document.getElementById('index-btn').style.display = 'block';
-    document.getElementById('mobile-list-btn').style.display = 'none';
-
     document.getElementById('gal').scrollTop = 0;
 }
 
-// 首页作品流
+// 首页
 function showGallery() {
-    document.getElementById('gallery-view').style.display = 'block';
-    document.getElementById('detail-view').style.display = 'none';
-    document.getElementById('info-view').style.display = 'none';
-    document.getElementById('mobile-list-view').style.display = 'none';
-
+    fadeSwitch('gallery-view');
     document.getElementById('index-btn').style.display = 'none';
-    document.getElementById('mobile-list-btn').style.display = window.innerWidth <= 800 ? 'block' : 'none';
-
     document.getElementById('gal').scrollTop = 0;
 }
 
-// 手机LIST页
-function showMobileList() {
-    document.getElementById('gallery-view').style.display = 'none';
-    document.getElementById('detail-view').style.display = 'none';
-    document.getElementById('info-view').style.display = 'none';
-    document.getElementById('mobile-list-view').style.display = 'block';
-
-    document.getElementById('index-btn').style.display = 'none';
-}
-
-// info页
+// info
 function showInfo() {
-    document.getElementById('gallery-view').style.display = 'none';
-    document.getElementById('detail-view').style.display = 'none';
-    document.getElementById('mobile-list-view').style.display = 'none';
-    document.getElementById('info-view').style.display = 'block';
-
-    document.getElementById('index-btn').style.display = 'none';
-    document.getElementById('mobile-list-btn').style.display = 'none';
-
+    fadeSwitch('info-view');
+    document.getElementById('index-btn').style.display = 'block';
     document.getElementById('gal').scrollTop = 0;
 }
 
-// 桌面滚动
+// 手机list
+function showMobileList() {
+    fadeSwitch('mobile-list-view');
+    document.getElementById('gal').scrollTop = 0;
+}
+
+// 左栏滚动
 function scrollToId(id) {
     showGallery();
-    const element = document.getElementById(id);
-    if (element) {
-        setTimeout(() => {
+    setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-    }
+        }
+    }, 220);
 }
 
-// 手机LIST点击滚动
-function mobileScrollToId(id) {
-    showGallery();
-    const element = document.getElementById(id);
-    if (element) {
-        setTimeout(() => {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-    }
-}
-
-// 返回顶部
+// 回顶部
 function scrollToTop() {
     document.getElementById('gal').scrollTo({ top: 0, behavior: 'smooth' });
 }
