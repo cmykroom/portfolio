@@ -218,6 +218,16 @@ a {
     display: none;
 }
 
+/* 淡入淡出 */
+.view-fade {
+    opacity: 0;
+    transition: opacity 0.22s ease;
+}
+
+.view-fade.show {
+    opacity: 1;
+}
+
 /* =========================
    MOBILE
 ========================= */
@@ -227,18 +237,15 @@ a {
         font-size: 14px;
     }
 
-    /* 桌面左栏消失 */
     .left-panel {
         display: none;
     }
 
-    /* 右栏全宽 */
     .right-panel {
         width: 100%;
         padding: 0 var(--page-gap);
     }
 
-    /* 手机显示专属标题 */
     .desktop-title {
         display: none;
     }
@@ -247,18 +254,15 @@ a {
         display: inline;
     }
 
-    /* 手机list按钮显示 */
     #mobile-list-btn {
         display: block;
     }
 
-    /* 桌面footer隐藏 */
     .gallery-footer,
     .panel-footer {
         display: none;
     }
 
-    /* 手机list页 */
     #mobile-list-view {
         display: none;
         width: 100%;
@@ -307,7 +311,6 @@ a {
         font-size: 14px;
     }
 
-    /* 手机底部 */
     .mobile-bottom-info {
         display: block;
         width: 100%;
