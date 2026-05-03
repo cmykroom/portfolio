@@ -264,26 +264,42 @@ a{
 }
 
 /* ==========================================================================
-   GALLERY PAGE - BREATHABLE GRID (5-COLUMN)
+   GALLERY PAGE - ABSOLUTE UNIFIED SYSTEM
    ========================================================================== */
 
+/* 1. 模拟主页的左右边距，消除切换时的视觉跳跃 */
 .objects-page {
     width: 100%;
-    padding: 0 20px; /* 保持与主页基础对齐线一致 */
+    padding: 0 var(--page-gap); /* 严格同步全局变量 */
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* 核心：通过增加容器的内边距，让网格区域整体“内缩”，图片随之变小 */
+/* 2. 强制同步主页 Header 的三段式对齐 */
+.objects-page .panel-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 5px;
+    height: 60px; /* 同步主页高度 */
+    border-bottom: 1px solid var(--line-color);
+}
+
+/* 3. 网格区域：增加呼吸感，同时控制宽度 */
 .objects-grid {
+    flex: 1;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     
-    /* 增加呼吸感的关键：加大间距 */
-    column-gap: 40px; /* 增加列间距，让图片显得更小 */
-    row-gap: 80px;   /* 增加行间距，产生纵向的韵律感 */
+    /* 呼吸感设置 */
+    column-gap: 40px; 
+    row-gap: 80px;   
     
-    /* 增加左右内缩，让图片在视觉上更精致，不显得局促 */
-    padding: 80px 5% 120px 5%; 
+    /* 这里的 padding 让 5 列图片收缩在中间，更有精致感 */
+    padding: 80px 10% 120px 10%; 
     
     width: 100%;
     box-sizing: border-box;
@@ -296,9 +312,9 @@ a{
 
 .object-cover {
     width: 100%;
-    aspect-ratio: 1 / 1; /* 保持正方形有助于维持网格的严谨感 */
+    aspect-ratio: 1 / 1; 
     overflow: hidden;
-    background-color: #f7f7f7;
+    background-color: #f2f2f2; /* 同步主页图片底色 */
 }
 
 .object-cover img {
@@ -308,30 +324,38 @@ a{
     display: block;
 }
 
-/* 编号样式微调：增加一点间距 */
+/* 4. 编号：保持极简小字 */
 .object-number {
     margin-top: 15px;
-    font-size: 10px; /* 稍微调小一点字号，增加精致感 */
-    color: #000;
+    font-size: 10px; 
+    color: #666; /* 同步全局辅助文字颜色 */
     letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
-/* 响应式适配：确保在不同屏幕下依然有呼吸感 */
-@media (max-width: 1200px) {
+/* 5. 强制同步主页 Footer */
+.objects-page .panel-footer {
+    width: 100%;
+    height: 40px;
+    border-top: 1px solid var(--line-color);
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+}
+
+/* 6. 响应式：在手机端适配你主页的 mobile 逻辑 */
+@media (max-width: 800px) {
     .objects-grid {
-        column-gap: 30px;
-        padding: 60px 2%;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 12px;
+        row-gap: 30px;
+        padding: 40px 0; /* 手机端取消缩进，撑满屏幕 */
+    }
+
+    .objects-page .panel-header {
+        height: 52px;
     }
 }
-
-@media (max-width: 768px) {
-    .objects-grid {
-        grid-template-columns: repeat(3, 1fr); /* 平板显示 3 列 */
-        column-gap: 20px;
-        row-gap: 40px;
-    }
-}
-
 
 /* =========================
    MOBILE
