@@ -217,7 +217,7 @@ a{
 /* footer */
 .panel-footer,
 .gallery-footer{
-    height:40px;
+    height:38px;
     border-top:1px solid var(--line-color);
     display:flex;
     align-items:center;
@@ -336,7 +336,7 @@ a{
 /* 5. 强制同步主页 Footer */
 .objects-page .panel-footer {
     width: 100%;
-    height: 40px;
+    height: 38px;
     border-top: 1px solid var(--line-color);
     display: flex;
     align-items: center;
