@@ -27,13 +27,12 @@ async function loadProjects() {
     }
 }
 
-// 修改点：为桌面端列表行添加 "grid-row" 类名，实现像素级对齐
 function renderList() {
     const listContainer = document.getElementById('js-project-list');
     if (!listContainer) return;
 
     listContainer.innerHTML = allProjects.map(p => `
-        <div class="project-item grid-row clickable" onclick="scrollToId('${p.id}')">
+        <div class="project-item" onclick="scrollToId('${p.id}')">
             <div class="col-1">${p.client}</div>
             <div class="col-2">${p.project}</div>
             <div class="col-3">${p.year}</div>
@@ -41,13 +40,12 @@ function renderList() {
     `).join('');
 }
 
-// 修改点：手机端列表同样可以共用结构，样式由 CSS 的 Media Query 控制
 function renderMobileList() {
     const mobileList = document.getElementById('mobile-project-list');
     if (!mobileList) return;
 
     mobileList.innerHTML = allProjects.map(p => `
-        <div class="project-item grid-row clickable" onclick="showDetailFromMobile('${p.id}')">
+        <div class="project-item" onclick="showDetailFromMobile('${p.id}')">
             <div class="col-1">${p.client}</div>
             <div class="col-2">${p.project}</div>
             <div class="col-3">${p.year}</div>
@@ -55,14 +53,13 @@ function renderMobileList() {
     `).join('');
 }
 
-// 修改点：Gallery 内部的 Meta 信息也使用 grid-row 保持统一节奏
 function renderGallery() {
     const galleryContainer = document.getElementById('js-gallery-content');
     if (!galleryContainer) return;
 
     galleryContainer.innerHTML = allProjects.map(p => `
         <section class="gallery-item" id="${p.id}" onclick="showDetail('${p.id}')">
-            <div class="item-meta grid-row">
+            <div class="item-meta">
                 <div class="col-1">${p.client}</div>
                 <div class="col-2">${p.project}</div>
                 <div class="col-3">${p.year}</div>
