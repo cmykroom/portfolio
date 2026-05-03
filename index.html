@@ -1,61 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MENGFEI YAN</title>
+    <!-- 确保 style.css 文件就在同一个目录下 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
 <div class="main-container">
-    <!-- 左侧 -->
+    <!-- 左侧面板 -->
     <aside class="left-panel">
-        <header class="panel-header grid-layout">
-            <div>MENGFEI YAN ®</div>
-            <div style="display:flex; justify-content:space-between; padding-right:20px;">
-                <span class="clickable" onclick="showInfo()">Information</span>
-                <a href="gallery/">Gallery</a>
+        <header class="panel-header grid-row">
+            <div class="clickable">MENGFEI YAN ®</div>
+            <div class="top-nav-links">
+                <span class="clickable">Information</span>
+                <span class="clickable">Gallery</span>
             </div>
             <div></div>
         </header>
 
         <div class="scroll-content">
-            <div class="table-head">
+            <!-- 列表表头 -->
+            <div class="grid-row table-head">
                 <div>Client</div>
                 <div>Project</div>
-                <div class="col-3-right">Year</div>
+                <div class="text-right">Year</div>
             </div>
-            <div id="js-project-list"></div>
+            
+            <!-- 项目列表容器 -->
+            <div id="js-project-list">
+                <!-- 单个列表行示例 -->
+                <div class="grid-row project-item">
+                    <div>SED_DO</div>
+                    <div>Ref. R/XTR-082</div>
+                    <div class="text-right">2049</div>
+                </div>
+            </div>
         </div>
 
-        <footer class="panel-footer grid-layout" style="height:40px; border-top:1px solid #d0d0d0; align-items:center;">
+        <!-- 装饰图标 -->
+        <div class="corner-icon">
+            <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/icon1.png" alt="Icon">
+        </div>
+
+        <!-- 左侧页脚 -->
+        <footer class="footer-row grid-row">
             <div>00:11:20</div>
-            <div><a href="#">IG</a>, <a href="#">Email</a></div>
+            <div class="footer-links">
+                <a href="#">IG</a>, <a href="mailto:mengfeiyan11@gmail.com">Email</a>
+            </div>
             <div></div>
         </footer>
     </aside>
 
-    <!-- 右侧：干净、无蓝色字、图片大小合适 -->
+    <!-- 右侧面板 -->
     <main class="right-panel">
+        <!-- 右侧顶部：仅保留 Selected Work，彻底干掉乱跑的蓝色字 -->
         <header class="panel-header">
             <div class="header-title">Selected Work</div>
-            <!-- 下面这个 div 在桌面端会完全隐藏，位置和颜色都不会再干扰你 -->
-            <div class="mobile-links desktop-hide">
-                <span class="clickable">Gallery</span>
-                <span class="clickable">List</span>
-            </div>
+            <!-- 下面的组件仅在移动端显示，桌面端会被 CSS 彻底移除 -->
+            <div class="mobile-only desktop-hide">Gallery List</div>
         </header>
 
         <div class="scroll-content">
             <div id="js-gallery-content">
-                <!-- 单个作品项示例 -->
+                <!-- 单个作品项：文字行 + 图片 -->
                 <div class="gallery-item">
-                    <div class="gallery-item-header">
+                    <div class="grid-row gallery-item-header">
                         <div>SED_DO</div>
                         <div>Ref. R/XTR-082</div>
-                        <div class="col-3-right">2049</div>
+                        <div class="text-right">2049</div>
                     </div>
                     <div class="image-container">
-                        <img src="your-image.jpg">
+                        <!-- 图片会严格按照左侧前两列的宽度显示 -->
+                        <img src="https://via.placeholder.com/800x600" alt="Work">
                     </div>
                 </div>
             </div>
 
-            <footer class="gallery-footer" style="height:40px; border-top:1px solid #d0d0d0; display:flex; justify-content:space-between; align-items:center;">
-                <a href="#" onclick="scrollToTop()">↑ Top</a>
-                <span>©2026 All Rights Reserved</span>
+            <!-- 右侧页脚 -->
+            <footer class="footer-row">
+                <a href="#" class="top-link">↑ Top</a>
+                <span class="copyright">©2026 All Rights Reserved</span>
             </footer>
         </div>
     </main>
 </div>
+
+<!-- 脚本建议放在 body 结束前 -->
+<script src="script.js"></script>
+</body>
+</html>
