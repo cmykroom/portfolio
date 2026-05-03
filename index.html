@@ -10,9 +10,9 @@
 
 <div class="main-container">
 
-    <!-- 左侧桌面栏 -->
+    <!-- 左侧面板 -->
     <aside class="left-panel">
-        <!-- 头部网格：确保与右侧标题对齐 -->
+        <!-- 顶部：高度 30px, 贴顶对齐 -->
         <header class="panel-header grid-row">
             <div class="col-1 clickable" onclick="showGallery()">MENGFEI YAN ®</div>
             <div class="col-2 top-links">
@@ -23,23 +23,23 @@
         </header>
 
         <div class="scroll-content">
-            <!-- 表头网格 -->
+            <!-- 列表头 -->
             <div class="table-head grid-row">
                 <div class="col-1">Client</div>
                 <div class="col-2">Project</div>
                 <div class="col-3">Year</div>
             </div>
 
-            <!-- 项目列表：由 JS 生成 -->
+            <!-- 项目列表渲染容器 -->
             <div class="project-list" id="js-project-list"></div>
         </div>
 
-        <!-- 左下角装饰图标 -->
+        <!-- 装饰图标 -->
         <div class="left-panel-corner-img">
             <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/icon1.png" alt="Icon">
         </div>
 
-        <!-- 页脚网格 -->
+        <!-- 左侧页脚：与右侧页脚高度/线位对齐 -->
         <footer class="panel-footer grid-row">
             <div class="col-1" id="timer">00:00:00</div>
             <div class="col-2">
@@ -53,17 +53,18 @@
     <main class="right-panel">
         <div class="scroll-content view-fade show" id="gal">
 
-            <!-- 首页视图 -->
+            <!-- 作品流视图 -->
             <div id="gallery-view">
                 <header class="panel-header">
                     <div class="col-header-left">
+                        <!-- CSS 已设置桌面端隐藏 mobile-title，解决多余文字问题 -->
                         <span class="desktop-title">Selected Work</span>
                         <span class="mobile-title">MENGFEI YAN</span>
                     </div>
 
-                    <!-- 仅在移动端显示的链接 -->
+                    <!-- 移动端专有导航 -->
                     <div class="col-header-right mobile-links desktop-hide">
-                        <span id="mobile-list-btn" class="clickable" onclick="showMobileList()">List</span>
+                        <span class="clickable" onclick="showMobileList()">List</span>
                         <span class="clickable" onclick="showInfo()">Information</span>
                         <a href="gallery/">Gallery</a>
                     </div>
@@ -72,30 +73,22 @@
                 <div id="js-gallery-content"></div>
             </div>
 
-            <!-- 手机版列表视图 -->
+            <!-- 移动端列表视图 -->
             <div id="mobile-list-view" style="display:none;">
                 <header class="panel-header">
                     <div class="col-header-left">Index</div>
                     <div class="col-header-right clickable" onclick="closeMobileList()">Close</div>
                 </header>
-
-                <div class="table-head">
-                    <div class="col-1">Client</div>
-                    <div class="col-2">Project</div>
-                    <div class="col-3">Year</div>
-                </div>
-
                 <div id="mobile-project-list"></div>
             </div>
 
-            <!-- 详情视图 -->
+            <!-- 项目详情视图 -->
             <div id="detail-view" style="display:none;">
                 <header class="panel-header">
                     <div class="col-header-left">Selected Work</div>
                     <div class="col-header-right clickable" onclick="showGallery()">Index</div>
                 </header>
 
-                <!-- 详情页 Meta 行：对齐左侧节奏 -->
                 <div class="item-meta grid-row">
                     <div class="col-1" id="d-client"></div>
                     <div class="col-2" id="d-project"></div>
@@ -133,8 +126,7 @@
                     <div class="info-label">About</div>
                     <div class="info-content">
                         YAN MENGFEI<br>
-                        1987年上海生まれ。幼少から美術を専攻し、広告制作会社経って、その後日本に渡り、2023年桑沢デザイン研究所卒業。<br><br>
-                        I was born in Shanghai in 1987. My primary focus is on artwork, typography, and branding systems.
+                        1987年上海生まれ。幼少から美術を専攻し、2023年桑沢デザイン研究所卒業。
                     </div>
                 </div>
 
@@ -144,7 +136,7 @@
                 </div>
             </div>
 
-            <!-- 修复后的底部 Footer (彻底解决换行混乱) -->
+            <!-- 右侧页脚：横线与左侧物理对齐 -->
             <footer class="gallery-footer">
                 <div class="footer-inner">
                     <a href="#" onclick="scrollToTop();return false;" class="clickable">↑ Top</a>
