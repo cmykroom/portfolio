@@ -263,28 +263,47 @@ a{
     display:none;
 }
 
-/* =========================
-   GALLERY PAGE
-========================= */
 
-/* --- GALLERY PAGE STYLES --- */
+/* ==========================================================================
+   GALLERY PAGE (5-COLUMN GRID)
+   ========================================================================== */
 
+/* 1. 页面整体容器对齐 */
+.objects-page {
+    padding: 0 20px; /* 确保与首页 header/footer 的左右对齐线完全一致 */
+}
+
+/* 2. 页面大标题 */
+.objects-title-section {
+    padding: 60px 0 30px 0; /* 增加顶部呼吸感 */
+}
+
+.objects-title {
+    font-size: 14px; /* 精致的小标题字号 */
+    font-weight: normal;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* 3. 核心：5列网格布局 */
 .objects-grid {
     display: grid;
-    /* 核心修改：将 repeat 的参数从 3 改为 5 */
-    grid-template-columns: repeat(5, 1fr); 
-    
-    /* 间距建议：因为一行的图变多了，间距可以稍微缩小一点，保持精致感 */
-    column-gap: 15px; 
-    row-gap: 40px; 
-    
-    padding: 40px 0;
+    grid-template-columns: repeat(5, 1fr); /* 强制 5 列 */
+    column-gap: 15px; /* 列间距 */
+    row-gap: 50px;   /* 行间距，略大一点可以拉开纵向节奏 */
     width: 100%;
+    margin-bottom: 80px;
 }
 
 .object-item {
     display: flex;
     flex-direction: column;
+}
+
+.object-cover {
+    width: 100%;
+    overflow: hidden;
+    background-color: #f7f7f7; /* 图片加载前的占位底色 */
 }
 
 .object-cover img {
@@ -295,26 +314,58 @@ a{
 }
 
 .object-name {
-    margin-top: 10px; /* 缩小间距，匹配更小的图片尺寸 */
-    font-size: 11px;  /* 稍微缩小字号，避免文字过长导致排版错乱 */
+    margin-top: 12px;
+    font-size: 11px; /* 针对 5 列布局优化的字号 */
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    line-height: 1.2;
+    line-height: 1.4;
+    color: #000;
 }
 
-/* 响应式调整：在小屏幕上不能排5个，否则图太小了 */
+/* 4. 页脚样式复刻（横线 + 三段式布局） */
+.main-footer {
+    margin-top: 100px;
+    padding-bottom: 30px;
+    width: 100%;
+}
+
+.footer-line {
+    width: 100%;
+    height: 1px;
+    background-color: #000;
+    margin-bottom: 15px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between; /* 关键：撑开时钟、Email、版权 */
+    align-items: center;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.footer-item a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* 5. 响应式适配 */
 @media (max-width: 1024px) {
     .objects-grid {
-        grid-template-columns: repeat(3, 1fr); /* 平板端显示 3 列 */
+        grid-template-columns: repeat(3, 1fr); /* 平板显示 3 列 */
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
     .objects-grid {
-        grid-template-columns: repeat(2, 1fr); /* 手机端显示 2 列 */
+        grid-template-columns: repeat(2, 1fr); /* 手机显示 2 列 */
+    }
+    .footer-content {
+        flex-direction: column; /* 手机端改为垂直排列，防止拥挤 */
+        gap: 10px;
+        align-items: flex-start;
     }
 }
-
 /* =========================
    MOBILE
 ========================= */
