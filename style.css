@@ -1,5 +1,5 @@
 /* ==========================================================================
-   FINAL STABLE CSS - 彻底修复崩溃
+   1. 基础重置 (解决链接变蓝问题)
    ========================================================================== */
 *{
     margin:0;
@@ -12,12 +12,7 @@
     --page-gap: 15px;
     --middle-gap: 20px;
     --line-color: #d0d0d0;
-    --header-height: 30px; 
-    --footer-height: 40px; 
-    /* 定义统一比例变量 */
-    --col-1-w: 32%;
-    --col-2-w: 48%;
-    --col-3-w: 20%;
+    --header-h: 30px; 
 }
 
 body{
@@ -29,6 +24,18 @@ body{
     overflow: hidden;
 }
 
+/* 强制重置所有链接颜色，防止变蓝 */
+a, a:visited, a:active { 
+    color: #000 !important; 
+    text-decoration: none; 
+}
+
+.clickable { cursor: pointer; }
+.clickable:hover { opacity: 0.5; }
+
+/* ==========================================================================
+   2. 布局框架
+   ========================================================================== */
 .main-container{
     display: flex;
     width: 100%;
@@ -36,45 +43,11 @@ body{
     gap: var(--middle-gap);
 }
 
-/* --- 通用行容器：不再使用 Grid 强制分配，改用 Flex 确保结构安全 --- */
-.row-layout {
-    display: flex;
-    width: 100%;
-}
-
-.col-1 { width: var(--col-1-w); flex-shrink: 0; }
-.col-2 { width: var(--col-2-w); flex-shrink: 0; }
-.col-3 { width: var(--col-3-w); flex-shrink: 0; text-align: right; }
-
-/* --- 顶部 Header --- */
-.panel-header {
-    height: var(--header-height);
-    border-bottom: 1px solid var(--line-color);
-    padding-top: 4px;
-    align-items: flex-start;
-}
-
-.top-links {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding-right: 20px;
-}
-
-/* --- 列表与内容 --- */
-.table-head, .project-item, .item-meta {
-    height: 30px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid var(--line-color);
-}
-
-/* --- 面板基础 --- */
 .left-panel, .right-panel {
     width: 50%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    height: 100%;
 }
 
 .left-panel { padding-left: var(--page-gap); position: relative; }
@@ -83,9 +56,40 @@ body{
 .scroll-content { flex: 1; overflow-y: auto; }
 .scroll-content::-webkit-scrollbar { display: none; }
 
-/* --- 底部 Footer --- */
+/* ==========================================================================
+   3. 顶部 Header (解决贴边、靠上、隐藏冗余蓝色字)
+   ========================================================================== */
+.panel-header {
+    height: var(--header-h);
+    border-bottom: 1px solid var(--line-color);
+    display: flex;
+    align-items: flex-start; /* 极致靠上 */
+    padding-top: 4px;
+}
+
+/* 左侧网格对齐 */
+.left-row {
+    display: grid;
+    grid-template-columns: 32% 48% 20%;
+    width: 100%;
+}
+
+.left-panel .top-links {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+}
+
+/* 右侧 Header 布局：Selected Work 靠左，其余空间留白 */
+.right-panel .panel-header {
+    justify-content: flex-start; 
+}
+
+/* ==========================================================================
+   4. 底部 Footer (解决对齐与链接颜色)
+   ========================================================================== */
 .panel-footer, .gallery-footer {
-    height: var(--footer-height);
+    height: 40px;
     border-top: 1px solid var(--line-color);
     display: flex;
     align-items: center;
@@ -95,26 +99,32 @@ body{
     display: flex;
     justify-content: space-between;
     width: 100%;
+    font-size: 13px;
 }
 
-/* 隐藏多余文字 */
-.desktop-title { display: block; }
-.mobile-title { display: none; }
+/* ==========================================================================
+   5. 桌面端隐藏逻辑 (解决右侧多余字)
+   ========================================================================== */
+@media (min-width: 801px) {
+    .desktop-hide {
+        display: none !important; /* 强制隐藏蓝色字（List/Gallery等） */
+    }
+}
 
-/* 装饰图标 */
+/* 列表行样式 */
+.table-head, .project-item {
+    height: 30px;
+    border-bottom: 1px solid var(--line-color);
+    display: flex;
+    align-items: center;
+}
+
+.col-3 { text-align: right; }
+
 .left-panel-corner-img {
     position: absolute;
-    bottom: 45px;
+    bottom: 50px;
     right: 0;
     width: 25px;
-    pointer-events: none;
 }
 .left-panel-corner-img img { width: 100%; height: auto; }
-
-/* 详情页图片 */
-.image-container {
-    width: 100%;
-    aspect-ratio: 4/3;
-    background: #f2f2f2;
-    margin-top: 10px;
-}
