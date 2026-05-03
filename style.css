@@ -1,65 +1,251 @@
-/* --- 1. 基础重置：解决所有链接变蓝 --- */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-a, a:visited, .clickable { 
-    color: #000 !important; 
-    text-decoration: none !important; 
+/* ==========================================================================
+   基础重置与全局变量
+   ========================================================================== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-font-smoothing:antialiased;
 }
 
-:root {
-    --page-gap: 15px;
-    --middle-gap: 20px;
-    --line-color: #d0d0d0;
-    --header-h: 30px;
-    --w1: 32%; /* 第一列比例 */
-    --w2: 48%; /* 第二列比例 */
-    --w3: 20%; /* 第三列比例 */
+:root{
+    --page-gap:15px;
+    --middle-gap:20px;
+    --line-color:#d0d0d0;
 }
 
-/* --- 2. 布局框架 --- */
-.main-container { display: flex; width: 100%; height: 100vh; gap: var(--middle-gap); }
-.left-panel, .right-panel { width: 50%; display: flex; flex-direction: column; }
-.left-panel { padding-left: var(--page-gap); }
-.right-panel { padding-right: var(--page-gap); }
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Inter",sans-serif;
+    font-size:15px;
+    color:#000;
+    background:#fff;
+    height:100vh;
+    overflow:hidden;
+}
 
-/* --- 3. 严格网格对齐 --- */
-.grid-layout {
-    display: grid;
-    grid-template-columns: var(--w1) var(--w2) var(--w3);
+a{
+    color:#000;
+    text-decoration:none;
+}
+
+.main-container{
+    display:flex;
+    width:100%;
+    height:100%;
+    gap:var(--middle-gap);
+    overflow:hidden;
+}
+
+/* ==========================================================================
+   左侧面板 (LEFT PANEL)
+   ========================================================================== */
+.left-panel{
+    width:50%;
+    display:flex;
+    flex-direction:column;
+    padding-left:var(--page-gap);
+    position: relative; /* 重要：为右下角图片提供定位基准 */
+}
+
+/* 新增：左侧右下角图片容器 */
+.left-panel-corner-img {
+    position: absolute;
+    bottom: 30px;  /* 位于 footer 之上，可根据视觉微调 */
+    right: -2px;      /* 与右侧边框对齐，或设为 20px 留出间距 */
+    width: 60px;  /* 图片宽度，按需调整 */
+    z-index: 5;
+    pointer-events: none; /* 鼠标穿透，不影响点击下层的列表 */
+}
+
+.left-panel-corner-img img {
     width: 100%;
-    align-items: flex-start;
+    height: auto;
+    display: block;
+    /* filter: grayscale(100%); 如果需要黑白效果可以开启 */
 }
 
-.panel-header {
-    height: var(--header-h);
-    border-bottom: 1px solid var(--line-color);
-    padding-top: 4px;
+/* ==========================================================================
+   右侧面板 (RIGHT PANEL)
+   ========================================================================== */
+.right-panel{
+    width:50%;
+    display:flex;
+    flex-direction:column;
+    padding-right:var(--page-gap);
+    min-height:0;
 }
 
-/* --- 4. 彻底干掉右侧多余的蓝色字 --- */
-.right-panel .panel-header {
-    display: block; /* 恢复块状布局，确保只有 Selected Work 独占 */
+.scroll-content{
+    flex:1;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    -webkit-overflow-scrolling:touch;
+}
+.scroll-content::-webkit-scrollbar{
+    display:none;
 }
 
-@media (min-width: 801px) {
-    /* 在桌面端，所有带这个类的标签必须物理消失 */
-    .desktop-hide { display: none !important; }
+/* ==========================================================================
+   网格对齐系统 (Grid Alignment)
+   ========================================================================== */
+
+.panel-header{
+    height:60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    padding-top:5px;
+    border-bottom:1px solid var(--line-color);
+    flex-shrink:0;
 }
 
-/* --- 5. 修复图片大小 (对齐到第二列末尾) --- */
-.image-container {
-    width: calc(var(--w1) + var(--w2)); 
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-.image-container img { width: 100%; height: auto; display: block; }
+/* 统一 col-2 的宽度确保 Information, Project, IG 在同一列 */
+.panel-header .col-2 { flex: 0 0 48%; text-align: left; }
+.table-head .col-2   { flex: 0 0 48%; text-align: left; }
+.project-item .col-2 { flex: 0 0 48%; text-align: left; }
+.panel-footer .col-2 { flex: 0 0 48%; text-align: left; }
 
-/* 列表行样式 */
-.table-head, .project-item, .gallery-item-header {
-    height: 30px;
-    border-bottom: 1px solid var(--line-color);
-    display: grid; /* 强制所有行使用网格 */
-    grid-template-columns: var(--w1) var(--w2) var(--w3);
-    align-items: center;
+.col-1{ flex:0 0 32%; }
+.col-3{ flex:0 0 20%; text-align:right; }
+
+.col-header-left,
+.col-header-right{
+    font-weight:normal;
 }
-.col-3-right { text-align: right; }
+
+/* 交互 */
+.clickable{ cursor:pointer; }
+.clickable:hover{ opacity:.5; }
+
+.desktop-title{ display:inline; }
+.mobile-title{ display:none; }
+
+.top-links,
+.mobile-links{
+    display:flex;
+    justify-content:flex-end;
+    gap:18px;
+    text-align:right;
+}
+
+/* 列表行 */
+.table-head,
+.project-item,
+.item-meta{
+    height:30px;
+    display:flex;
+    align-items:center;
+    border-bottom:1px solid var(--line-color);
+}
+
+.project-item:hover{ opacity:.5; }
+
+/* ==========================================================================
+   页脚微调 (Footer)
+   ========================================================================== */
+
+.panel-footer,
+.gallery-footer{
+    height:38px;
+    border-top:1px solid var(--line-color);
+    display:flex;
+    align-items:center;
+    margin-top:20px;
+    flex-shrink:0;
+    /* 核心修改：文字精准上提 1px */
+    transform: translateY(-1px);
+}
+
+.footer-inner{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+}
+
+/* ==========================================================================
+   其他组件 (详情页、Info、Gallery 等)
+   ========================================================================== */
+
+.image-container{
+    position:relative;
+    width:100%;
+    aspect-ratio:4/3;
+    overflow:hidden;
+    margin-top:10px;
+    background:#f2f2f2;
+}
+
+.image-container img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.description-section{
+    display:flex;
+    gap:40px;
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.info-tags{ flex:0 0 32%; color:#666; line-height:1.8; }
+.info-tags ul{ list-style:none; }
+.info-text{ flex:1; font-size:14px; line-height:1.6; }
+
+.project-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+    margin-top:40px;
+}
+
+.info-row{
+    display:flex;
+    border-bottom:1px solid var(--line-color);
+    padding:15px 0 40px 0;
+}
+
+.info-label{ flex:0 0 32%; }
+.info-content{ flex:1; line-height:1.6; max-width:500px; }
+
+/* 加号装饰 */
+.plus{ position:absolute; font-size:18px; color:#aaa; z-index:10; }
+.top-left{top:15px;left:15px;}
+.top-right{top:15px;right:15px;}
+.bottom-left{bottom:15px;left:15px;}
+.bottom-right{bottom:15px;right:15px;}
+
+/* 桌面端隐藏手机专属导航 */
+.desktop-hide { display: none; }
+
+/* ==========================================================================
+   响应式布局 (MOBILE)
+   ========================================================================== */
+@media (max-width:800px){
+    body{ font-size:14px; }
+    .left-panel{ display:none; } /* 手机端隐藏左侧及图片 */
+    
+    .right-panel{ width:100%; padding:0 var(--page-gap); }
+    .desktop-title{ display:none; }
+    .mobile-title{ display:inline; }
+    
+    .desktop-hide { display: flex; }
+    
+    .panel-header{ height:52px; }
+    .gallery-footer, .panel-footer{ display:none; }
+    
+    .mobile-bottom-info{
+        display:block;
+        width:100%;
+        border-top:1px solid var(--line-color);
+        margin-top:26px;
+        padding:10px 0 22px 0;
+    }
+    .mobile-bottom-inner{
+        display:flex;
+        justify-content:space-between;
+        font-size:13px;
+    }
+}
