@@ -12,34 +12,41 @@
 
     <!-- 左侧桌面栏 -->
     <aside class="left-panel">
-        <header class="panel-header">
+        <!-- 修改点：添加 grid-row 类确保顶部对齐 -->
+        <header class="panel-header grid-row">
             <div class="col-1 clickable" onclick="showGallery()">MENGFEI YAN ®</div>
             <div class="col-2 top-links">
                 <span class="clickable" onclick="showInfo()">Information</span>
                 <a href="gallery/">Gallery</a>
             </div>
+            <div class="col-3"></div> <!-- 占位符确保列数一致 -->
         </header>
 
         <div class="scroll-content">
-            <div class="table-head">
+            <!-- 修改点：添加 grid-row 类确保表头对齐 -->
+            <div class="table-head grid-row">
                 <div class="col-1">Client</div>
                 <div class="col-2">Project</div>
                 <div class="col-3">Year</div>
             </div>
 
-            <div class="project-list" id="js-project-list"></div>
+            <div class="project-list" id="js-project-list">
+                <!-- 注意：在 script.js 生成项目行时，也要给行 div 添加 "grid-row" 类 -->
+            </div>
         </div>
 
-        <!-- 新增：左侧右下角图片容器 -->
+        <!-- 左侧右下角图片容器 -->
         <div class="left-panel-corner-img">
             <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/icon1.png" alt="Corner Image">
         </div>
 
-        <footer class="panel-footer">
+        <!-- 修改点：添加 grid-row 类确保页脚对齐 -->
+        <footer class="panel-footer grid-row">
             <div class="col-1" id="timer">00:00:00</div>
             <div class="col-2">
                 <a href="#">IG</a>, <a href="mailto:mengfeiyan11@gmail.com">Email</a>
             </div>
+            <div class="col-3"></div>
         </footer>
     </aside>
 
@@ -102,6 +109,7 @@
                     <div class="col-header-right clickable" onclick="showGallery()">Index</div>
                 </header>
 
+                <!-- 详情页的 meta 也可以使用 grid-row 如果需要对齐左侧 -->
                 <div class="item-meta">
                     <div class="col-1" id="d-client"></div>
                     <div class="col-2" id="d-project"></div>
