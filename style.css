@@ -34,7 +34,7 @@ a{
     overflow:hidden;
 }
 
-/* 左侧 */
+/* 左侧面板基础 */
 .left-panel{
     width:50%;
     display:flex;
@@ -42,7 +42,7 @@ a{
     padding-left:var(--page-gap);
 }
 
-/* 右侧 */
+/* 右侧面板基础 */
 .right-panel{
     width:50%;
     display:flex;
@@ -62,7 +62,7 @@ a{
     display:none;
 }
 
-/* 顶部 */
+/* 顶部 Header */
 .panel-header{
     height:60px;
     display:flex;
@@ -73,8 +73,36 @@ a{
     flex-shrink:0;
 }
 
+/* ==========================================================================
+   网格对齐系统：统一第二列 (col-2) 的宽度，确保垂直对齐
+   ========================================================================== */
+
+/* 顶部 Header 的第二列 (Information) */
+.panel-header .col-2 {
+    flex: 0 0 48%; 
+    text-align: left;
+}
+
+/* 列表表头的第二列 (Project) */
+.table-head .col-2 {
+    flex: 0 0 48%;
+    text-align: left;
+}
+
+/* 列表内容的第二列 */
+.project-item .col-2 {
+    flex: 0 0 48%;
+    text-align: left;
+}
+
+/* 底部页脚的第二列 (IG, Email) */
+.panel-footer .col-2 {
+    flex: 0 0 48%;
+    text-align: left;
+}
+
+/* 其他列宽定义 */
 .col-1{ flex:0 0 32%; }
-.col-2{ flex:0 0 48%; }
 .col-3{ flex:0 0 20%; text-align:right; }
 
 .col-header-left,
@@ -214,15 +242,30 @@ a{
     max-width:500px;
 }
 
-/* footer */
-.panel-footer,
-.gallery-footer{
-    height:38px;
-    border-top:1px solid var(--line-color);
-    display:flex;
-    align-items:center;
-    margin-top:20px;
-    flex-shrink:0;
+/* ==========================================================================
+   FOOTER：微调文字上移 1px
+   ========================================================================== */
+
+.panel-footer {
+    height: 38px;
+    border-top: 1px solid var(--line-color);
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    flex-shrink: 0;
+    /* 上移文字 */
+    transform: translateY(-1px);
+}
+
+.gallery-footer {
+    height: 38px;
+    border-top: 1px solid var(--line-color);
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    flex-shrink: 0;
+    /* 上移文字 */
+    transform: translateY(-1px);
 }
 
 .footer-inner{
@@ -257,50 +300,46 @@ a{
     opacity:1;
 }
 
-/* 手机版list */
+/* 手机版控制 */
 #mobile-list-view,
 #mobile-list-btn{
     display:none;
 }
 
+.desktop-hide {
+    display: none;
+}
+
 /* ==========================================================================
-   GALLERY PAGE - ABSOLUTE UNIFIED SYSTEM
+   GALLERY PAGE - SYSTEM
    ========================================================================== */
 
-/* 1. 模拟主页的左右边距，消除切换时的视觉跳跃 */
 .objects-page {
     width: 100%;
-    padding: 0 var(--page-gap); /* 严格同步全局变量 */
+    padding: 0 var(--page-gap);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* 2. 强制同步主页 Header 的三段式对齐 */
 .objects-page .panel-header {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     padding-top: 5px;
-    height: 60px; /* 同步主页高度 */
-    border-bottom: none !important; /* 原来 1px solid var(--line-color); */
+    height: 60px;
+    border-bottom: none !important;
 }
 
-/* 3. 网格区域：增加呼吸感，同时控制宽度 */
 .objects-grid {
     flex: 1;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    
-    /* 呼吸感设置 */
     column-gap: 40px; 
     row-gap: 80px;   
-    
-    /* 这里的 padding 让 5 列图片收缩在中间，更有精致感 */
     padding: 60px 10% 120px 10%; 
-    
     width: 100%;
     box-sizing: border-box;
 }
@@ -314,7 +353,7 @@ a{
     width: 100%;
     aspect-ratio: 1 / 1; 
     overflow: hidden;
-    background-color: #f2f2f2; /* 同步主页图片底色 */
+    background-color: #f2f2f2;
 }
 
 .object-cover img {
@@ -324,16 +363,14 @@ a{
     display: block;
 }
 
-/* 4. 编号：保持极简小字 */
 .object-number {
     margin-top: 15px;
     font-size: 10px; 
-    color: #666; /* 同步全局辅助文字颜色 */
+    color: #666;
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
 
-/* 5. 强制同步主页 Footer */
 .objects-page .panel-footer {
     width: 100%;
     height: 38px;
@@ -343,23 +380,10 @@ a{
     margin-top: auto;
 }
 
-/* 6. 响应式：在手机端适配你主页的 mobile 逻辑 */
-@media (max-width: 800px) {
-    .objects-grid {
-        grid-template-columns: repeat(2, 1fr);
-        column-gap: 12px;
-        row-gap: 30px;
-        padding: 40px 0; /* 手机端取消缩进，撑满屏幕 */
-    }
+/* ==========================================================================
+   MOBILE RESPONSIVE
+   ========================================================================== */
 
-    .objects-page .panel-header {
-        height: 52px;
-    }
-}
-
-/* =========================
-   MOBILE
-========================= */
 @media (max-width:800px){
 
     body{
@@ -385,6 +409,11 @@ a{
 
     #mobile-list-btn{
         display:inline;
+    }
+
+    /* 手机端显示右侧隐藏的导航 */
+    .desktop-hide {
+        display: flex;
     }
 
     .gallery-footer,
@@ -449,30 +478,11 @@ a{
         font-size:13px;
     }
 
-    /* gallery */
-    .objects-header{
-        height:52px;
-        margin-bottom:25px;
-    }
-
-    .objects-title{
-        font-size:14px;
-        margin-bottom:22px;
-    }
-
+    /* gallery mobile */
     .objects-grid{
         grid-template-columns:repeat(2,1fr);
         column-gap:12px;
         row-gap:30px;
-    }
-
-    .object-name{
-        font-size:12px;
-    }
-
-    .objects-footer{
-        font-size:12px;
-        margin-top:40px;
-        padding-bottom:10px;
+        padding: 40px 0;
     }
 }
