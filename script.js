@@ -1,73 +1,107 @@
+// 全局变量存储从 JSON 读取的数据
 let allProjects = [];
 
-async function init() {
+// 1. 初始化：加载数据并启动时钟
+window.onload = () => {
+    loadProjects();
+    updateClock();
+    setInterval(updateClock, 1000);
+};
+
+// 2. 从 JSON 文件异步获取数据
+async function loadProjects() {
     try {
         const response = await fetch('projects.json');
-        if (!response.ok) throw new Error("JSON file not found");
+        if (!response.ok) throw new Error('无法读取 projects.json');
+        
         allProjects = await response.json();
-        renderList();
-        renderGallery();
-        updateClock();
-        setInterval(updateClock, 1000);
-    } catch (e) {
-        console.error("加载失败:", e);
+        
+        renderList();    // 渲染左侧文字列表
+        renderGallery(); // 渲染右侧图片列表
+    } catch (error) {
+        console.error("项目加载失败:", error);
     }
 }
 
+// 3. 渲染左侧文字列表
 function renderList() {
-    const listWrap = document.getElementById('js-project-list');
-    if (!listWrap) return;
-    listWrap.innerHTML = allProjects.map(p => `
+    const listContainer = document.getElementById('js-project-list');
+    if (!listContainer) return;
+
+    listContainer.innerHTML = allProjects.map(p => `
         <div class="project-item" onclick="scrollToId('${p.id}')">
             <div class="col-1">${p.client}</div>
             <div class="col-2">${p.project}</div>
             <div class="col-3">${p.year}</div>
-        </div>`).join('');
+        </div>
+    `).join('');
 }
 
+// 4. 渲染右侧首页图片列表
 function renderGallery() {
-    const galWrap = document.getElementById('js-gallery-content');
-    if (!galWrap) return;
-    galWrap.innerHTML = allProjects.map(p => `
-        <div class="gallery-item" id="${p.id}" onclick="showDetail('${p.id}')">
-            <div class="image-container">
-                <img src="${p.cover}">
-                <span class="plus top-left">+</span><span class="plus top-right">+</span>
+    const galleryContainer = document.getElementById('js-gallery-content');
+    if (!galleryContainer) return;
+
+    galleryContainer.innerHTML = allProjects.map(p => `
+        <section class="gallery-item" id="${p.id}" onclick="showDetail('${p.id}')">
+            <div class="item-meta">
+                <div class="col-1">${p.client}</div>
+                <div class="col-2">${p.project}</div>
+                <div class="col-3">${p.year}</div>
             </div>
-        </div>`).join('');
+            <div class="image-container">
+                <img src="${p.cover}" alt="${p.project}">
+                <span class="plus top-left">+</span><span class="plus top-right">+</span>
+                <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
+            </div>
+        </section>
+    `).join('');
 }
 
-// 手机端菜单开关
-function toggleMobileList() {
-    const lp = document.querySelector('.left-panel');
-    const btn = document.getElementById('mobile-list-btn');
-    lp.classList.toggle('active');
-    btn.innerText = lp.classList.contains('active') ? 'Close' : 'List';
+// 5. 显示作品详情页
+function showDetail(id) {
+    const project = allProjects.find(p => p.id === id);
+    if (!project) return;
+
+    // 填充基本文本信息
+    document.getElementById('d-client').innerText = project.client;
+    document.getElementById('d-project').innerText = project.project;
+    document.getElementById('d-year').innerText = project.year;
+    document.getElementById('d-img').src = project.cover;
+    document.getElementById('d-text').innerHTML = project.description;
+    
+    // 渲染标签 (Tags)
+    const tagsContainer = document.getElementById('d-tags');
+    if (project.tags && tagsContainer) {
+        tagsContainer.innerHTML = project.tags.map(t => `<li>${t}</li>`).join('');
+    }
+
+    // 渲染详情页的子网格图片 (Grid)
+    const gridContainer = document.getElementById('js-detail-grid');
+    if (project.subImages && gridContainer) {
+        gridContainer.innerHTML = project.subImages.map((imgUrl, index) => `
+            <div class="grid-item">
+                <div class="image-container small">
+                    <img src="${imgUrl}">
+                    <span class="plus top-left">+</span><span class="plus top-right">+</span>
+                    <span class="plus bottom-left">+</span><span class="plus bottom-right">+</span>
+                </div>
+                <div class="grid-num">${String(index + 1).padStart(2, '0')}</div>
+            </div>
+        `).join('');
+    }
+
+    // 视图切换
+    document.getElementById('gallery-view').style.display = 'none';
+    document.getElementById('info-view').style.display = 'none';
+    document.getElementById('detail-view').style.display = 'block';
+    document.getElementById('index-btn').style.display = 'inline-block';
+    
+    // 滚动回顶部
+    document.getElementById('gal').scrollTop = 0;
 }
 
-// 手机端专用：点名字回首页
-function mobileGoHome() {
-    const lp = document.querySelector('.left-panel');
-    if (lp.classList.contains('active')) toggleMobileList();
-    showGallery();
-    scrollToTop();
-}
-
-// 手机端专用：点 Information
-function mobileGoInfo() {
-    const lp = document.querySelector('.left-panel');
-    if (lp.classList.contains('active')) toggleMobileList();
-    showInfo();
-}
-
-function scrollToId(id) {
-    if (window.innerWidth <= 800) toggleMobileList();
-    showGallery();
-    setTimeout(() => {
-        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-}
-
+// 6. 视图切换函数
 function showGallery() {
     document.getElementById('gallery-view').style.display = 'block';
     document.getElementById('detail-view').style.display = 'none';
@@ -80,33 +114,63 @@ function showInfo() {
     document.getElementById('detail-view').style.display = 'none';
     document.getElementById('info-view').style.display = 'block';
     document.getElementById('index-btn').style.display = 'inline-block';
+    document.getElementById('gal').scrollTop = 0;
 }
 
-function showDetail(id) {
-    const p = allProjects.find(i => i.id === id);
-    if(!p) return;
-    document.getElementById('gallery-view').style.display = 'none';
-    document.getElementById('info-view').style.display = 'none';
-    document.getElementById('detail-view').style.display = 'block';
-    document.getElementById('index-btn').style.display = 'inline-block';
-    
-    document.getElementById('d-client').innerText = p.client;
-    document.getElementById('d-project').innerText = p.project;
-    document.getElementById('d-year').innerText = p.year;
-    document.getElementById('d-img').src = p.cover;
-    document.getElementById('d-text').innerHTML = p.description || "";
+// 7. 手机端特有功能：菜单开关与跳转逻辑
+function toggleMobileList() {
+    const lp = document.getElementById('js-left-panel');
+    const btn = document.getElementById('mobile-list-btn');
+    if (!lp || !btn) return;
+
+    lp.classList.toggle('active');
+    btn.innerText = lp.classList.contains('active') ? 'Close' : 'List';
 }
 
-function updateClock() {
-    const timer = document.getElementById('timer');
-    if(timer) {
-        const now = new Date();
-        timer.innerText = now.toTimeString().split(' ')[0];
+function mobileGoHome() {
+    // 手机模式下，如果菜单开着就先关掉
+    if (window.innerWidth <= 800) {
+        const lp = document.getElementById('js-left-panel');
+        if (lp && lp.classList.contains('active')) toggleMobileList();
     }
+    showGallery();
+    scrollToTop();
+}
+
+function mobileGoInfo() {
+    // 手机模式下，如果菜单开着就先关掉
+    if (window.innerWidth <= 800) {
+        const lp = document.getElementById('js-left-panel');
+        if (lp && lp.classList.contains('active')) toggleMobileList();
+    }
+    showInfo();
+}
+
+// 8. 辅助功能：滚动与时钟
+function scrollToId(id) {
+    // 如果是手机端点击列表项，先收起菜单
+    if (window.innerWidth <= 800) {
+        const lp = document.getElementById('js-left-panel');
+        if (lp && lp.classList.contains('active')) toggleMobileList();
+    }
+    
+    showGallery(); // 确保回到主页视图
+    setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, 100); // 稍微延迟确保视图切换完成
 }
 
 function scrollToTop() {
-    document.getElementById('gal').scrollTo({ top: 0, behavior: 'smooth' });
+    const gal = document.getElementById('gal');
+    if (gal) gal.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-window.onload = init;
+function updateClock() {
+    const now = new Date();
+    const timeString = now.toTimeString().split(' ')[0];
+    const timerElement = document.getElementById('timer');
+    if (timerElement) timerElement.innerText = timeString;
+}
