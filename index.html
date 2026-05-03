@@ -12,9 +12,14 @@
         <!-- 左侧面板（桌面） -->
         <aside class="left-panel">
             <header class="panel-header">
-                <div class="col-1">MENGFEI YAN ® </div>
-                <div class="col-2 clickable" onclick="showInfo()">Information</div>
-            </header>
+    <div class="col-header-left">
+        <span class="desktop-title">Selected Work</span>
+        <span class="mobile-title">MENGFEI YAN</span>
+    </div>
+
+    <div id="mobile-list-btn" class="col-header-right clickable" onclick="showMobileList()">List</div>
+    <div id="index-btn" class="col-header-right clickable" onclick="showGallery()" style="display:none;">Index</div>
+</header>
 
             <div class="scroll-content">
                 <div class="table-head">
