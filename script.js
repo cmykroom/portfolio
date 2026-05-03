@@ -3,16 +3,20 @@ let allProjects = [];
 async function init() {
     try {
         const response = await fetch('projects.json');
+        if (!response.ok) throw new Error("JSON file not found");
         allProjects = await response.json();
         renderList();
         renderGallery();
         updateClock();
         setInterval(updateClock, 1000);
-    } catch (e) { console.error("加载失败", e); }
+    } catch (e) {
+        console.error("加载失败:", e);
+    }
 }
 
 function renderList() {
     const listWrap = document.getElementById('js-project-list');
+    if (!listWrap) return;
     listWrap.innerHTML = allProjects.map(p => `
         <div class="project-item" onclick="scrollToId('${p.id}')">
             <div class="col-1">${p.client}</div>
@@ -23,6 +27,7 @@ function renderList() {
 
 function renderGallery() {
     const galWrap = document.getElementById('js-gallery-content');
+    if (!galWrap) return;
     galWrap.innerHTML = allProjects.map(p => `
         <div class="gallery-item" id="${p.id}" onclick="showDetail('${p.id}')">
             <div class="image-container">
@@ -32,6 +37,7 @@ function renderGallery() {
         </div>`).join('');
 }
 
+// 手机端菜单开关
 function toggleMobileList() {
     const lp = document.querySelector('.left-panel');
     const btn = document.getElementById('mobile-list-btn');
@@ -39,14 +45,18 @@ function toggleMobileList() {
     btn.innerText = lp.classList.contains('active') ? 'Close' : 'List';
 }
 
+// 手机端专用：点名字回首页
 function mobileGoHome() {
-    if (document.querySelector('.left-panel').classList.contains('active')) toggleMobileList();
+    const lp = document.querySelector('.left-panel');
+    if (lp.classList.contains('active')) toggleMobileList();
     showGallery();
     scrollToTop();
 }
 
+// 手机端专用：点 Information
 function mobileGoInfo() {
-    if (document.querySelector('.left-panel').classList.contains('active')) toggleMobileList();
+    const lp = document.querySelector('.left-panel');
+    if (lp.classList.contains('active')) toggleMobileList();
     showInfo();
 }
 
@@ -88,8 +98,11 @@ function showDetail(id) {
 }
 
 function updateClock() {
-    const now = new Date();
-    document.getElementById('timer').innerText = now.toTimeString().split(' ')[0];
+    const timer = document.getElementById('timer');
+    if(timer) {
+        const now = new Date();
+        timer.innerText = now.toTimeString().split(' ')[0];
+    }
 }
 
 function scrollToTop() {
