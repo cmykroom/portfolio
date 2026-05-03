@@ -12,9 +12,7 @@
         <!-- 左侧面板 (手机端作为右侧滑入菜单) -->
         <aside class="left-panel">
             <header class="panel-header">
-                <!-- 手机端点击名字回到首页 -->
                 <div class="col-1 clickable" onclick="mobileGoHome()">MENGFEI YAN ® </div>
-                <!-- 手机端点击跳转到 Information 页面 -->
                 <div class="col-2 clickable" onclick="mobileGoInfo()">Information</div>
             </header>
             
@@ -22,9 +20,7 @@
                 <div class="table-head">
                     <div class="col-1">Client</div><div class="col-2">Project</div><div class="col-3">Year</div>
                 </div>
-                <div class="project-list" id="js-project-list">
-                    <!-- 动态内容加载区 -->
-                </div>
+                <div class="project-list" id="js-project-list"></div>
             </div>
 
             <footer class="panel-footer">
@@ -39,19 +35,17 @@
         <main class="right-panel">
             <div class="scroll-content" id="gal">
                 
-                <!-- 视图 A: 首页图片列表 -->
                 <div id="gallery-view">
                     <header class="panel-header">
                         <div class="col-header-left" id="right-title">Selected Work</div>
                         <div class="col-header-right">
-                            <span id="mobile-list-btn" class="clickable" onclick="toggleMobileList()" style="display: none; margin-right: 15px;">List</span>
+                            <span id="mobile-list-btn" class="clickable" onclick="toggleMobileList()" style="display: none;">List</span>
                             <span id="index-btn" class="clickable" onclick="showGallery()" style="display: none;">Index</span>
                         </div>
                     </header>
                     <div id="js-gallery-content"></div>
                 </div>
 
-                <!-- 视图 B: 作品详情 -->
                 <div id="detail-view" style="display: none;">
                     <header class="panel-header">
                         <div class="col-header-left">Selected Work</div>
@@ -75,7 +69,6 @@
                     <div class="back-btn"><a href="#" onclick="showGallery(); return false;">← Back</a></div>
                 </div>
 
-                <!-- 视图 C: Information 页面 -->
                 <div id="info-view" style="display: none;">
                     <header class="panel-header">
                         <div class="col-header-left">Profile</div>
@@ -85,11 +78,10 @@
                         <div class="info-label">About</div>
                         <div class="info-content">
                             YAN MENGFEI<br>
-                            1987年上海生まれ。幼少から美術を専攻し、広告制作会社経って、その後日本に渡り、2023年桑沢デザイン研究所卒業。企業のロゴや広告・ポスター、ミニカード、アーティストのZINEなどのグラフィックデザインを中心に活动。日本で、タイポグラフィー自主制作しながら、社会問題を扱うプロジェクトなどにグラフィックも活跃し始める。日々グラフィックデザインが多様化するグローバルな社会どのような形で変化しているか探求しています。<br>
-                            I was born in Shanghai in 1987 and have been specializing in art since childhood. After working at an advertising production company, My primary focus is on artwork, typography, and branding systems.  I moved to Japan and graduated from Kuwasawa Design School in 2023.
+                            1987年上海生まれ。幼少から美術を専攻し、広告制作会社経って、その後日本に渡り、2023年桑沢デザイン研究所卒業。<br>
+                            I was born in Shanghai in 1987. My primary focus is on artwork, typography, and branding systems.
                         </div>
                     </div>
-                    <!-- ... 其他 info 内容 ... -->
                     <div class="info-row">
                         <div class="info-label">Contact</div>
                         <div class="info-content">mengfeiyan11@gmail.com</div>
