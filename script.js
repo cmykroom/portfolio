@@ -1,50 +1,16 @@
-// 全局项目数据
 let allProjects = [];
 
-/* 页面淡入切换函数 */
-function fadeSwitch(showId) {
-    const views = ['gallery-view', 'detail-view', 'info-view', 'mobile-list-view'];
-
-    views.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-            el.classList.remove('show');
-            el.classList.add('view-fade');
-        }
-    });
-
-    setTimeout(() => {
-        views.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) el.style.display = 'none';
-        });
-
-        const target = document.getElementById(showId);
-        if (target) {
-            target.style.display = 'block';
-            setTimeout(() => {
-                target.classList.add('show');
-            }, 20);
-        }
-    }, 180);
-}
-
-// 初始化
 window.onload = () => {
     loadProjects();
     updateClock();
     setInterval(updateClock, 1000);
 
-    setTimeout(() => {
-        const gallery = document.getElementById('gallery-view');
-        if (gallery) {
-            gallery.classList.add('view-fade');
-            gallery.classList.add('show');
-        }
-    }, 50);
+    const gal = document.getElementById("gal");
+    if (gal) {
+        gal.classList.add("show");
+    }
 };
 
-// 读取JSON
 async function loadProjects() {
     try {
         const response = await fetch('projects.json');
@@ -53,14 +19,14 @@ async function loadProjects() {
         allProjects = await response.json();
 
         renderList();
-        renderGallery();
         renderMobileList();
+        renderGallery();
+
     } catch (error) {
         console.error("项目加载失败:", error);
     }
 }
 
-// 左侧桌面列表
 function renderList() {
     const listContainer = document.getElementById('js-project-list');
     if (!listContainer) return;
@@ -74,13 +40,12 @@ function renderList() {
     `).join('');
 }
 
-// 手机list列表
 function renderMobileList() {
-    const mobileList = document.getElementById('js-mobile-project-list');
+    const mobileList = document.getElementById('mobile-project-list');
     if (!mobileList) return;
 
     mobileList.innerHTML = allProjects.map(p => `
-        <div class="project-item" onclick="showDetail('${p.id}')">
+        <div class="project-item" onclick="showDetailFromMobile('${p.id}')">
             <div class="col-1">${p.client}</div>
             <div class="col-2">${p.project}</div>
             <div class="col-3">${p.year}</div>
@@ -88,7 +53,6 @@ function renderMobileList() {
     `).join('');
 }
 
-// 首页图片流
 function renderGallery() {
     const galleryContainer = document.getElementById('js-gallery-content');
     if (!galleryContainer) return;
@@ -111,25 +75,33 @@ function renderGallery() {
     `).join('');
 }
 
-// 详情页
+function fadeSwitch(callback) {
+    const gal = document.getElementById("gal");
+    gal.classList.remove("show");
+
+    setTimeout(() => {
+        callback();
+        gal.scrollTop = 0;
+        gal.classList.add("show");
+    }, 180);
+}
+
 function showDetail(id) {
     const project = allProjects.find(p => p.id === id);
     if (!project) return;
 
-    document.getElementById('d-client').innerText = project.client;
-    document.getElementById('d-project').innerText = project.project;
-    document.getElementById('d-year').innerText = project.year;
-    document.getElementById('d-img').src = project.cover;
-    document.getElementById('d-text').innerHTML = project.description;
+    fadeSwitch(() => {
+        document.getElementById('d-client').innerText = project.client;
+        document.getElementById('d-project').innerText = project.project;
+        document.getElementById('d-year').innerText = project.year;
+        document.getElementById('d-img').src = project.cover;
+        document.getElementById('d-text').innerHTML = project.description;
 
-    const tagsContainer = document.getElementById('d-tags');
-    if (project.tags) {
-        tagsContainer.innerHTML = project.tags.map(t => `<li>${t}</li>`).join('');
-    }
+        const tagsContainer = document.getElementById('d-tags');
+        tagsContainer.innerHTML = project.tags ? project.tags.map(t => `<li>${t}</li>`).join('') : '';
 
-    const gridContainer = document.getElementById('js-detail-grid');
-    if (project.subImages && gridContainer) {
-        gridContainer.innerHTML = project.subImages.map((imgUrl, index) => `
+        const gridContainer = document.getElementById('js-detail-grid');
+        gridContainer.innerHTML = project.subImages ? project.subImages.map((imgUrl, index) => `
             <div class="grid-item">
                 <div class="image-container small">
                     <img src="${imgUrl}">
@@ -140,35 +112,50 @@ function showDetail(id) {
                 </div>
                 <div class="grid-num">${String(index + 1).padStart(2, '0')}</div>
             </div>
-        `).join('');
-    }
+        `).join('') : '';
 
-    fadeSwitch('detail-view');
-    document.getElementById('index-btn').style.display = 'block';
-    document.getElementById('gal').scrollTop = 0;
+        document.getElementById('gallery-view').style.display = 'none';
+        document.getElementById('mobile-list-view').style.display = 'none';
+        document.getElementById('detail-view').style.display = 'block';
+        document.getElementById('info-view').style.display = 'none';
+    });
 }
 
-// 首页
+function showDetailFromMobile(id) {
+    showDetail(id);
+}
+
 function showGallery() {
-    fadeSwitch('gallery-view');
-    document.getElementById('index-btn').style.display = 'none';
-    document.getElementById('gal').scrollTop = 0;
+    fadeSwitch(() => {
+        document.getElementById('gallery-view').style.display = 'block';
+        document.getElementById('mobile-list-view').style.display = 'none';
+        document.getElementById('detail-view').style.display = 'none';
+        document.getElementById('info-view').style.display = 'none';
+    });
 }
 
-// info
 function showInfo() {
-    fadeSwitch('info-view');
-    document.getElementById('index-btn').style.display = 'block';
-    document.getElementById('gal').scrollTop = 0;
+    fadeSwitch(() => {
+        document.getElementById('gallery-view').style.display = 'none';
+        document.getElementById('mobile-list-view').style.display = 'none';
+        document.getElementById('detail-view').style.display = 'none';
+        document.getElementById('info-view').style.display = 'block';
+    });
 }
 
-// 手机list
 function showMobileList() {
-    fadeSwitch('mobile-list-view');
-    document.getElementById('gal').scrollTop = 0;
+    fadeSwitch(() => {
+        document.getElementById('gallery-view').style.display = 'none';
+        document.getElementById('mobile-list-view').style.display = 'block';
+        document.getElementById('detail-view').style.display = 'none';
+        document.getElementById('info-view').style.display = 'none';
+    });
 }
 
-// 左栏滚动
+function closeMobileList() {
+    showGallery();
+}
+
 function scrollToId(id) {
     showGallery();
     setTimeout(() => {
@@ -179,12 +166,13 @@ function scrollToId(id) {
     }, 220);
 }
 
-// 回顶部
 function scrollToTop() {
-    document.getElementById('gal').scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('gal').scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 }
 
-// 时钟
 function updateClock() {
     const now = new Date();
     const timeString = now.toTimeString().split(' ')[0];
