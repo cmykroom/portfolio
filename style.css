@@ -57,17 +57,17 @@ body {
 }
 .scroll-content::-webkit-scrollbar { display: none; }
 
-/* 头部样式：现在作为滚动内容的第一行 */
+/* 头部样式 */
 .panel-header {
     height: 60px; 
     display: flex;
     justify-content: space-between; 
     align-items: flex-start; 
-    padding-top: 5px;     
+    padding-top: 5px;      
     flex-shrink: 0;
     margin: 0;
-    /* 核心修改：增加底边框，使其成为视觉上的第一根线 */
     border-bottom: 1px solid var(--line-color);
+    flex-wrap: nowrap; /* 强制不换行 */
 }
 
 /* 列宽比例与通用布局 */
@@ -78,9 +78,13 @@ body {
 .clickable { cursor: pointer; }
 .clickable:hover { opacity: 0.5; }
 
-/* 右上角标题与 Index 按钮定位 */
 .col-header-left { font-weight: normal; }
-.col-header-right { text-align: right; }
+.col-header-right { 
+    text-align: right; 
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+}
 
 /* 列表行高调整 */
 .table-head, .project-item, .item-meta {
@@ -92,7 +96,6 @@ body {
     margin: 0;
 }
 
-/* 移除重复的顶部边框 */
 #gallery-view .item-meta:first-of-type,
 #info-view .info-row:first-child {
     border-top: none;
@@ -101,7 +104,6 @@ body {
 .project-item { cursor: pointer; transition: opacity 0.2s; }
 .project-item:hover { opacity: 0.5; }
 
-/* 右侧列表项目间距 */
 .gallery-item { 
     width: 100%; 
     cursor: pointer; 
@@ -134,48 +136,30 @@ body {
 .info-tags ul { list-style: none; }
 .info-text { flex: 1; line-height: 1.6; font-size: 14px; }
 
-/* Information (Profile) 页面样式 */
-#info-view {
-    width: 100%;
-    margin-top: 0;
-}
-
+/* Information 页面样式 */
 .info-row {
     display: flex;
     border-bottom: 1px solid var(--line-color);
-    padding: 15px 0 40px 0; /* 略微增加了间距 */
-    margin-bottom: 0;
+    padding: 15px 0 40px 0;
 }
+.info-label { flex: 0 0 32%; font-size: 15px; }
+.info-content { flex: 1; font-size: 15px; line-height: 1.6; max-width: 500px; }
 
-.info-label {
-    flex: 0 0 32%;
-    font-size: 15px;
-}
-
-.info-content {
-    flex: 1;
-    font-size: 15px;
-    line-height: 1.6;
-    max-width: 500px; 
-}
-
-/* 2x2 网格小图 */
+/* 网格小图 */
 .project-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     margin-top: 40px;
-    width: 100%;
 }
 .grid-item { display: flex; flex-direction: column; }
 .image-container.small { aspect-ratio: 4 / 3; margin-bottom: 10px; }
 .grid-num { font-size: 12px; color: #666; margin-bottom: 40px; }
 
-/* 返回按钮 */
 .back-btn { margin: 40px 0 100px 0; }
 .back-btn a { color: #000; text-decoration: none; border-bottom: 1px solid #000; }
 
-/* 底部面板：现在跟随内容滚动 */
+/* 底部面板 */
 .panel-footer, .gallery-footer {
     height: 40px;
     border-top: 1px solid var(--line-color);
@@ -194,54 +178,65 @@ body {
 .bottom-left { bottom: 15px; left: 15px; }
 .bottom-right { bottom: 15px; right: 15px; }
 
-/* --- 网页版保持不变：隐藏手机按钮 --- */
+/* --- 网页版默认隐藏手机按钮 --- */
 #mobile-list-btn {
     display: none;
 }
 
-/* --- 手机版专用样式 --- */
+/* --- 手机版专用响应式样式 --- */
 @media (max-width: 800px) {
-    #mobile-list-btn {
-        display: inline-block; /* 手机端显示 */
-        margin-right: 15px;
+    body {
+        overflow: auto; /* 允许手机版自然滚动 */
     }
 
-    /* 改造左侧面板为手机端全屏遮罩 */
+    #mobile-list-btn {
+        display: inline-block !important; /* 强制显示 List 按钮 */
+        margin-right: 0px;
+        white-space: nowrap;
+    }
+
+    /* 改造左侧面板为全屏遮罩 */
     .left-panel {
         position: fixed;
         top: 0;
-        left: -100%; /* 初始位置在屏幕外 */
+        left: -100%; 
         width: 100%;
         height: 100%;
         background: #fff;
         z-index: 9999;
-        transition: left 0.3s ease; /* 平滑滑入效果 */
-        padding-right: var(--page-gap) !important;
-        display: flex !important; /* 覆盖之前的 display: none */
+        transition: left 0.3s ease;
+        padding: 0 var(--page-gap) !important;
+        display: flex !important;
+        flex-direction: column;
     }
 
-    /* 当激活时，滑入屏幕 */
     .left-panel.active {
         left: 0;
     }
 
-    /* 手机端列表内的滚动区域恢复 */
-    .left-panel .scroll-content {
-        display: block !important;
+    /* 手机端右侧面板全屏显示 */
+    .right-panel { 
+        width: 100%; 
+        padding: 0 var(--page-gap); 
+        overflow: visible;
     }
 
-    /* 调整手机端 header 间距 */
-    .left-panel .panel-header {
-        margin-bottom: 20px;
-    }
-}
-
-
-/* 响应式 */
-@media (max-width: 800px) {
-    .left-panel { display: none; }
-    .right-panel { width: 100%; padding: 0 var(--page-gap); }
+    /* 布局调整 */
     .description-section { flex-direction: column; gap: 20px; }
     .project-grid { grid-template-columns: 1fr; }
-    .info-row { flex-direction: column; gap: 10px; }
+    .info-row { flex-direction: column; gap: 10px; padding: 20px 0; }
+    .info-label { font-weight: bold; }
+
+    /* 底部页脚增加留白 */
+    .gallery-footer {
+        padding-top: 40px;
+        padding-bottom: 80px; /* 增加底部空白，防止贴边 */
+        height: auto;
+    }
+    
+    .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
 }
