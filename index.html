@@ -12,35 +12,35 @@
 
     <!-- 左侧桌面栏 -->
     <aside class="left-panel">
-        <!-- 修改点：添加 grid-row 类确保顶部对齐 -->
+        <!-- 头部网格：确保 Information 对齐下面的 Project -->
         <header class="panel-header grid-row">
             <div class="col-1 clickable" onclick="showGallery()">MENGFEI YAN ®</div>
             <div class="col-2 top-links">
                 <span class="clickable" onclick="showInfo()">Information</span>
+                <!-- Gallery 链接在网格内部会通过 CSS 靠右 -->
                 <a href="gallery/">Gallery</a>
             </div>
-            <div class="col-3"></div> <!-- 占位符确保列数一致 -->
+            <div class="col-3"></div>
         </header>
 
         <div class="scroll-content">
-            <!-- 修改点：添加 grid-row 类确保表头对齐 -->
+            <!-- 表头网格 -->
             <div class="table-head grid-row">
                 <div class="col-1">Client</div>
                 <div class="col-2">Project</div>
                 <div class="col-3">Year</div>
             </div>
 
-            <div class="project-list" id="js-project-list">
-                <!-- 注意：在 script.js 生成项目行时，也要给行 div 添加 "grid-row" 类 -->
-            </div>
+            <!-- 项目列表：由 JS 生成，确保 JS 中也带有 grid-row 类 -->
+            <div class="project-list" id="js-project-list"></div>
         </div>
 
-        <!-- 左侧右下角图片容器 -->
+        <!-- 左侧右下角图片 -->
         <div class="left-panel-corner-img">
             <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/icon1.png" alt="Corner Image">
         </div>
 
-        <!-- 修改点：添加 grid-row 类确保页脚对齐 -->
+        <!-- 页脚网格 -->
         <footer class="panel-footer grid-row">
             <div class="col-1" id="timer">00:00:00</div>
             <div class="col-2">
@@ -50,11 +50,11 @@
         </footer>
     </aside>
 
-    <!-- 右侧 -->
+    <!-- 右侧面板 (恢复 Flex 布局，不使用全局 Grid) -->
     <main class="right-panel">
         <div class="scroll-content view-fade show" id="gal">
 
-            <!-- 首页 -->
+            <!-- 首页视图 -->
             <div id="gallery-view">
                 <header class="panel-header">
                     <div class="col-header-left">
@@ -79,7 +79,7 @@
                 </div>
             </div>
 
-            <!-- 手机版LIST -->
+            <!-- 手机版列表视图 -->
             <div id="mobile-list-view" style="display:none;">
                 <header class="panel-header">
                     <div class="col-header-left">Index</div>
@@ -102,15 +102,15 @@
                 </div>
             </div>
 
-            <!-- 详情页 -->
+            <!-- 详情视图 -->
             <div id="detail-view" style="display:none;">
                 <header class="panel-header">
                     <div class="col-header-left">Selected Work</div>
                     <div class="col-header-right clickable" onclick="showGallery()">Index</div>
                 </header>
 
-                <!-- 详情页的 meta 也可以使用 grid-row 如果需要对齐左侧 -->
-                <div class="item-meta">
+                <!-- 详情页 Meta 行：使用 grid-row 保持对齐节奏 -->
+                <div class="item-meta grid-row">
                     <div class="col-1" id="d-client"></div>
                     <div class="col-2" id="d-project"></div>
                     <div class="col-3" id="d-year"></div>
@@ -143,7 +143,7 @@
                 </div>
             </div>
 
-            <!-- Information -->
+            <!-- 个人信息视图 -->
             <div id="info-view" style="display:none;">
                 <header class="panel-header">
                     <div class="col-header-left">Profile</div>
@@ -185,6 +185,7 @@
                 </div>
             </div>
 
+            <!-- 页脚 -->
             <footer class="gallery-footer">
                 <div class="footer-inner">
                     <a href="#" onclick="scrollToTop();return false;">↑ Top</a>
