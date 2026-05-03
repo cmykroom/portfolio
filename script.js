@@ -137,3 +137,38 @@ function updateClock() {
     const timerElement = document.getElementById('timer');
     if (timerElement) timerElement.innerText = timeString;
 }
+
+// 切换手机端列表遮罩
+function toggleMobileList() {
+    const leftPanel = document.querySelector('.left-panel');
+    const listBtn = document.getElementById('mobile-list-btn');
+    
+    leftPanel.classList.toggle('active');
+
+    // 切换按钮文字
+    if (leftPanel.classList.contains('active')) {
+        listBtn.innerText = 'Close';
+    } else {
+        listBtn.innerText = 'List';
+    }
+}
+
+// 修改原有的 scrollToId 函数
+function scrollToId(id) {
+    // 如果是手机版，点击后先关闭遮罩层
+    const leftPanel = document.querySelector('.left-panel');
+    if (window.innerWidth <= 800 && leftPanel.classList.contains('active')) {
+        leftPanel.classList.remove('active');
+        document.getElementById('mobile-list-btn').innerText = 'List';
+    }
+
+    showGallery(); 
+    
+    // 延迟一小会儿滚动，确保遮罩关闭动画不会卡顿
+    setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, 100);
+}
