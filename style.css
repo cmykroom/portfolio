@@ -265,43 +265,63 @@ a{
 
 
 /* ==========================================================================
-   GALLERY PAGE - NUMERIC INDEX SYSTEM
+   GALLERY PAGE - ZERO-JUMP ALIGNMENT SYSTEM
    ========================================================================== */
 
-/* 全局容器控制 */
-.viewport-wrapper {
-    padding: 0 20px; /* 必须与主页对齐线一致 */
+/* 1. 基础页面容器：强制同步主页左右边距 */
+.objects-page {
+    width: 100%;
+    /* 核心：这里的 padding 必须与你 index.html 主页容器的左右 padding 像素级一致 */
+    padding: 0 20px; 
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* 顶部导航三分法 */
-.site-header {
+/* 2. Header 同步：确保位置大小与首页 Selected Work 完全重合 */
+.objects-page .main-header {
     display: flex;
-    padding: 20px 0;
-    font-size: 13px;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 20px 0; /* 高度必须与主页 header 一致 */
+}
+
+/* 3. 导航三分法：左-中-右 严格对齐 */
+.objects-page .header-left, 
+.objects-page .header-right,
+.objects-page .header-center {
+    flex: 1;
+}
+
+.objects-page .header-center {
+    text-align: center;
+}
+
+.objects-page .header-right {
+    text-align: right;
+}
+
+.objects-page .main-header a {
+    text-decoration: none;
+    color: #000;
+    font-size: 13px; /* 确保与主页字号一致 */
     text-transform: uppercase;
 }
 
-.nav-section { flex: 1; }
-.nav-section.center { text-align: center; }
-.nav-section.right { text-align: right; }
-.nav-section a { text-decoration: none; color: #000; }
-
-/* 5列网格布局 */
-.gallery-container {
-    flex: 1;
-    padding: 60px 0;
-}
-
+/* 4. 5列网格布局：仅调整中间内容的节奏 */
 .objects-grid {
+    flex: 1;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    column-gap: 20px;
-    row-gap: 50px; /* 增加行间距，给编号留出空间 */
+    /* 强制 5 列 */
+    grid-template-columns: repeat(5, 1fr); 
+    column-gap: 20px; 
+    row-gap: 45px; 
+    /* 顶部的 padding 决定了图片开始的位置，建议与主页作品列表的起始位置对齐 */
+    padding: 60px 0 100px 0; 
 }
 
+/* 5. 图片与数字编号：极致简约 */
 .object-item {
     display: flex;
     flex-direction: column;
@@ -309,7 +329,7 @@ a{
 
 .object-cover {
     width: 100%;
-    aspect-ratio: 1 / 1; /* 保持正方形对齐 */
+    aspect-ratio: 1 / 1; /* 保持正方形对齐，如有需要可改为 auto */
     overflow: hidden;
     background-color: #f7f7f7;
 }
@@ -321,39 +341,55 @@ a{
     display: block;
 }
 
-/* 数字编号样式：替代原文件名 */
 .object-number {
-    margin-top: 12px;
-    font-size: 11px; /* 极简小字号 */
+    margin-top: 10px;
+    font-size: 11px;
     color: #000;
-    font-family: inherit;
     letter-spacing: 0.02em;
 }
 
-/* 页脚单横线布局 */
-.site-footer {
-    margin-top: 100px;
+/* 6. Footer 同步：横线与三段式分布 */
+.objects-page .main-footer {
     padding-bottom: 25px;
+    margin-top: auto; /* 确保 footer 始终在底部 */
 }
 
-.footer-line {
+.objects-page .footer-line {
     width: 100%;
     height: 1px;
     background-color: #000;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
-.footer-content {
+.objects-page .footer-content {
     display: flex;
+    justify-content: space-between;
     font-size: 11px;
     text-transform: uppercase;
-    width: 100%;
+    letter-spacing: 0.02em;
 }
 
-.footer-section { flex: 1; }
-.footer-section.center { text-align: center; }
-.footer-section.right { text-align: right; }
+/* Footer 三分法对齐 */
+.objects-page .footer-content > div {
+    flex: 1;
+}
 
+.objects-page .footer-content > div:nth-child(2) {
+    text-align: center;
+}
+
+.objects-page .footer-content > div:nth-child(3) {
+    text-align: right;
+}
+
+/* 7. 响应式：针对窄屏的保护 */
+@media (max-width: 1024px) {
+    .objects-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 640px) {
+    .objects-grid { grid-template-columns: repeat(2, 1fr); }
+}
 
 
 
