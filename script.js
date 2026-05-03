@@ -1,30 +1,30 @@
 // 全局变量存储从 JSON 读取的数据
 let allProjects = [];
 
-// 1. 初始化：加载数据并启动时钟
+// 初始化
 window.onload = () => {
     loadProjects();
     updateClock();
     setInterval(updateClock, 1000);
 };
 
-// 2. 从 JSON 文件异步获取数据
+// 读取 JSON
 async function loadProjects() {
     try {
-        // 确保 projects.json 文件在同一目录下
         const response = await fetch('projects.json');
         if (!response.ok) throw new Error('无法读取 projects.json');
-        
+
         allProjects = await response.json();
-        
-        renderList();    // 渲染左侧文字列表
-        renderGallery(); // 渲染右侧图片列表
+
+        renderList();
+        renderMobileList();
+        renderGallery();
     } catch (error) {
         console.error("项目加载失败:", error);
     }
 }
 
-// 3. 渲染左侧文字列表
+// 左侧桌面文字列表
 function renderList() {
     const listContainer = document.getElementById('js-project-list');
     if (!listContainer) return;
@@ -38,7 +38,21 @@ function renderList() {
     `).join('');
 }
 
-// 4. 渲染右侧首页图片列表
+// 手机LIST文字列表
+function renderMobileList() {
+    const listContainer = document.getElementById('js-mobile-project-list');
+    if (!listContainer) return;
+
+    listContainer.innerHTML = allProjects.map(p => `
+        <div class="project-item" onclick="mobileScrollToId('${p.id}')">
+            <div class="col-1">${p.client}</div>
+            <div class="col-2">${p.project}</div>
+            <div class="col-3">${p.year}</div>
+        </div>
+    `).join('');
+}
+
+// 右侧首页图片列表
 function renderGallery() {
     const galleryContainer = document.getElementById('js-gallery-content');
     if (!galleryContainer) return;
@@ -59,25 +73,22 @@ function renderGallery() {
     `).join('');
 }
 
-// 5. 显示作品详情页
+// 显示作品详情
 function showDetail(id) {
     const project = allProjects.find(p => p.id === id);
     if (!project) return;
 
-    // 填充基本文本信息
     document.getElementById('d-client').innerText = project.client;
     document.getElementById('d-project').innerText = project.project;
     document.getElementById('d-year').innerText = project.year;
     document.getElementById('d-img').src = project.cover;
     document.getElementById('d-text').innerHTML = project.description;
-    
-    // 渲染标签 (Tags)
+
     const tagsContainer = document.getElementById('d-tags');
     if (project.tags) {
         tagsContainer.innerHTML = project.tags.map(t => `<li>${t}</li>`).join('');
     }
 
-    // 渲染详情页的子网格图片 (Grid)
     const gridContainer = document.getElementById('js-detail-grid');
     if (project.subImages && gridContainer) {
         gridContainer.innerHTML = project.subImages.map((imgUrl, index) => `
@@ -92,45 +103,81 @@ function showDetail(id) {
         `).join('');
     }
 
-    // 视图切换
     document.getElementById('gallery-view').style.display = 'none';
+    document.getElementById('mobile-list-view').style.display = 'none';
     document.getElementById('info-view').style.display = 'none';
     document.getElementById('detail-view').style.display = 'block';
+
     document.getElementById('index-btn').style.display = 'block';
-    
-    // 滚动回顶部
+    document.getElementById('mobile-list-btn').style.display = 'none';
+
     document.getElementById('gal').scrollTop = 0;
 }
 
-// 6. 视图切换函数
+// 首页作品流
 function showGallery() {
     document.getElementById('gallery-view').style.display = 'block';
     document.getElementById('detail-view').style.display = 'none';
     document.getElementById('info-view').style.display = 'none';
-    document.getElementById('index-btn').style.display = 'none';
-}
+    document.getElementById('mobile-list-view').style.display = 'none';
 
-function showInfo() {
-    document.getElementById('gallery-view').style.display = 'none';
-    document.getElementById('detail-view').style.display = 'none';
-    document.getElementById('info-view').style.display = 'block';
-    document.getElementById('index-btn').style.display = 'block';
+    document.getElementById('index-btn').style.display = 'none';
+    document.getElementById('mobile-list-btn').style.display = window.innerWidth <= 800 ? 'block' : 'none';
+
     document.getElementById('gal').scrollTop = 0;
 }
 
-// 7. 辅助功能：滚动与时钟
+// 手机LIST页
+function showMobileList() {
+    document.getElementById('gallery-view').style.display = 'none';
+    document.getElementById('detail-view').style.display = 'none';
+    document.getElementById('info-view').style.display = 'none';
+    document.getElementById('mobile-list-view').style.display = 'block';
+
+    document.getElementById('index-btn').style.display = 'none';
+}
+
+// info页
+function showInfo() {
+    document.getElementById('gallery-view').style.display = 'none';
+    document.getElementById('detail-view').style.display = 'none';
+    document.getElementById('mobile-list-view').style.display = 'none';
+    document.getElementById('info-view').style.display = 'block';
+
+    document.getElementById('index-btn').style.display = 'none';
+    document.getElementById('mobile-list-btn').style.display = 'none';
+
+    document.getElementById('gal').scrollTop = 0;
+}
+
+// 桌面滚动
 function scrollToId(id) {
-    showGallery(); // 确保在首页视图
+    showGallery();
     const element = document.getElementById(id);
     if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
     }
 }
 
+// 手机LIST点击滚动
+function mobileScrollToId(id) {
+    showGallery();
+    const element = document.getElementById(id);
+    if (element) {
+        setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    }
+}
+
+// 返回顶部
 function scrollToTop() {
     document.getElementById('gal').scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// 时钟
 function updateClock() {
     const now = new Date();
     const timeString = now.toTimeString().split(' ')[0];
