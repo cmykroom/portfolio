@@ -1,130 +1,65 @@
-/* ==========================================================================
-   1. 基础重置 (解决链接变蓝问题)
-   ========================================================================== */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    -webkit-font-smoothing:antialiased;
+/* --- 1. 基础重置：解决所有链接变蓝 --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+a, a:visited, .clickable { 
+    color: #000 !important; 
+    text-decoration: none !important; 
 }
 
-:root{
+:root {
     --page-gap: 15px;
     --middle-gap: 20px;
     --line-color: #d0d0d0;
-    --header-h: 30px; 
+    --header-h: 30px;
+    --w1: 32%; /* 第一列比例 */
+    --w2: 48%; /* 第二列比例 */
+    --w3: 20%; /* 第三列比例 */
 }
 
-body{
-    font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-    font-size: 15px;
-    color: #000;
-    background: #fff;
-    height: 100vh;
-    overflow: hidden;
-}
-
-/* 强制重置所有链接颜色，防止变蓝 */
-a, a:visited, a:active { 
-    color: #000 !important; 
-    text-decoration: none; 
-}
-
-.clickable { cursor: pointer; }
-.clickable:hover { opacity: 0.5; }
-
-/* ==========================================================================
-   2. 布局框架
-   ========================================================================== */
-.main-container{
-    display: flex;
-    width: 100%;
-    height: 100%;
-    gap: var(--middle-gap);
-}
-
-.left-panel, .right-panel {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.left-panel { padding-left: var(--page-gap); position: relative; }
+/* --- 2. 布局框架 --- */
+.main-container { display: flex; width: 100%; height: 100vh; gap: var(--middle-gap); }
+.left-panel, .right-panel { width: 50%; display: flex; flex-direction: column; }
+.left-panel { padding-left: var(--page-gap); }
 .right-panel { padding-right: var(--page-gap); }
 
-.scroll-content { flex: 1; overflow-y: auto; }
-.scroll-content::-webkit-scrollbar { display: none; }
+/* --- 3. 严格网格对齐 --- */
+.grid-layout {
+    display: grid;
+    grid-template-columns: var(--w1) var(--w2) var(--w3);
+    width: 100%;
+    align-items: flex-start;
+}
 
-/* ==========================================================================
-   3. 顶部 Header (解决贴边、靠上、隐藏冗余蓝色字)
-   ========================================================================== */
 .panel-header {
     height: var(--header-h);
     border-bottom: 1px solid var(--line-color);
-    display: flex;
-    align-items: flex-start; /* 极致靠上 */
     padding-top: 4px;
 }
 
-/* 左侧网格对齐 */
-.left-row {
-    display: grid;
-    grid-template-columns: 32% 48% 20%;
-    width: 100%;
-}
-
-.left-panel .top-links {
-    display: flex;
-    justify-content: space-between;
-    padding-right: 20px;
-}
-
-/* 右侧 Header 布局：Selected Work 靠左，其余空间留白 */
+/* --- 4. 彻底干掉右侧多余的蓝色字 --- */
 .right-panel .panel-header {
-    justify-content: flex-start; 
+    display: block; /* 恢复块状布局，确保只有 Selected Work 独占 */
 }
 
-/* ==========================================================================
-   4. 底部 Footer (解决对齐与链接颜色)
-   ========================================================================== */
-.panel-footer, .gallery-footer {
-    height: 40px;
-    border-top: 1px solid var(--line-color);
-    display: flex;
-    align-items: center;
-}
-
-.footer-inner {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    font-size: 13px;
-}
-
-/* ==========================================================================
-   5. 桌面端隐藏逻辑 (解决右侧多余字)
-   ========================================================================== */
 @media (min-width: 801px) {
-    .desktop-hide {
-        display: none !important; /* 强制隐藏蓝色字（List/Gallery等） */
-    }
+    /* 在桌面端，所有带这个类的标签必须物理消失 */
+    .desktop-hide { display: none !important; }
 }
+
+/* --- 5. 修复图片大小 (对齐到第二列末尾) --- */
+.image-container {
+    width: calc(var(--w1) + var(--w2)); 
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.image-container img { width: 100%; height: auto; display: block; }
 
 /* 列表行样式 */
-.table-head, .project-item {
+.table-head, .project-item, .gallery-item-header {
     height: 30px;
     border-bottom: 1px solid var(--line-color);
-    display: flex;
+    display: grid; /* 强制所有行使用网格 */
+    grid-template-columns: var(--w1) var(--w2) var(--w3);
     align-items: center;
 }
-
-.col-3 { text-align: right; }
-
-.left-panel-corner-img {
-    position: absolute;
-    bottom: 50px;
-    right: 0;
-    width: 25px;
-}
-.left-panel-corner-img img { width: 100%; height: auto; }
+.col-3-right { text-align: right; }
