@@ -11,6 +11,7 @@ window.onload = () => {
 // 2. 从 JSON 文件异步获取数据
 async function loadProjects() {
     try {
+        // 确保 projects.json 文件在同一目录下
         const response = await fetch('projects.json');
         if (!response.ok) throw new Error('无法读取 projects.json');
         
@@ -72,7 +73,7 @@ function showDetail(id) {
     
     // 渲染标签 (Tags)
     const tagsContainer = document.getElementById('d-tags');
-    if (project.tags && tagsContainer) {
+    if (project.tags) {
         tagsContainer.innerHTML = project.tags.map(t => `<li>${t}</li>`).join('');
     }
 
@@ -95,7 +96,7 @@ function showDetail(id) {
     document.getElementById('gallery-view').style.display = 'none';
     document.getElementById('info-view').style.display = 'none';
     document.getElementById('detail-view').style.display = 'block';
-    document.getElementById('index-btn').style.display = 'inline-block';
+    document.getElementById('index-btn').style.display = 'block';
     
     // 滚动回顶部
     document.getElementById('gal').scrollTop = 0;
@@ -113,59 +114,21 @@ function showInfo() {
     document.getElementById('gallery-view').style.display = 'none';
     document.getElementById('detail-view').style.display = 'none';
     document.getElementById('info-view').style.display = 'block';
-    document.getElementById('index-btn').style.display = 'inline-block';
+    document.getElementById('index-btn').style.display = 'block';
     document.getElementById('gal').scrollTop = 0;
 }
 
-// 7. 手机端特有功能：菜单开关与跳转逻辑
-function toggleMobileList() {
-    const lp = document.getElementById('js-left-panel');
-    const btn = document.getElementById('mobile-list-btn');
-    if (!lp || !btn) return;
-
-    lp.classList.toggle('active');
-    btn.innerText = lp.classList.contains('active') ? 'Close' : 'List';
-}
-
-function mobileGoHome() {
-    // 手机模式下，如果菜单开着就先关掉
-    if (window.innerWidth <= 800) {
-        const lp = document.getElementById('js-left-panel');
-        if (lp && lp.classList.contains('active')) toggleMobileList();
-    }
-    showGallery();
-    scrollToTop();
-}
-
-function mobileGoInfo() {
-    // 手机模式下，如果菜单开着就先关掉
-    if (window.innerWidth <= 800) {
-        const lp = document.getElementById('js-left-panel');
-        if (lp && lp.classList.contains('active')) toggleMobileList();
-    }
-    showInfo();
-}
-
-// 8. 辅助功能：滚动与时钟
+// 7. 辅助功能：滚动与时钟
 function scrollToId(id) {
-    // 如果是手机端点击列表项，先收起菜单
-    if (window.innerWidth <= 800) {
-        const lp = document.getElementById('js-left-panel');
-        if (lp && lp.classList.contains('active')) toggleMobileList();
+    showGallery(); // 确保在首页视图
+    const element = document.getElementById(id);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
     }
-    
-    showGallery(); // 确保回到主页视图
-    setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    }, 100); // 稍微延迟确保视图切换完成
 }
 
 function scrollToTop() {
-    const gal = document.getElementById('gal');
-    if (gal) gal.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('gal').scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function updateClock() {
