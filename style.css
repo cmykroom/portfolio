@@ -50,9 +50,9 @@ a{
 /* 新增：左侧右下角图片容器 */
 .left-panel-corner-img {
     position: absolute;
-    bottom: 20px;  /* 位于 footer 之上，可根据视觉微调 */
+    bottom: 15px;  /* 位于 footer 之上，可根据视觉微调 */
     right: 0;      /* 与右侧边框对齐，或设为 20px 留出间距 */
-    width: 80px;  /* 图片宽度，按需调整 */
+    width: 60px;  /* 图片宽度，按需调整 */
     z-index: 5;
     pointer-events: none; /* 鼠标穿透，不影响点击下层的列表 */
 }
