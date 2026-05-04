@@ -77,6 +77,10 @@ a {
 .col-2 { flex: 0 0 48%; }
 .col-3 { flex: 0 0 20%; text-align: right; }
 
+/* 头部左右对齐专用 */
+.col-header-left { flex: 1; }
+.col-header-right { flex: 1; text-align: right; }
+
 .clickable { cursor: pointer; }
 .clickable:hover { opacity: .5; }
 
@@ -97,6 +101,13 @@ a {
 .mobile-links a {
     color: #000;
     text-decoration: none;
+}
+
+/* 桌面端隐藏逻辑：精准去掉右侧 Information/Gallery */
+@media (min-width: 801px) {
+    .desktop-hide {
+        display: none !important;
+    }
 }
 
 /* 表格行 */
@@ -201,8 +212,8 @@ a {
     border-top: 1px solid var(--line-color);
     display: flex;
     align-items: center;
-    margin-top: 0; /* 删掉原来的 20px，防止高度错位 */
-    flex-shrink: 0; /* 防止页脚被压缩 */
+    margin-top: 0; 
+    flex-shrink: 0; 
     background: #fff;
 }
 
@@ -210,7 +221,7 @@ a {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center; /* 确保内部文字垂直居中 */
+    align-items: center; 
 }
 
 /* + 标记位置微调 */
@@ -242,7 +253,7 @@ a {
 }
 
 /* =========================
-   OBJECTS PAGE
+   OBJECTS PAGE / GALLERY 
 ========================= */
 
 .objects-page {
@@ -303,6 +314,12 @@ a {
 
 .object-name {
     font-size: 13px;
+}
+
+/* 针对 Gallery 内部数字字号缩小 */
+.object-number {
+    font-size: 9px;
+    color: #000;
 }
 
 .objects-footer {
