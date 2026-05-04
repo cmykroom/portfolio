@@ -1,53 +1,79 @@
 /**
  * GALLERY.JS
- * 功能：调用 Are.na 图片并实现 01, 02... 自动编号，包含页脚实时时钟逻辑
+ * 功能：调用 Are.na 图片，每 15 个（5x3）自动分页，包含实时时钟逻辑
  */
 
 const arenaChannel = "oobjects-z8bwpssc3kc"; // 你的 Are.na 频道 ID
+const ITEMS_PER_PAGE = 15; // 每页显示 15 个（5列 * 3排）
 
 window.onload = () => {
     loadArenaObjects();
     updateClock();
-    setInterval(updateClock, 1000); // 启动页脚时钟，每秒更新一次
+    setInterval(updateClock, 1000); // 启动页脚时钟
 };
 
 /**
- * 核心功能：获取 Are.na 内容并渲染到 5 列网格中
+ * 核心功能：获取 Are.na 内容并按 5x3 分页渲染
  */
 async function loadArenaObjects() {
-    const grid = document.getElementById("objects-grid");
-    if (!grid) return;
+    const scrollContainer = document.getElementById("scroll-container");
+    if (!scrollContainer) return;
 
     try {
-        // 请求 Are.na API，获取最多 100 个内容块
+        // 1. 请求 Are.na API
         const response = await fetch(`https://api.are.na/v2/channels/${arenaChannel}/contents?per=100`);
         const data = await response.json();
 
-        // 过滤出图片类型的内容块
+        // 2. 过滤图片
         const imageBlocks = data.contents.filter(block =>
             block.class === "Image" && block.image && block.image.display && block.image.display.url
         );
 
-        // 将图片和自动生成的数字编号（01, 02...）注入 HTML
-        grid.innerHTML = imageBlocks.map((block, index) => `
-            <div class="object-item">
-                <div class="object-cover">
-                    <img src="${block.image.display.url}" alt="OBJECT_${String(index + 1).padStart(2, '0')}">
-                </div>
-                <div class="object-number">
-                    ${String(index + 1).padStart(2, '0')}
-                </div>
-            </div>
-        `).join("");
+        // 3. 清空现有内容
+        scrollContainer.innerHTML = "";
+
+        // 4. 分页逻辑：每 15 个 block 创建一个 .objects-grid
+        for (let i = 0; i < imageBlocks.length; i += ITEMS_PER_PAGE) {
+            const pageData = imageBlocks.slice(i, i + ITEMS_PER_PAGE);
+            
+            // 创建这一页的 grid 容器
+            const gridPage = document.createElement("div");
+            gridPage.className = "objects-grid";
+
+            // 生成这一页的内部 HTML
+            gridPage.innerHTML = pageData.map((block, index) => {
+                const globalIndex = i + index + 1; // 全局编号
+                const formattedNumber = String(globalIndex).padStart(2, '0');
+                
+                return `
+                    <div class="object-item">
+                        <div class="object-cover">
+                            <img src="${block.image.display.url}" alt="OBJECT_${formattedNumber}">
+                        </div>
+                        <div class="object-number">
+                            ${formattedNumber}
+                        </div>
+                    </div>
+                `;
+            }).join("");
+
+            // 将这一页添加到滚动容器中
+            scrollContainer.appendChild(gridPage);
+        }
+
+        // 如果没有任何图片
+        if (imageBlocks.length === 0) {
+            scrollContainer.innerHTML = `<div style="padding:40px; font-size: 11px;">NO OBJECTS FOUND.</div>`;
+        }
 
     } catch (error) {
         console.error("Are.na 数据读取失败:", error);
-        grid.innerHTML = `<div style="padding:40px 0; font-size: 11px;">UNABLE TO LOAD OBJECTS.</div>`;
+        scrollContainer.innerHTML = `<div style="padding:40px; font-size: 11px;">UNABLE TO LOAD OBJECTS.</div>`;
     }
 }
 
 /**
- * 页脚时钟逻辑：同步主页 00:00:00 格式
+ * 页脚时钟逻辑
  */
 function updateClock() {
     const clockElement = document.getElementById('digital-clock');
