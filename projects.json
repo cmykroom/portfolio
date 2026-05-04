@@ -30,12 +30,14 @@
     "client": "KN_01",
     "project": "SNAKE_YEAR_LIMITED_EDITION",
     "year": "2024",
-    "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover1.jpg",
+    "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/2024_KN01_0.jpg",
     "tags": ["Visual", "Pakaging","Publications"],
-    "description": "第三个项目的介绍...",
+    "description": "2024年の干支である「へび」を1本の糸に見立て、”絆”や”つながり”を表すシンボルとしてデザイン。新年を象徴する「赤」に、全色と虹色で「へび」をあしらい、フェスティプな印象を感じさせる特別なデザインパッケージです。また、外箱では新しいスタートや可能性を象徴する「扉」と「舌」をモチーフに、希望に満ちた一年のはじまりを表現しています。また、重厚な赤と金箔押し以外に、活気とお祝い感を加えるように、グラデーションカラーの表現でオフセット印刷を行いました。",
     "subImages": [
-      "https://path/to/sub1.jpg",
-      "https://path/to/sub2.jpg"
+      "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/2024_KN01_1.jpg",
+      "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/2024_KN01_2.jpg",
+      "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/2024_KN01_3.jpg",
+      "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/2024_KN01_4.jpg"
     ]
   },
   {
