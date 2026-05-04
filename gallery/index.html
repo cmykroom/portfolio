@@ -10,8 +10,8 @@
     <style>
         /* 针对 Gallery 页面的隔离样式 */
         html, body.gallery-body {
-            height: 100vh !important;
-            overflow: hidden !important; /* 锁定视口 */
+            height: 100vh;
+            overflow: hidden; 
             margin: 0;
             padding: 0;
             background: #fff;
@@ -22,7 +22,7 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            padding: 0 15px; /* 严格对齐首页边距 */
+            padding: 0 15px; 
             box-sizing: border-box;
         }
 
@@ -41,25 +41,22 @@
         .col-2 { flex: 0 0 48%; text-align: center; }
         .col-3 { flex: 0 0 20%; text-align: right; }
 
-        /* 内容容器：改为纵向翻页滑动 */
+        /* PC端：纵向翻页滑动 + 居中 */
         .viewport-wrapper {
             flex: 1;
             display: flex;
-            flex-direction: column; /* 改为纵向排列 */
-            overflow-y: auto;       /* 开启纵向滚动 */
+            flex-direction: column;
+            overflow-y: auto;
             overflow-x: hidden;
-            scroll-snap-type: y mandatory; /* 纵向吸附 */
+            scroll-snap-type: y mandatory;
             -webkit-overflow-scrolling: touch;
-            
-            /* 居中逻辑：确保 grid 容器在上下剩余空间中居中 */
             justify-content: center; 
         }
         .viewport-wrapper::-webkit-scrollbar { display: none; }
 
-        /* 5x3 精确栅格 */
+        /* PC端：5x3 栅格 */
         .objects-grid {
             width: 100%;
-            /* 每一页的高度等于容器高度 */
             min-height: 100%; 
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -68,17 +65,13 @@
             row-gap: 40px;
             scroll-snap-align: start;
             box-sizing: border-box;
-            
-            /* 内部内容垂直居中 */
             align-content: center; 
-            padding: 40px 0; /* 给上下留出呼吸空间 */
+            padding: 40px 0; 
         }
 
-        /* 单个项目样式 */
         .object-item {
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
         }
 
         .object-cover {
@@ -117,40 +110,63 @@
             justify-content: space-between;
             font-size: 13px;
         }
+
+        /* ============================================================
+           MOBILE 适配：2张一行，不限高度，正常滚动
+           ============================================================ */
+        @media (max-width: 800px) {
+            html, body.gallery-body {
+                height: auto !important; /* 解除高度锁定 */
+                overflow: auto !important; /* 允许正常垂直滚动 */
+            }
+
+            .objects-page {
+                height: auto !important;
+                padding: 0 15px;
+            }
+
+            .viewport-wrapper {
+                height: auto !important;
+                overflow: visible !important; /* 关闭手机端的吸附和溢出控制 */
+                scroll-snap-type: none !important;
+                margin: 20px 0;
+            }
+
+            .objects-grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important; /* 手机端：2张一行 */
+                grid-template-rows: none !important; /* 手机端：取消3排限制 */
+                column-gap: 20px !important;
+                row-gap: 30px !important;
+                min-height: auto !important;
+                padding: 10px 0 60px 0 !important;
+            }
+
+            .gallery-body .panel-footer {
+                position: relative; /* 手机端底部随页面滚动 */
+                margin-top: 20px;
+            }
+        }
     </style>
 </head>
 <body class="gallery-body">
 
 <div class="objects-page">
-    
     <header class="panel-header">
-        <div class="col-1">
-            <a href="../index.html" class="clickable">MENGFEI YAN ®</a>
-        </div>
-        <div class="col-2">
-            <a href="../information.html" class="clickable">Information</a>
-        </div>
-        <div class="col-3">
-            <a href="../index.html" class="clickable">Selected Work</a>
-        </div>
+        <div class="col-1"><a href="../index.html" class="clickable">MENGFEI YAN ®</a></div>
+        <div class="col-2"><a href="../information.html" class="clickable">Information</a></div>
+        <div class="col-3"><a href="../index.html" class="clickable">Selected Work</a></div>
     </header>
 
-    <!-- 纵向滚动容器 -->
-    <main class="viewport-wrapper" id="scroll-container">
-        <!-- JS 注入位置 -->
-    </main>
+    <main class="viewport-wrapper" id="scroll-container"></main>
 
     <footer class="panel-footer">
         <div class="footer-inner">
             <div id="digital-clock">00:00:00</div>
-            <div>
-                <a href="#" class="clickable">IG</a>, 
-                <a href="mailto:mengfeiyan11@gmail.com" class="clickable">Email</a>
-            </div>
+            <div><a href="#" class="clickable">IG</a>, <a href="mailto:mengfeiyan11@gmail.com" class="clickable">Email</a></div>
             <div>©2026 All Rights Reserved</div>
         </div>
     </footer>
-
 </div>
 
 <script src="gallery.js"></script>
