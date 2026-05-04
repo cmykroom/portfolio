@@ -4,76 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GALLERY — MENGFEI YAN</title>
-    <!-- 引用上一级目录的全局样式表 -->
+    <!-- 引用原始全局样式表 -->
     <link rel="stylesheet" href="../style.css">
+    
     <style>
-        /* 针对此页面的核心布局样式 */
-        :root {
-            --grid-gap: 20px;
-            --header-height: 60px;
-            --footer-height: 60px;
-        }
-
-        body.gallery-body {
+        /* 仅针对 Gallery 页面的隔离样式 */
+        html, body.gallery-body {
+            height: 100vh !important;
+            overflow: hidden !important; /* 锁定视口，防止全局滚动 */
             margin: 0;
             padding: 0;
-            height: 100vh;
-            overflow: hidden; /* 禁止全身滚动 */
-            display: flex;
-            flex-direction: column;
-            background-color: #fff;
-        }
-
-        /* 顶部和底部容器 */
-        .panel-header, .panel-footer {
-            height: var(--header-height);
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            z-index: 10;
             background: #fff;
         }
 
-        .panel-footer {
-            position: fixed;
-            bottom: 0;
+        .objects-page {
             width: 100%;
-            border-top: 1px solid #f0f0f0; /* 可选：增加视觉分割感 */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 0 15px; /* 严格对齐首页边距 */
             box-sizing: border-box;
         }
 
-        /* 左右分布的通用结构 */
-        .header-inner, .footer-inner {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            width: 100%;
-            align-items: center;
+        /* 头部对齐优化 */
+        .gallery-body .panel-header {
+            flex-shrink: 0;
+            height: 60px;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: flex-start !important;
+            padding-top: 5px;
+            border-bottom: 1px solid #d0d0d0;
         }
 
-        /* 中间横向滚动区域 */
+        /* 复用首页列宽比例，消除切换跳跃感 */
+        .col-1 { flex: 0 0 32%; }
+        .col-2 { flex: 0 0 48%; text-align: center; }
+        .col-3 { flex: 0 0 20%; text-align: right; }
+
+        /* 内容容器：横向滚动 */
         .viewport-wrapper {
             flex: 1;
+            display: flex;
             overflow-x: auto;
             overflow-y: hidden;
-            scroll-snap-type: x mandatory; /* 实现翻页吸附感 */
-            display: flex;
-            padding: 0 20px;
-            margin-top: 20px;
-            margin-bottom: calc(var(--footer-height) + 20px);
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            margin: 80px 0; /* 增加上下边距产生空气感 */
         }
+        .viewport-wrapper::-webkit-scrollbar { display: none; }
 
-        /* 每页的网格容器 */
+        /* 5x3 精确栅格 */
         .objects-grid {
-            min-width: calc(100vw - 40px); /* 减去两侧 padding */
+            min-width: calc(100vw - 30px); 
             display: grid;
-            grid-template-columns: repeat(5, 1fr); /* 严格5列 */
-            grid-template-rows: repeat(3, 1fr);    /* 严格3排 */
-            gap: var(--grid-gap);
+            grid-template-columns: repeat(5, 1fr); /* 5列 */
+            grid-template-rows: repeat(3, 1fr);    /* 3排 */
+            column-gap: 60px; /* 调大列间距增加空气感 */
+            row-gap: 40px;    /* 行间距 */
             scroll-snap-align: start;
-            margin-right: 40px; /* 页面间的间距 */
+            padding-right: 60px;
+            box-sizing: border-box;
         }
 
-        /* 每一项的占位样式，确保对齐 */
+        /* 单个项目样式 */
         .object-item {
             display: flex;
             flex-direction: column;
@@ -82,24 +76,40 @@
 
         .object-cover {
             width: 100%;
-            aspect-ratio: 1 / 1; /* 统一比例，可改为 3/4 或 4/5 */
-            object-fit: cover;
-            background-color: #d3d3d3; /* 图二中的灰色占位块 */
+            aspect-ratio: 1 / 1; /* 统一比例 */
+            background: #f2f2f2;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .object-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 居中裁切关键 */
+            display: block;
         }
 
         .object-number {
-            margin-top: 8px;
-            font-size: 12px;
-            text-align: left;
+            font-size: 11px;
+            color: #000;
+            letter-spacing: 0.05em;
         }
 
-        /* 隐藏滚动条但保留功能 */
-        .viewport-wrapper::-webkit-scrollbar {
-            display: none;
+        /* 底部固定 */
+        .gallery-body .panel-footer {
+            height: 40px;
+            border-top: 1px solid #d0d0d0;
+            display: flex !important;
+            align-items: center !important;
+            flex-shrink: 0;
+            background: #fff;
         }
-        .viewport-wrapper {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+
+        .footer-inner {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
         }
     </style>
 </head>
@@ -107,54 +117,35 @@
 
 <div class="objects-page">
     
-    <!-- 顶部导航 -->
     <header class="panel-header">
-        <div class="header-inner">
-            <div class="col-1">
-                <a href="../index.html" class="clickable">MENGFEI YAN ®</a>
-            </div>
-            <div class="col-2" style="text-align: center;">
-                <a href="../information.html" class="clickable">Information</a>
-            </div>
-            <div class="col-3" style="text-align: right;">
-                <a href="../index.html" class="clickable">Selected Work</a>
-            </div>
+        <div class="col-1">
+            <a href="../index.html" class="clickable">MENGFEI YAN ®</a>
+        </div>
+        <div class="col-2">
+            <a href="../information.html" class="clickable">Information</a>
+        </div>
+        <div class="col-3">
+            <a href="../index.html" class="clickable">Selected Work</a>
         </div>
     </header>
 
-    <!-- 横向翻页容器 -->
     <main class="viewport-wrapper" id="scroll-container">
-        <!-- 第一页 -->
-        <div class="objects-grid">
-            <!-- 以下为示例结构，gallery.js 注入时请遵循此结构 -->
-            <!-- 注入 15 个 .object-item 为一组 -->
-            <div class="object-item">
-                <div class="object-cover"></div>
-                <div class="object-number">01</div>
-            </div>
-            <!-- ... 重复直到 15 个 -->
-        </div>
-
-        <!-- 第二页（当 JS 检测到数据超过15个时，创建第二个 .objects-grid） -->
+        <!-- JS 注入位置 -->
     </main>
 
-    <!-- 底部页脚：固定位置 -->
     <footer class="panel-footer">
         <div class="footer-inner">
-            <div id="digital-clock" class="col-header-left">00:36:36</div>
-            
-            <div style="text-align: center;">
+            <div id="digital-clock">00:00:00</div>
+            <div>
                 <a href="#" class="clickable">IG</a>, 
                 <a href="mailto:mengfeiyan11@gmail.com" class="clickable">Email</a>
             </div>
-            
-            <div class="col-header-right" style="text-align: right;">©2026 All Rights Reserved</div>
+            <div>©2026 All Rights Reserved</div>
         </div>
     </footer>
 
 </div>
 
-<!-- 引入业务逻辑脚本 -->
 <script src="gallery.js"></script>
 </body>
 </html>
