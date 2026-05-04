@@ -4,12 +4,12 @@
     "client": "MT_01",
     "project": "VISUAL_INVITATION",
     "year": "2025",
-    "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover1.jpg",
+    "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/2025_MT01_1.jpg",
     "tags": ["Branding", "Typography"],
     "description": "这里是项目的详细介绍文字...",
     "subImages": [
-      "https://path/to/sub1.jpg",
-      "https://path/to/sub2.jpg"
+      "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/2025_MT01_2.jpg",
+      "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/2025_MT01_3.jpg"
     ]
   },
   {
