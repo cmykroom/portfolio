@@ -52,7 +52,7 @@ a {
 }
 
 .scroll-content {
-    flex: 1;
+    flex: 1; /* 自动撑开，将 footer 压至底部 */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -70,6 +70,7 @@ a {
     align-items: flex-start;
     padding-top: 5px;
     border-bottom: 1px solid var(--line-color);
+    flex-shrink: 0; /* 防止页眉被压缩 */
 }
 
 .col-1 { flex: 0 0 32%; }
@@ -193,23 +194,26 @@ a {
     margin: 40px 0 100px 0;
 }
 
-/* footer */
+/* footer 核心对齐修复 */
 .panel-footer,
 .gallery-footer {
     height: 40px;
     border-top: 1px solid var(--line-color);
     display: flex;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 0; /* 删掉原来的 20px，防止高度错位 */
+    flex-shrink: 0; /* 防止页脚被压缩 */
+    background: #fff;
 }
 
 .footer-inner {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center; /* 确保内部文字垂直居中 */
 }
 
-/* + */
+/* + 标记位置微调 */
 .plus {
     position: absolute;
     font-size: 18px;
@@ -318,6 +322,8 @@ a {
 
     body {
         font-size: 14px;
+        height: auto;
+        overflow: auto;
     }
 
     .left-panel {
