@@ -2,7 +2,7 @@
  * GALLERY.JS
  */
 const arenaChannel = "oobjects-z8bwpssc3kc"; 
-const ITEMS_PER_PAGE = 15; 
+const ITEMS_PER_PAGE = 10; // 改为每页 10 张（5列 * 2排）
 
 window.onload = () => {
     loadArenaObjects();
