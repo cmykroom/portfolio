@@ -10,6 +10,9 @@
     --page-gap: 15px;
     --middle-gap: 20px;
     --line-color: #d0d0d0;
+    /* 新增：用于 Gallery 页面的高度控制 */
+    --header-height: 60px;
+    --footer-height: 40px;
 }
 
 body {
@@ -18,7 +21,7 @@ body {
     color: #000;
     background: #fff;
     height: 100vh;
-    overflow: hidden;
+    overflow: hidden; /* 核心：禁止全局滚动，改为容器内横向滚动 */
 }
 
 a {
@@ -196,11 +199,11 @@ a {
 /* footer */
 .panel-footer,
 .gallery-footer {
-    height: 40px;
+    height: var(--footer-height);
     border-top: 1px solid var(--line-color);
     display: flex;
     align-items: center;
-    margin-top: 20px;
+    background: #fff;
 }
 
 .footer-inner {
@@ -237,50 +240,77 @@ a {
     opacity: 1;
 }
 
-/* =========================
-   OBJECTS PAGE
-========================= */
+/* ============================================================
+   OBJECTS PAGE - 重构部分（5x3 固定网格 + 横向翻页 + 固定底栏）
+   ============================================================ */
+
+.gallery-body {
+    display: flex;
+    flex-direction: column;
+}
 
 .objects-page {
     width: 100%;
-    min-height: 100vh;
-    padding: 0 15px;
+    height: 100vh;
+    padding: 0 var(--page-gap);
     display: flex;
     flex-direction: column;
-    background: #fff;
+    overflow: hidden;
 }
 
+/* 顶部导航固定 */
 .objects-header {
-    height: 60px;
+    height: var(--header-height);
     border-bottom: 1px solid var(--line-color);
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     padding-top: 5px;
-    margin-bottom: 40px;
+    flex-shrink: 0;
 }
 
-.obj-left,
-.obj-right {
-    font-size: 15px;
-}
-
-.objects-title {
-    font-size: 15px;
-    margin-bottom: 35px;
-}
-
-.objects-grid {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 22px;
-    row-gap: 50px;
+/* 滚动包装容器：实现翻页吸附 */
+.viewport-wrapper {
     flex: 1;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
+/* 隐藏滚动条 */
+.viewport-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* 5x3 核心网格布局 */
+.objects-grid {
+    min-width: calc(100vw - (var(--page-gap) * 2));
+    display: grid;
+    /* 5列等宽 */
+    grid-template-columns: repeat(5, 1fr);
+    /* 3排等高，自动填充剩余空间 */
+    grid-template-rows: repeat(3, 1fr);
+    column-gap: 22px;
+    row-gap: 30px;
+    scroll-snap-align: start;
+    margin-right: 30px; /* 页面间距 */
+}
+
+/* 网格项 */
+.object-item {
+    display: flex;
+    flex-direction: column;
+    min-height: 0; /* 防止溢出 */
+}
+
+/* 图片容器：强制统一比例 */
 .object-cover {
     width: 100%;
+    aspect-ratio: 1 / 1; /* 根据图二改为 1:1，如需长方形可改 3/4 */
     background: #f2f2f2;
     overflow: hidden;
     margin-bottom: 10px;
@@ -288,126 +318,54 @@ a {
 
 .object-cover img {
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
+    object-fit: cover; /* 关键：裁剪并填充，确保网格整齐 */
     transition: opacity .25s ease;
 }
 
-.object-cover:hover img {
-    opacity: .94;
-}
-
-.object-name {
+.object-number {
     font-size: 13px;
+    text-transform: uppercase;
 }
 
+/* 底部固定 */
 .objects-footer {
-    height: 40px;
+    height: var(--footer-height);
     border-top: 1px solid var(--line-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 60px;
+    flex-shrink: 0;
     font-size: 13px;
 }
 
 /* =========================
-   MOBILE
+    MOBILE (保持对 800px 以下的适配)
 ========================= */
 @media (max-width:800px){
 
     body {
         font-size: 14px;
+        overflow-y: auto; /* 手机端恢复滚动，方便触摸 */
     }
 
-    .left-panel {
-        display: none;
+    .objects-page {
+        height: auto;
+        overflow: visible;
     }
 
-    .right-panel {
-        width: 100%;
-        padding: 0 var(--page-gap);
+    .viewport-wrapper {
+        display: block; /* 手机端改回垂直排列 */
+        overflow: visible;
+        margin-bottom: 0;
     }
 
-    .desktop-title {
-        display: none;
-    }
-
-    .mobile-title {
-        display: inline;
-    }
-
-    #mobile-list-btn {
-        display: block;
-    }
-
-    .gallery-footer,
-    .panel-footer {
-        display: none;
-    }
-
-    #mobile-list-view {
-        display: none;
-        width: 100%;
-        min-height: 100%;
-        background: #fff;
-    }
-
-    .panel-header {
-        height: 52px;
-        font-size: 14px;
-    }
-
-    .table-head,
-    .project-item,
-    .item-meta {
-        height: 34px;
-        font-size: 14px;
-    }
-
-    .gallery-item {
-        padding-bottom: 28px;
-    }
-
-    .description-section {
-        flex-direction: column;
-        gap: 15px;
-        margin-top: 10px;
-    }
-
-    .project-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-        margin-top: 25px;
-    }
-
-    .info-row {
-        flex-direction: column;
-        gap: 10px;
-        padding: 15px 0 25px 0;
-    }
-
-    .info-label,
-    .info-content {
-        width: 100%;
-        max-width: none;
-        font-size: 14px;
-    }
-
-    .mobile-bottom-info {
-        display: block;
-        width: 100%;
-        border-top: 1px solid var(--line-color);
-        margin-top: 26px;
-        padding: 10px 0 22px 0;
-    }
-
-    .mobile-bottom-inner {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 13px;
+    .objects-grid {
+        grid-template-columns: repeat(2, 1fr); /* 手机端2列 */
+        grid-template-rows: none;
+        min-width: 100%;
+        row-gap: 30px;
+        margin-right: 0;
     }
 
     .objects-header {
@@ -415,24 +373,9 @@ a {
         margin-bottom: 25px;
     }
 
-    .objects-title {
-        margin-bottom: 22px;
-        font-size: 14px;
-    }
-
-    .objects-grid {
-        grid-template-columns: repeat(2, 1fr);
-        column-gap: 12px;
-        row-gap: 30px;
-    }
-
-    .object-name {
-        font-size: 12px;
-    }
-
     .objects-footer {
         font-size: 12px;
         margin-top: 40px;
-        padding-bottom: 10px;
+        padding-bottom: 20px;
     }
 }
