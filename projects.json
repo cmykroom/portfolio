@@ -5,7 +5,7 @@
     "project": "VISUAL_INVITATION",
     "year": "2025",
     "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover1.jpg",
-    "tags": ["Branding", "Typography", "2025"],
+    "tags": ["Branding", "Typography"],
     "description": "这里是项目的详细介绍文字...",
     "subImages": [
       "https://path/to/sub1.jpg",
@@ -18,7 +18,7 @@
     "project": "SUMMERTIME",
     "year": "2025",
     "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover2.jpg",
-    "tags": ["Poster", "Layout"],
+    "tags": ["Publications", "Layout"],
     "description": "第二个项目的介绍...",
     "subImages": [
       "https://path/to/sub1.jpg",
@@ -27,11 +27,11 @@
   },
   {
     "id": "p3",
-    "client": "SED_DO",
-    "project": "R/VIS-033",
-    "year": "2047",
+    "client": "KN_01",
+    "project": "SNAKE_YEAR_LIMITED_EDITION",
+    "year": "2024",
     "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover1.jpg",
-    "tags": ["Visual", "Identity"],
+    "tags": ["Visual", "Pakaging","Publications"],
     "description": "第三个项目的介绍...",
     "subImages": [
       "https://path/to/sub1.jpg",
@@ -40,11 +40,11 @@
   },
   {
     "id": "p4",
-    "client": "SED_DO",
-    "project": "R/EDT-091",
-    "year": "2046",
+    "client": "AW_02",
+    "project": "UNBELIEVABLE_ATLAS",
+    "year": "2022",
     "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover2.jpg",
-    "tags": ["Editorial", "Design"],
+    "tags": ["Visual", "Design"],
     "description": "第四个项目的介绍...",
     "subImages": [
       "https://path/to/sub1.jpg",
@@ -53,11 +53,11 @@
   },
   {
     "id": "p5",
-    "client": "SED_DO",
-    "project": "R/ARC-120",
-    "year": "2045",
+    "client": "AW_01",
+    "project": "MOVE",
+    "year": "2021",
     "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover1.jpg",
-    "tags": ["Architecture", "Concept"],
+    "tags": ["Poster", "Visual", "Concept", "Publications"],
     "description": "第五个项目的介绍...",
     "subImages": [
       "https://path/to/sub1.jpg",
