@@ -1,11 +1,11 @@
 [
   {
     "id": "p1",
-    "client": "SED_DO",
-    "project": "Ref. R/XTR-082",
-    "year": "2049",
+    "client": "MT_01",
+    "project": "VISUAL_INVITATION",
+    "year": "2025",
     "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover1.jpg",
-    "tags": ["Branding", "Typography", "2049"],
+    "tags": ["Branding", "Typography", "2025"],
     "description": "这里是项目的详细介绍文字...",
     "subImages": [
       "https://path/to/sub1.jpg",
@@ -14,9 +14,9 @@
   },
   {
     "id": "p2",
-    "client": "SED_DO",
-    "project": "R/PRT-017",
-    "year": "2048",
+    "client": "EXP_03",
+    "project": "SUMMERTIME",
+    "year": "2025",
     "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover2.jpg",
     "tags": ["Poster", "Layout"],
     "description": "第二个项目的介绍...",
