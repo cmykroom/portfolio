@@ -3,7 +3,7 @@
     "id": "p1",
     "client": "MT_01",
     "project": "Visual Invitation",
-    "year": "2025.12",
+    "year": "2025",
     "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover1.jpg",
     "tags": [
       "Branding",
@@ -32,7 +32,7 @@
       "...",
       "..."
     ]
-  }
+  },
  {
     "id": "p3",
     "client": "KN_01",
@@ -59,7 +59,7 @@
     "tags": [
       "Branding",
       "Typography",
-      "2025.12"
+      "2022"
     ],
     "description": "这里是项目的详细介绍文字...",
     "subImages": [
