@@ -10,8 +10,8 @@
     <style>
         /* 针对 Gallery 页面的隔离样式 */
         html, body.gallery-body {
-            height: 100vh;
-            overflow: hidden; 
+            height: 100vh !important;
+            overflow: hidden !important; 
             margin: 0;
             padding: 0;
             background: #fff;
@@ -41,37 +41,39 @@
         .col-2 { flex: 0 0 48%; text-align: center; }
         .col-3 { flex: 0 0 20%; text-align: right; }
 
-        /* PC端：纵向翻页滑动 + 居中 */
+        /* 内容容器：纵向翻页 */
         .viewport-wrapper {
             flex: 1;
             display: flex;
             flex-direction: column;
-            overflow-y: auto;
+            overflow-y: scroll;
             overflow-x: hidden;
             scroll-snap-type: y mandatory;
             -webkit-overflow-scrolling: touch;
-            justify-content: center; 
         }
         .viewport-wrapper::-webkit-scrollbar { display: none; }
 
-        /* PC端：5x3 栅格 */
+        /* 5x2 栅格：每页完整显示 10 张图，解决挤压和重叠 */
         .objects-grid {
             width: 100%;
-            min-height: 100%; 
+            height: calc(100vh - 100px); /* 视口减去页眉页脚 */
+            flex-shrink: 0;
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            grid-template-rows: repeat(3, 1fr);
+            /* 改为 2 排，确保图片有足够的垂直空间 */
+            grid-template-rows: repeat(2, 1fr); 
             column-gap: 60px;
-            row-gap: 40px;
+            row-gap: 60px; /* 增加行间距 */
             scroll-snap-align: start;
             box-sizing: border-box;
-            align-content: center; 
-            padding: 40px 0; 
+            padding: 60px 0; /* 增加上下留白 */
+            align-content: center;
         }
 
         .object-item {
             display: flex;
             flex-direction: column;
+            min-height: 0;
         }
 
         .object-cover {
@@ -111,41 +113,20 @@
             font-size: 13px;
         }
 
-        /* ============================================================
-           MOBILE 适配：2张一行，不限高度，正常滚动
-           ============================================================ */
+        /* =========================
+           MOBILE 适配 (保持不变)
+           ========================= */
         @media (max-width: 800px) {
-            html, body.gallery-body {
-                height: auto !important; /* 解除高度锁定 */
-                overflow: auto !important; /* 允许正常垂直滚动 */
-            }
-
-            .objects-page {
-                height: auto !important;
-                padding: 0 15px;
-            }
-
-            .viewport-wrapper {
-                height: auto !important;
-                overflow: visible !important; /* 关闭手机端的吸附和溢出控制 */
-                scroll-snap-type: none !important;
-                margin: 20px 0;
-            }
-
+            html, body.gallery-body { height: auto !important; overflow: auto !important; }
+            .objects-page { height: auto !important; }
+            .viewport-wrapper { height: auto !important; overflow: visible !important; scroll-snap-type: none !important; }
             .objects-grid {
-                display: grid !important;
-                grid-template-columns: repeat(2, 1fr) !important; /* 手机端：2张一行 */
-                grid-template-rows: none !important; /* 手机端：取消3排限制 */
-                column-gap: 20px !important;
-                row-gap: 30px !important;
-                min-height: auto !important;
-                padding: 10px 0 60px 0 !important;
+                height: auto !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                grid-template-rows: none !important;
+                padding: 20px 0 60px 0 !important;
             }
-
-            .gallery-body .panel-footer {
-                position: relative; /* 手机端底部随页面滚动 */
-                margin-top: 20px;
-            }
+            .gallery-body .panel-footer { position: relative; }
         }
     </style>
 </head>
