@@ -17,12 +17,12 @@
     "client": "EXP_03",
     "project": "SUMMERTIME",
     "year": "2025",
-    "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover2.jpg",
+    "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/2025_EXP03_0.jpg",
     "tags": ["Publications", "Layout"],
     "description": "第二个项目的介绍...",
     "subImages": [
-      "https://path/to/sub1.jpg",
-      "https://path/to/sub2.jpg"
+      "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/2025_EXP03_1.jpg",
+      "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/2025_EXP03_2.jpg"
     ]
   },
   {
