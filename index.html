@@ -8,6 +8,67 @@
 </head>
 <body>
 
+<svg class="circle-text" viewBox="0 0 500 500">
+    
+    <!-- 圆路径 -->
+    <defs>
+        <path
+            id="circlePath"
+            d="
+            M 500,500
+            m -90,0
+            a 90,90 0 1,1 180,0
+            a 90,90 0 1,1 -180,0
+            "
+        />
+    </defs>
+
+    <!-- 沿路径排列文字 -->
+    <text>
+        <textPath href="#circlePath">
+            MU+ ARCHIVE • MU+ ARCHIVE
+        </textPath>
+    </text>
+
+</svg>
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#bfefff;
+    overflow:hidden;
+}
+
+.circle-text{
+    width:400px;
+    height:400px;
+
+    animation: rotate 20s linear infinite;
+}
+
+text{
+    font-size:18px;
+    letter-spacing:10px;
+    fill:#333;
+    font-family:Helvetica, Arial, sans-serif;
+}
+
+@keyframes rotate{
+    from{
+        transform:rotate(0deg);
+    }
+    to{
+        transform:rotate(360deg);
+    }
+}
+</style>
+
+    <!-- 沿路径排列文字（结尾） -->
+
+    
 <div class="main-container">
 
     <!-- 左侧桌面栏 -->
