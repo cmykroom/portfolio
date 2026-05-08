@@ -51,7 +51,7 @@
 
     .circle-text{
 
-        font-size:16pt;
+        font-size:18pt;
 
         letter-spacing:8px;
 
@@ -253,6 +253,82 @@
 
             </div>
 
+            <!-- 详情页 -->
+            <div id="detail-view" style="display:none;">
+
+                <header class="panel-header">
+
+                    <div class="col-header-left">
+                        Selected Work
+                    </div>
+
+                    <div
+                        class="col-header-right clickable"
+                        onclick="showGallery()"
+                    >
+                        Index
+                    </div>
+
+                </header>
+
+                <div class="item-meta">
+
+                    <div class="col-1" id="d-client"></div>
+                    <div class="col-2" id="d-project"></div>
+                    <div class="col-3" id="d-year"></div>
+
+                </div>
+
+                <div class="image-container detail-main-img">
+
+                    <img src="" id="d-img">
+
+                    <span class="plus top-left">+</span>
+                    <span class="plus top-right">+</span>
+                    <span class="plus bottom-left">+</span>
+                    <span class="plus bottom-right">+</span>
+
+                </div>
+
+                <div class="description-section">
+
+                    <div class="info-tags">
+                        <ul id="d-tags"></ul>
+                    </div>
+
+                    <div class="info-text" id="d-text"></div>
+
+                </div>
+
+                <div class="project-grid" id="js-detail-grid"></div>
+
+                <div class="back-btn">
+
+                    <a href="#" onclick="showGallery();return false;">
+                        ← Back
+                    </a>
+
+                </div>
+
+                <div class="mobile-bottom-info">
+
+                    <div class="mobile-bottom-inner">
+
+                        <div>
+                            ©2026 All Rights Reserved
+                        </div>
+
+                        <div>
+                            <a href="#">IG</a>,
+                            <a href="mailto:mengfeiyan11@gmail.com">Email</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
             <!-- Information -->
             <div id="info-view" style="display:none;">
 
@@ -281,15 +357,78 @@
 
                         YAN MENGFEI<br>
 
-                        1987年上海生まれ。幼少期から美術を専攻し、
-                        現地の広告制作会社を経て日本へ渡る。
-                        2023年に桑沢デザイン研究所を卒業。
+                        1987年上海生まれ。幼少期から美術を専攻し、現地の広告制作会社を経て日本へ渡る。2023年に桑沢デザイン研究所を卒業。企業のロゴや広告・ポスター、ミニカード、アーティストのZINEなどのグラフィックデザインを中心に活動。日本でタイポグラフィーの自主制作をしながら、社会問題を扱うプロジェクトにも参加する。グラフィックデザインが多様化するグローバルな社会にどのような形で貢献できるかを、日々探求しています。<br><br>
+
+                        I was born in Shanghai in 1987 and began studying fine arts at an early age. After working at a local advertising production company, I moved to Japan and graduated from Kuwasawa Design School in 2023. My practice focuses primarily on graphic design, including corporate logos, advertisements, posters, mini cards, and artists’ zines. Alongside my independent exploration of typography in Japan, I also participate in projects that engage with social issues. Through these experiences, I continue to explore how graphic design can contribute to an increasingly diverse and global society.
+
+                    </div>
+
+                </div>
+
+                <div class="info-row">
+
+                    <div class="info-label">
+                        Education
+                    </div>
+
+                    <div class="info-content">
+
+                        2003- HUASHAN ART SCHOOL (SHANGHAI)<br>
+                        2010- EAST CHINA NORMAL UNIVERSITY (SHANGHAI)<br>
+                        2013- A SUBSIDIARY OF THE AMERICAN ASSOCIATION OF ADVERTISING AGENCIES<br>
+                        2020-2023 KUWASAWA DESIGN SCHOOL (TOKYO)<br>
+                        2023- CURIOSITY (TOKYO)
+
+                    </div>
+
+                </div>
+
+                <div class="info-row">
+
+                    <div class="info-label">
+                        Contact
+                    </div>
+
+                    <div class="info-content">
+                        mengfeiyan11@gmail.com
+                    </div>
+
+                </div>
+
+                <div class="mobile-bottom-info">
+
+                    <div class="mobile-bottom-inner">
+
+                        <div>
+                            ©2026 All Rights Reserved
+                        </div>
+
+                        <div>
+                            <a href="#">IG</a>,
+                            <a href="mailto:mengfeiyan11@gmail.com">Email</a>
+                        </div>
 
                     </div>
 
                 </div>
 
             </div>
+
+            <footer class="gallery-footer">
+
+                <div class="footer-inner">
+
+                    <a href="#" onclick="scrollToTop();return false;">
+                        ↑ Top
+                    </a>
+
+                    <span>
+                        ©2026 All Rights Reserved
+                    </span>
+
+                </div>
+
+            </footer>
 
         </div>
 
@@ -328,7 +467,7 @@
 
                 <textPath href="#circlePath">
 
-                    MU+ Portfolio MU+ ARCHIVE MU+ OBJECT
+                    MU+ Portfolio MU+ ARCHIVE MU+ OBJECT 
 
                 </textPath>
 
