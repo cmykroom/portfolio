@@ -1,61 +1,148 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MENGFEI YAN</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    
-<!-- 页面内容 -->
-<div style="padding:100px;">
-    <h1>MU+ ARCHIVE</h1>
-    <p>Portfolio Website</p>
-</div>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- 浮动圆环 -->
-<div class="circle-wrap">
+<title>MENGFEI YAN</title>
 
-<svg
-    class="circle-text"
-    viewBox="0 0 500 500"
->
-
-<defs>
-    <path
-        id="circlePath"
-        d="
-        M 250 250
-        m -90 0
-        a 90 90 0 1 1 180 0
-        a 90 90 0 1 1 -180 0
-        "
-    />
-</defs>
-
-<text>
-    <textPath href="#circlePath">
-        MU+ ARCHIVE • MU+ ARCHIVE •
-    </textPath>
-</text>
-
-</svg>
-
-</div>
-
-    
 <style>
 
-body{
+/* =========================
+   RESET
+========================= */
+
+*{
     margin:0;
-    background:#f5f5f5;
-    height:300vh;
-    font-family:sans-serif;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* 圆环 */
+body{
+
+    background:#efefef;
+
+    color:#111;
+
+    font-family:
+    Helvetica,
+    Arial,
+    sans-serif;
+
+    overflow-x:hidden;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+
+    padding:120px 40px 80px 40px;
+}
+
+.hero h1{
+
+    font-size:72px;
+
+    font-weight:500;
+
+    letter-spacing:-2px;
+
+    margin-bottom:10px;
+}
+
+.hero p{
+
+    font-size:28px;
+
+    opacity:.7;
+}
+
+/* =========================
+   NAV
+========================= */
+
+.nav{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 40px;
+
+    margin-top:120px;
+
+    margin-bottom:30px;
+
+    font-size:18px;
+}
+
+.nav-center{
+
+    display:flex;
+
+    gap:40px;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.project-table{
+
+    width:100%;
+
+    border-top:1px solid #ccc;
+}
+
+.table-row{
+
+    display:grid;
+
+    grid-template-columns:
+    220px
+    1fr
+    120px;
+
+    padding:14px 40px;
+
+    border-bottom:1px solid #d8d8d8;
+
+    font-size:18px;
+}
+
+.table-row.header{
+
+    opacity:.6;
+}
+
+/* =========================
+   IMAGE SECTION
+========================= */
+
+.feature-image{
+
+    width:100%;
+
+    padding:40px;
+}
+
+.feature-image img{
+
+    width:100%;
+
+    display:block;
+}
+
+/* =========================
+   FLOATING ROTATE CIRCLE
+========================= */
+
 .circle-wrap{
+
     position:fixed;
 
     right:40px;
@@ -64,28 +151,54 @@ body{
     width:220px;
     height:220px;
 
-    z-index:9999;
+    z-index:99999;
 
     pointer-events:none;
+
+    mix-blend-mode:difference;
 }
 
-/* SVG旋转 */
-.circle-text{
+/* SVG */
+
+.circle-svg{
+
     width:100%;
     height:100%;
 
-    animation: rotate 20s linear infinite;
+    overflow:visible;
 }
 
-text{
+/* ROTATE */
+
+.rotating-group{
+
+    transform-origin:250px 250px;
+
+    animation: circleRotate 40s linear infinite;
+}
+
+/* TEXT */
+
+.circle-text{
+
     font-size:18px;
+
     letter-spacing:8px;
-    fill:black;
+
+    fill:white;
 
     font-weight:300;
+
+    font-family:
+    Helvetica,
+    Arial,
+    sans-serif;
 }
 
-@keyframes rotate{
+/* ANIMATION */
+
+@keyframes circleRotate{
+
     from{
         transform:rotate(0deg);
     }
@@ -95,187 +208,231 @@ text{
     }
 }
 
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:768px){
+
+    .hero{
+
+        padding:60px 20px;
+    }
+
+    .hero h1{
+
+        font-size:42px;
+    }
+
+    .hero p{
+
+        font-size:18px;
+    }
+
+    .nav{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:20px;
+
+        padding:0 20px;
+    }
+
+    .table-row{
+
+        grid-template-columns:
+        100px
+        1fr
+        60px;
+
+        font-size:14px;
+
+        padding:12px 20px;
+    }
+
+    .feature-image{
+
+        padding:20px;
+    }
+
+    .circle-wrap{
+
+        width:160px;
+        height:160px;
+
+        right:20px;
+        bottom:20px;
+    }
+
+    .circle-text{
+
+        font-size:14px;
+
+        letter-spacing:6px;
+    }
+}
+
 </style>
+</head>
 
-    <!-- 沿路径排列文字（结尾） -->
+<body>
 
-    
-<div class="main-container">
+<!-- =========================
+     HERO
+========================= -->
 
-    <!-- 左侧桌面栏 -->
-    <aside class="left-panel">
-        <header class="panel-header">
-            <div class="col-1 clickable" onclick="showGallery()">MENGFEI YAN ®</div>
-            <div class="col-2 top-links">
-                <span class="clickable" onclick="showInfo()">Information</span>
-                <a href="gallery/">Gallery</a>
-            </div>
-        </header>
+<section class="hero">
 
-        <div class="scroll-content">
-            <div class="table-head">
-                <div class="col-1">Client</div>
-                <div class="col-2">Project</div>
-                <div class="col-3">Year</div>
-            </div>
+    <h1>MU+ ARCHIVE</h1>
 
-            <div class="project-list" id="js-project-list"></div>
-        </div>
+    <p>Portfolio Website</p>
 
-        <footer class="panel-footer">
-            <div class="col-1" id="timer">00:00:00</div>
-            <div class="col-2">
-                <a href="#">IG</a>, <a href="mailto:mengfeiyan11@gmail.com">Email</a>
-            </div>
-        </footer>
-    </aside>
+</section>
 
-    <!-- 右侧 -->
-    <main class="right-panel">
-        <div class="scroll-content view-fade show" id="gal">
+<!-- =========================
+     NAV
+========================= -->
 
-            <!-- 首页 -->
-            <div id="gallery-view">
-                <header class="panel-header">
-                    <div class="col-header-left">
-                        <span class="desktop-title">Selected Work</span>
-                        <span class="mobile-title">MENGFEI YAN</span>
-                    </div>
+<nav class="nav">
 
-                    <!-- 关键修改点：在此添加了 desktop-hide 类 -->
-                    <div class="col-header-right mobile-links desktop-hide">
-                        <span id="mobile-list-btn" class="clickable" onclick="showMobileList()">List</span>
-                        <span class="clickable" onclick="showInfo()">Information</span>
-                        <a href="gallery/">Gallery</a>
-                    </div>
-                </header>
+    <div>
+        MENGFEI YAN ®
+    </div>
 
-                <div id="js-gallery-content"></div>
+    <div class="nav-center">
 
-                <div class="mobile-bottom-info">
-                    <div class="mobile-bottom-inner">
-                        <div>©2026 All Rights Reserved</div>
-                        <div><a href="#">IG</a>, <a href="mailto:mengfeiyan11@gmail.com">Email</a></div>
-                    </div>
-                </div>
-            </div>
+        <span>Information</span>
 
-            <!-- 手机版LIST -->
-            <div id="mobile-list-view" style="display:none;">
-                <header class="panel-header">
-                    <div class="col-header-left">Index</div>
-                    <div class="col-header-right clickable" onclick="closeMobileList()">Close</div>
-                </header>
+        <span>Gallery</span>
 
-                <div class="table-head">
-                    <div class="col-1">Client</div>
-                    <div class="col-2">Project</div>
-                    <div class="col-3">Year</div>
-                </div>
+        <span>Selected Work</span>
 
-                <div id="mobile-project-list"></div>
+    </div>
 
-                <div class="mobile-bottom-info">
-                    <div class="mobile-bottom-inner">
-                        <div>©2026 All Rights Reserved</div>
-                        <div><a href="#">IG</a>, <a href="mailto:mengfeiyan11@gmail.com">Email</a></div>
-                    </div>
-                </div>
-            </div>
+</nav>
 
-            <!-- 详情页 -->
-            <div id="detail-view" style="display:none;">
-                <header class="panel-header">
-                    <div class="col-header-left">Selected Work</div>
-                    <div class="col-header-right clickable" onclick="showGallery()">Index</div>
-                </header>
+<!-- =========================
+     TABLE
+========================= -->
 
-                <div class="item-meta">
-                    <div class="col-1" id="d-client"></div>
-                    <div class="col-2" id="d-project"></div>
-                    <div class="col-3" id="d-year"></div>
-                </div>
+<section class="project-table">
 
-                <div class="image-container detail-main-img">
-                    <img src="" id="d-img">
-                    <span class="plus top-left">+</span>
-                    <span class="plus top-right">+</span>
-                    <span class="plus bottom-left">+</span>
-                    <span class="plus bottom-right">+</span>
-                </div>
+    <div class="table-row header">
 
-                <div class="description-section">
-                    <div class="info-tags"><ul id="d-tags"></ul></div>
-                    <div class="info-text" id="d-text"></div>
-                </div>
+        <div>Client</div>
 
-                <div class="project-grid" id="js-detail-grid"></div>
+        <div>Project</div>
 
-                <div class="back-btn">
-                    <a href="#" onclick="showGallery();return false;">← Back</a>
-                </div>
+        <div>Year</div>
 
-                <div class="mobile-bottom-info">
-                    <div class="mobile-bottom-inner">
-                        <div>©2026 All Rights Reserved</div>
-                        <div><a href="#">IG</a>, <a href="mailto:mengfeiyan11@gmail.com">Email</a></div>
-                    </div>
-                </div>
-            </div>
+    </div>
 
-            <!-- Information -->
-            <div id="info-view" style="display:none;">
-                <header class="panel-header">
-                    <div class="col-header-left">Profile</div>
-                    <div class="col-header-right clickable" onclick="showGallery()">Index</div>
-                </header>
+    <div class="table-row">
 
-                <div class="info-row">
-                    <div class="info-label">About</div>
-                    <div class="info-content">
-                        YAN MENGFEI<br>
-                        1987年上海生まれ。幼少期から美術を専攻し、現地の広告制作会社を経て日本へ渡る。2023年に桑沢デザイン研究所を卒業。企業のロゴや広告・ポスター、ミニカード、アーティストのZINEなどのグラフィックデザインを中心に活動。日本でタイポグラフィーの自主制作をしながら、社会問題を扱うプロジェクトにも参加する。グラフィックデザインが多様化するグローバルな社会にどのような形で貢献できるかを、日々探求しています。<br><br>
-                        I was born in Shanghai in 1987 and began studying fine arts at an early age. After working at a local advertising production company, I moved to Japan and graduated from Kuwasawa Design School in 2023. My practice focuses primarily on graphic design, including corporate logos, advertisements, posters, mini cards, and artists’ zines. Alongside my independent exploration of typography in Japan, I also participate in projects that engage with social issues. Through these experiences, I continue to explore how graphic design can contribute to an increasingly diverse and global society.
-                    </div>
-                </div>
+        <div>MT_01</div>
 
-                <div class="info-row">
-                    <div class="info-label">Education</div>
-                    <div class="info-content">
-                        2003- HUASHAN ART SCHOOL (SHANGHAI)<br>
-                        2010- EAST CHINA NORMAL UNIVERSITY (SHANGHAI)<br>
-                        2013- A SUBSIDIARY OF THE AMERICAN ASSOCIATION OF ADVERTISING AGENCIES<br>
-                        2020-2023 KUWASAWA DESIGN SCHOOL (TOKYO)<br>
-                        2023- CURIOSITY (TOKYO)
-                    </div>
-                </div>
+        <div>VISUAL_INVITATION</div>
 
-                <div class="info-row">
-                    <div class="info-label">Contact</div>
-                    <div class="info-content">
-                        mengfeiyan11@gmail.com
-                    </div>
-                </div>
+        <div>2025</div>
 
-                <div class="mobile-bottom-info">
-                    <div class="mobile-bottom-inner">
-                        <div>©2026 All Rights Reserved</div>
-                        <div><a href="#">IG</a>, <a href="mailto:mengfeiyan11@gmail.com">Email</a></div>
-                    </div>
-                </div>
-            </div>
+    </div>
 
-            <footer class="gallery-footer">
-                <div class="footer-inner">
-                    <a href="#" onclick="scrollToTop();return false;">↑ Top</a>
-                    <span>©2026 All Rights Reserved</span>
-                </div>
-            </footer>
+    <div class="table-row">
 
-        </div>
-    </main>
+        <div>EXP_03</div>
+
+        <div>SUMMERTIME</div>
+
+        <div>2025</div>
+
+    </div>
+
+    <div class="table-row">
+
+        <div>KN_01</div>
+
+        <div>SNAKE_YEAR_LIMITED_EDITION</div>
+
+        <div>2024</div>
+
+    </div>
+
+    <div class="table-row">
+
+        <div>AW_02</div>
+
+        <div>UNBELIEVABLE_ATLAS</div>
+
+        <div>2022</div>
+
+    </div>
+
+    <div class="table-row">
+
+        <div>AW_01</div>
+
+        <div>MOVE</div>
+
+        <div>2021</div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     IMAGE
+========================= -->
+
+<section class="feature-image">
+
+    <img src="https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover1.jpg">
+
+</section>
+
+<!-- =========================
+     FLOATING ROTATE CIRCLE
+========================= -->
+
+<div class="circle-wrap">
+
+    <svg
+        class="circle-svg"
+        viewBox="0 0 500 500"
+    >
+
+        <defs>
+
+            <path
+                id="circlePath"
+                d="
+                M 250 250
+                m -90 0
+                a 90 90 0 1 1 180 0
+                a 90 90 0 1 1 -180 0
+                "
+            />
+
+        </defs>
+
+        <g class="rotating-group">
+
+            <text class="circle-text">
+
+                <textPath href="#circlePath">
+
+                    MU+ ARCHIVE • MU+ ARCHIVE •
+
+                </textPath>
+
+            </text>
+
+        </g>
+
+    </svg>
+
 </div>
 
-<script src="script.js"></script>
 </body>
 </html>
