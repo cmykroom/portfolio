@@ -21,15 +21,13 @@
         left:50%;
 
         width:160px;
-        height:160px; 
+        height:160px;
 
         transform:translate(-50%,-50%);
 
-        z-index:99999;
+        z-index:30;
 
         pointer-events:none;
-
-        mix-blend-mode:difference;
 
         opacity:.9;
     }
@@ -44,18 +42,20 @@
 
     .rotating-group{
 
-        transform-origin:250px 250px;
+        transform-origin:center;
 
-        animation: circleRotate 40s linear infinite;
+        transform-box:fill-box;
+
+        animation:circleRotate 40s linear infinite;
     }
 
     .circle-text{
 
-        font-size:12pt;
+        font-size:16pt;
 
         letter-spacing:8px;
 
-        fill:white;
+        fill:#111;
 
         font-weight:300;
 
@@ -328,7 +328,7 @@
 
                 <textPath href="#circlePath">
 
-                    MU+ ARCHIVE • MU+ ARCHIVE •
+                    MU+ Portfolio MU+ ARCHIVE MU+ OBJECT
 
                 </textPath>
 
