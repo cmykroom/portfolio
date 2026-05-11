@@ -231,10 +231,10 @@ a {
     color: #aaa;
     z-index: 10;
 }
-.top-left { top: 15px; left: 15px; }
-.top-right { top: 15px; right: 15px; }
-.bottom-left { bottom: 15px; left: 15px; }
-.bottom-right { bottom: 15px; right: 15px; }
+.top-left { top: 5px; left: 5px; }
+.top-right { top: 5px; right: 5px; }
+.bottom-left { bottom: 5px; left: 5px; }
+.bottom-right { bottom: 5px; right: 5px; }
 
 #mobile-list-view,
 #mobile-list-btn,
