@@ -40,19 +40,22 @@
       "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/2024_KN01_4.jpg"
     ]
   },
-  {
-    "id": "p4",
-    "client": "AW_02",
-    "project": "UNBELIEVABLE_ATLAS",
-    "year": "2022",
-    "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/cover2.jpg",
-    "tags": ["Visual", "Design"],
-    "description": "第四个项目的介绍...",
-    "subImages": [
-      "https://path/to/sub1.jpg",
-      "https://path/to/sub2.jpg"
-    ]
+   {
+  "id": "p4",
+  "client": "AW_02",
+  "project": "UNBELIEVABLE_ATLAS",
+  "year": "2022",
+  "cover": "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/2022_AW02_0.jpg",
+  "tags": ["Visual", "Design", "Typography", "Experimental"],
+  "description": {
+    "jp": "特定の自然条件と光の作用によって生まれる、非現実的でありながら物理性を感じさせる空間の状態に着目した。その感覚を文字の造形へと置き換え、空間性を持つ字形の実験を行った。",
+    "en": "Focusing on spatial conditions created through specific natural environments and the influence of light, I explored states that feel unreal while still retaining a sense of physicality. By translating these sensations into typographic forms, I conducted a series of experiments with letterforms that possess spatial qualities."
   },
+  "subImages": [
+    "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/2022_AW02_1.jpg",
+    "https://raw.githubusercontent.com/cmykroom/portfolio/main/images/2022_AW02_2.jpg"
+  ]
+},
   {
     "id": "p5",
     "client": "AW_01",
